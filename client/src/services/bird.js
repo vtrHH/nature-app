@@ -1,8 +1,8 @@
 import api from './api';
 
 //loads a bird by api_id
-export const loadBirdByApiId = async (api_id) => {
-  const response = await api.get(`/bird/${api_id}`);
+export const loadBirdByApiId = async (api_id_value) => {
+  const response = await api.get(`/bird/${api_id_value}`);
   return response.data;
 };
 
