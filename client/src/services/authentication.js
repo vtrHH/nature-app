@@ -3,21 +3,17 @@ import api from './api';
 //signs a user in
 export const signIn = async (data) => {
   const response = await api.post('/authentication/sign-in', data);
-  const body = response.data;
-  const user = body.user;
-  return user;
+  return response.data.user;
 };
 
 //signs a user up
 export const signUp = async (data) => {
   const response = await api.post('/authentication/sign-up', data);
-  const body = response.data;
-  const user = body.user;
-  return user;
+  return response.data.user;
 };
 
 //signs a user out
-export const signOut = async ()  => {
+export const signOut = async () => {
   await api.post('/authentication/sign-out');
 };
 

@@ -7,17 +7,17 @@ export const loadObservation = async (id) => {
 };
 
 export const createObservation = async => {
-    const response = await api.post(`/observations/`);
+    const response = await api.post('/observations/');
     return response.data;
   };
 
 export const editObservation = async (id) => {
     const response = await api.get(`/observations/${id}`);
-    return response.data.individual;
+    return response.data;
   };
 
 //lists all observation (maybe filtered, sorted, etc in th serverside)
 export const listOfObservations = async ()=> {
-    const response = await api.post('/obsercations/list', data);
-    return response.data.pet;
+    const response = await api.post('/observations/list', data);
+    return response.data;
   };
