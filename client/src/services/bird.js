@@ -1,11 +1,21 @@
 import api from './api';
 
-export const loadBirdByApiId = async id => {
+//loads a bird by api_id
+export const loadBirdByApiId = async (api_id) => {
   const response = await api.get(`/bird/${api_id}`);
-  return response.data.individual;
+  return response.data;
 };
 
-export const savePreferences = async data => {
-  const response = await api.patch('/individual/preferences', data);
-  return response.data.user;
+//create entry of bird in our database if not existing --> Not sure if needed, but probably yes
+export const createBird = async (data) => {
+  const response = await api.post('/birds', data);
+  return response.data;
 };
+
+//loads all birds (maybe filtered, sorted, etc in th serverside)
+export const listOfBirds = async () => {
+  const response = await api.get('/birds/list', data);
+  return response.data;
+};
+
+
