@@ -3,7 +3,8 @@ import { signUp } from './../services/authentication';
 
 class SignUp extends Component {
   state = {
-    name: '',
+    firstname: '',
+    lastname: '',
     email: '',
     password: '',
     role: ''
@@ -11,8 +12,8 @@ class SignUp extends Component {
 
   handleFormSubmission = async event => {
     event.preventDefault();
-    const { name, email, password, role } = this.state;
-    const user = await signUp({ name, email, password, role });
+    const { firstname, lastname, email, password, role } = this.state;
+    const user = await signUp({ firstname, lastname, email, password, role });
     this.props.onUserChange(user);
   };
 
@@ -30,12 +31,22 @@ class SignUp extends Component {
           <h1>Sign Up</h1>
         </header>
         <form onSubmit={this.handleFormSubmission}>
-          <label htmlFor="name-input">Name</label>
+          <label htmlFor="firstname-input">First Name</label>
           <input
-            id="name-input"
+            id="firstname-input"
             type="text"
-            placeholder="James Dean"
-            name="name"
+            placeholder="John"
+            name="firstname"
+            required
+            value={this.state.name}
+            onChange={this.handleInputChange}
+          />
+          <label htmlFor="lastname-input">Last Name</label>
+          <input
+            id="lastname-input"
+            type="text"
+            placeholder="Doe"
+            name="lastname"
             required
             value={this.state.name}
             onChange={this.handleInputChange}
@@ -45,7 +56,7 @@ class SignUp extends Component {
           <input
             id="email-input"
             type="email"
-            placeholder="james@example.com"
+            placeholder="email@email.com"
             name="email"
             required
             value={this.state.email}
@@ -53,7 +64,7 @@ class SignUp extends Component {
           />
 
           <label htmlFor="role-input">
-            Are you an individual or a shelter?
+            Are you an individual or an organisation?
           </label>
           <select
             id="role-input"
@@ -63,10 +74,10 @@ class SignUp extends Component {
             onChange={this.handleInputChange}
           >
             <option value="" disabled>
-              Individual or a shelter?
+              Individual or organisation?
             </option>
-            <option value="shelter">Shelter</option>
             <option value="individual">Individual</option>
+            <option value="shelter">Organisation</option>
           </select>
 
           <label htmlFor="password-input">Password</label>
