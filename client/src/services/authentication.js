@@ -17,7 +17,7 @@ export const signOut = async () => {
   await api.post('/authentication/sign-out');
 };
 
-//verifies if a user is signed in
+//verifies if there is a user
 export const verify = async () => {
   const response = await api.get('/authentication/verify');
   return response.data.user;
