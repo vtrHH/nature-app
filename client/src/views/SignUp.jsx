@@ -3,8 +3,7 @@ import { signUp } from './../services/authentication';
 
 class SignUp extends Component {
   state = {
-    firstname: '',
-    lastname: '',
+    username: '',   
     email: '',
     password: '',
     role: ''
@@ -12,8 +11,8 @@ class SignUp extends Component {
 
   handleFormSubmission = async event => {
     event.preventDefault();
-    const { firstname, lastname, email, password, role } = this.state;
-    const user = await signUp({ firstname, lastname, email, password, role });
+    const { username, email, password, role } = this.state;
+    const user = await signUp({ username, email, password, role });
     this.props.onUserChange(user);
   };
 
@@ -31,7 +30,17 @@ class SignUp extends Component {
           <h1>Sign Up</h1>
         </header>
         <form onSubmit={this.handleFormSubmission}>
-          <label htmlFor="firstname-input">First Name</label>
+          <label htmlFor="username-input">User Name</label>
+          <input
+            id="username-input"
+            type="text"
+            placeholder="username"
+            name="username"
+            required
+            value={this.state.username}
+            onChange={this.handleInputChange}
+          />
+          {/* <label htmlFor="firstname-input">First Name</label>
           <input
             id="firstname-input"
             type="text"
@@ -50,7 +59,7 @@ class SignUp extends Component {
             required
             value={this.state.name}
             onChange={this.handleInputChange}
-          />
+          /> */}
 
           <label htmlFor="email-input">Email</label>
           <input

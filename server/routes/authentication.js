@@ -10,12 +10,12 @@ const Organisation = require('./../models/organisation');
 const router = new Router();
 
 router.post('/sign-up', (req, res, next) => {
-    const { name, email, password, role } = req.body;
+    const { username, email, password, role } = req.body;
     bcryptjs
         .hash(password, 10)
         .then((hash) => {
             return User.create({
-                name,
+                username,
                 email,
                 passwordHashAndSalt: hash,
                 role
