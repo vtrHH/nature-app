@@ -11,6 +11,8 @@ import Home from './views/Home';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
 import CreateBird from './views/CreateBird';
+import IndividualProfile from './views/IndividualProfile';
+import OrganisationProfile from './views/OrganisationProfile';
 
 class App extends Component {
 
@@ -21,6 +23,7 @@ class App extends Component {
 
   async componentDidMount() {
     const user = await verify();
+    console.log(user);
     this.handleUserChange(user);
     this.setState({ loaded: true });
   }
@@ -29,10 +32,10 @@ class App extends Component {
     this.setState({ user });
   };
 
-  // handleSignOut = async () => {
-  //   await signOut();
-  //   this.handleUserChange(null);
-  // };
+  handleSignOut = async () => {
+    await signOut();
+    this.handleUserChange(null);
+  };
 
   render() {
 
@@ -44,20 +47,20 @@ class App extends Component {
           <Helmet>
             <title>NatureApp</title>
           </Helmet>
-          <Navbar/>
+          <Navbar user={user} onSignOut={this.handleSignOut} />
           <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/sign-in" component={SignIn} exact />
-          {/* <ProtectedRoute
+          <Route 
+            path="/" 
+            render={props => ( 
+                  <Home {...props} user={user} />)} exact />
+          <ProtectedRoute
                 path="/sign-in"
                 render={props => (
-                  <SignIn {...props} onUserChange={this.handleUserChange} />
-                )}
+                  <SignIn {...props} onUserChange={this.handleUserChange} />)}
                 authorized={!user}
                 redirect="/"
                 exact
-              /> */}
-          {/* <Route path="/sign-up" component={SignUp} exact /> */}
+              />          
           <ProtectedRoute
             path="/sign-up"
             render={props => (
@@ -67,6 +70,8 @@ class App extends Component {
             redirect="/"
             exact
           />
+          <Route path="/individual/:id" component={IndividualProfile} exact />
+          <Route path="/organisation/:id" component={OrganisationProfile} exact />
           <Route path="/bird/create" component={CreateBird} exact />
           </Switch>
 
