@@ -3,15 +3,26 @@
 const mongoose = require('mongoose');
 const User = require('./user');
 
-const individualSchema = new mongoose.Schema(
-  {
-    observation: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Observation'
-    }
+const individualSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    trim: true,
+    required: true
   },
-  { discriminatorKey: 'role' }
-);
+  lastName: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  observations: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'Observation'
+  },
+  preferences: {
+    type: [String]
+    // enum: ... ?
+  }
+});
 
 const Individual = User.discriminator('individual', individualSchema);
 

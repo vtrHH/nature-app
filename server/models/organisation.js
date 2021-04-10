@@ -3,21 +3,26 @@
 const mongoose = require('mongoose');
 const User = require('./user');
 
-const organisationSchema = new mongoose.Schema(
-  {
-    address: {
-      type: String
-    },
-    phoneNumber: {
-      type: String
-    },
-    bird: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Bird'
-    }
+const organisationSchema = new mongoose.Schema({
+  organisationName: {
+    type: String,
+    trim: true,
+    required: true
   },
-  { discriminatorKey: 'role' }
-);
+  address: {
+    type: String
+  },
+  phoneNumber: {
+    type: String
+  },
+  birds: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'Bird'
+  },
+  pictures: {
+    type: [String]
+  }
+});
 
 const Organisation = User.discriminator('organisation', organisationSchema);
 
