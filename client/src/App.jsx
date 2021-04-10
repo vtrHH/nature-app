@@ -18,20 +18,20 @@ class App extends Component {
     loaded: false
   };
 
-  async componentDidMount() {
-    const user = await verify();
-    this.handleUserChange(user);
-    this.setState({ loaded: true });
-  }
+  // async componentDidMount() {
+  //   const user = await verify();
+  //   this.handleUserChange(user);
+  //   this.setState({ loaded: true });
+  // }
 
-  handleUserChange = (user) => {
-    this.setState({ user });
-  };
+  // handleUserChange = user => {
+  //   this.setState({ user });
+  // };
 
-  handleSignOut = async () => {
-    await signOut();
-    this.handleUserChange(null);
-  };
+  // handleSignOut = async () => {
+  //   await signOut();
+  //   this.handleUserChange(null);
+  // };
 
   render() {
     return (
