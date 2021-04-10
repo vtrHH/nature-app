@@ -8,14 +8,15 @@ const User = require('./../models/user');
 const router = new Router();
 
 router.post('/sign-up', (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
   bcryptjs
     .hash(password, 10)
     .then((hash) => {
       return User.create({
         name,
         email,
-        passwordHashAndSalt: hash
+        passwordHashAndSalt: hash,
+        role
       });
     })
     .then((user) => {
@@ -55,6 +56,11 @@ router.post('/sign-in', (req, res, next) => {
 router.post('/sign-out', (req, res, next) => {
   req.session.destroy();
   res.json({});
+});
+
+router.get('/verify', (req, res) => {
+  const user = req.user || null;
+  res.json({ user: user });
 });
 
 module.exports = router;

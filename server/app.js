@@ -10,6 +10,8 @@ const mongoose = require('mongoose');
 const serveFavicon = require('serve-favicon');
 const basicAuthenticationDeserializer = require('./middleware/basic-authentication-deserializer.js');
 const bindUserToViewLocals = require('./middleware/bind-user-to-view-locals.js');
+const cors = require('cors');
+
 const baseRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
 
@@ -17,15 +19,24 @@ const app = express();
 
 app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(logger('dev'));
+app.use(
+  cors({
+    origin: ['http://localhost:3001'],
+    credentials: true
+  })
+);
 app.use(express.json());
 app.use(
   expressSession({
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: false,
+    proxy: true,
     cookie: {
       maxAge: 15 * 24 * 60 * 60 * 1000,
-      httpOnly: true
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true
     },
     store: new (connectMongo(expressSession))({
       mongooseConnection: mongoose.connection,
