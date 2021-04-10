@@ -3,6 +3,8 @@
 const { Router } = require('express');
 
 const bcryptjs = require('bcryptjs');
+const Individual = require('./../models/individual');
+const Organisation = require('./../models/organisation');
 const User = require('./../models/user');
 
 const router = new Router();
