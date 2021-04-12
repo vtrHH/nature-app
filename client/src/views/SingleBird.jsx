@@ -8,7 +8,7 @@ class SingleBird extends Component {
     
     this.state = {
       user: this.props.user,
-      bird: []
+      bird: bird.results
     }
   }
 
@@ -24,21 +24,31 @@ class SingleBird extends Component {
     render() {
 
         const user = this.state.user;
-        let bird = this.state.bird;
-        console.log(bird)
-        let bird2 = this.state.bird.map((item) => {
-        return item
-        });
-        console.log(bird2)
-        
+        let bird = this.state.bird[0];
+        // let singleBird = bird[0]
+        // console.log(`singleBird: ${singleBird}`)
+        // console.log(singleBird.id)
+
+        // let shiftBird = bird.shift()
+         // console.log(`shiftBird: ${shiftBird}`)
+
         return (
             <div>
-            {bird.map(item =>  (
-                <h1>Name {item.name}</h1>                   
-                )
-            )}       
-            {/* How can I just extract the value without mapping it?          */}
-            {/* How can I add more html elements without braking? return doesnt work for me...          */}
+            <h1>{bird.name}</h1>
+            <div>
+        {bird.default_photo !== null && <img src={bird.default_photo.medium_url} alt={bird.name}/> || <img src="" alt=""/>}    
+      
+    </div>
+   
+      <div className="bird__item__details">
+        <h3>{bird.preferred_common_name}</h3>
+        <h5>{bird.name}</h5>
+        <small>
+          {bird.matched_term} | {bird.iconic_taxon_name} | {bird.preferred_common_name}
+        </small>
+        <p>{bird.wikipedia_summary}</p>      
+      </div>
+            
             </div>
         )
     }

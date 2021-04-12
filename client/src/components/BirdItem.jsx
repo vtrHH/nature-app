@@ -8,7 +8,8 @@
 const BirdItem = ({ bird }) => {
     
   return (
-    <><div>
+    <>
+    <div>
         {bird.default_photo !== null && <img src={bird.default_photo.square_url} alt={bird.name}/> || <img src="" alt=""/>}    
       
     </div>
