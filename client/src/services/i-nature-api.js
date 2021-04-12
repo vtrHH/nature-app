@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+//search for all species matching the query
 export const searchSpecie = async (query) => {
   const response = await axios.get(
     `https://api.inaturalist.org/v1/taxa?q=${query}&rank=species`
@@ -7,9 +8,10 @@ export const searchSpecie = async (query) => {
   return response.data.results;
 };
 
-export const searchSpecieById = async (id) => {
+//search for an specific specie matching the id in the api
+export const searchSpecieById = async (api_id) => {
     const response = await axios.get(
-      `https://api.inaturalist.org/v1/taxa/${id}`
+      `https://api.inaturalist.org/v1/taxa/${api_id}`
     );
     return response.data.results;
   };
