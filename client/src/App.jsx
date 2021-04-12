@@ -10,7 +10,7 @@ import Navbar from './components/Navbar';
 import Home from './views/Home';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
-import CreateBird from './views/CreateBird';
+import CreateObservation from './views/CreateObservation';
 import IndividualProfile from './views/IndividualProfile';
 import OrganisationProfile from './views/OrganisationProfile';
 
@@ -39,7 +39,7 @@ class App extends Component {
 
   render() {
 
-    let user = this.state.user
+    const user = this.state.user
     return (
      
       <HelmetProvider>
@@ -72,7 +72,7 @@ class App extends Component {
           />
           <Route path="/individual/:id" component={IndividualProfile} exact />
           <Route path="/organisation/:id" component={OrganisationProfile} exact />
-          <Route path="/bird/create" component={CreateBird} exact />
+          <Route path="/observation/create" component={CreateObservation} exact />
           </Switch>
 
         </BrowserRouter>
