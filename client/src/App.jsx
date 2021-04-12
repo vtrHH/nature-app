@@ -11,6 +11,7 @@ import Home from './views/Home';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
 import CreateObservation from './views/CreateObservation';
+import SingleBird from './views/SingleBird';
 import IndividualProfile from './views/IndividualProfile';
 import OrganisationProfile from './views/OrganisationProfile';
 
@@ -70,6 +71,10 @@ class App extends Component {
             redirect="/"
             exact
           />
+          <Route 
+            path="/bird/:id" 
+            render={props => ( 
+                  <SingleBird {...props} user={user} />)} exact />
           <Route path="/individual/:id" component={IndividualProfile} exact />
           <Route path="/organisation/:id" component={OrganisationProfile} exact />
           <Route path="/observation/create" component={CreateObservation} exact />

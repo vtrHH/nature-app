@@ -14,6 +14,7 @@ const BirdItem = ({ bird }) => {
     </div>
    
       <div className="bird__item__details">
+        <h3>{bird.preferred_common_name}</h3>
         <h5>{bird.name}</h5>
         <small>
           {bird.matched_term} | {bird.iconic_taxon_name} | {bird.preferred_common_name}
@@ -35,7 +36,7 @@ export default BirdItem;
 // "default_photo": {
 //                 "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/19650865/square.jpg?1545328695",
 //                 "attribution": "(c) Allie_Caulfield, some rights reserved (CC BY)",
-//                 "flags": [],
+//   git a              "flags": [],
 //                 "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/19650865/medium.jpg?1545328695",
 //                 "id": 19650865,
 //                 "license_code": "cc-by",

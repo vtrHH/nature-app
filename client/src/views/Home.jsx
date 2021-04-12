@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import birds from '../data/kiwi.json'
+import birds from '../data/kiwi-species-subspecies.json'
 
 // import { listBirds } from './../services/bird';
 import BirdList from '../components/BirdList';
