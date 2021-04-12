@@ -12,10 +12,9 @@ const Navbar = ({ user, onSignOut }) => {
       </Link>
       {/* <Link to="/sign-in">Sign In</Link>
       <Link to="/sign-up">Sign Up</Link>   */}
-      <Link to="/bird/create">Create Bird</Link>
       {user && (
         <>
-          {user.role === 'individual' && <Link to="/bird/create">Add Bird</Link>}
+          {user.role === 'individual' && <Link to="/observation/create">Create Observation</Link>}
         </>
       )}
       <div>
@@ -32,6 +31,7 @@ const Navbar = ({ user, onSignOut }) => {
           </>
         )) || (
           <>
+            <Link to="/observation/create" disabled>Create Observation</Link>
             <Link to="/sign-in">Sign In</Link>
             <Link to="/sign-up">Sign Up</Link>
           </>
