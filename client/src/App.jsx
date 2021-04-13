@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { signOut, verify } from './services/authentication';
@@ -16,7 +16,6 @@ import IndividualProfile from './views/IndividualProfile';
 import OrganisationProfile from './views/OrganisationProfile';
 
 class App extends Component {
-
   state = {
     user: null,
     loaded: false
@@ -29,7 +28,7 @@ class App extends Component {
     this.setState({ loaded: true });
   }
 
-  handleUserChange = user => {
+  handleUserChange = (user) => {
     this.setState({ user });
   };
 
@@ -39,10 +38,8 @@ class App extends Component {
   };
 
   render() {
-
-    const user = this.state.user
+    const user = this.state.user;
     return (
-     
       <HelmetProvider>
         <BrowserRouter>
           <Helmet>
@@ -50,41 +47,50 @@ class App extends Component {
           </Helmet>
           <Navbar user={user} onSignOut={this.handleSignOut} />
           <Switch>
-          <Route 
-            path="/" 
-            render={props => ( 
-                  <Home {...props} user={user} />)} exact />
-          <ProtectedRoute
-                path="/sign-in"
-                render={props => (
-                  <SignIn {...props} onUserChange={this.handleUserChange} />)}
-                authorized={!user}
-                redirect="/"
-                exact
-              />          
-          <ProtectedRoute
-            path="/sign-up"
-            render={props => (
-              <SignUp {...props} onUserChange={this.handleUserChange} />
-            )}
-            authorized={!user}
-            redirect="/"
-            exact
-          />
-          <Route 
-            path="/bird/:id" 
-            render={props => ( 
-                  <SingleBird {...props} user={user} />)} exact />
-          <Route path="/individual/:id" component={IndividualProfile} exact />
-          <Route path="/organisation/:id" component={OrganisationProfile} exact />
-          <Route path="/observation/create" component={CreateObservation} exact />
+            <Route
+              path="/"
+              render={(props) => <Home {...props} user={user} />}
+              exact
+            />
+            <ProtectedRoute
+              path="/sign-in"
+              render={(props) => (
+                <SignIn {...props} onUserChange={this.handleUserChange} />
+              )}
+              authorized={!user}
+              redirect="/"
+              exact
+            />
+            <ProtectedRoute
+              path="/sign-up"
+              render={(props) => (
+                <SignUp {...props} onUserChange={this.handleUserChange} />
+              )}
+              authorized={!user}
+              redirect="/"
+              exact
+            />
+            <Route
+              path="/bird/:id"
+              render={(props) => <SingleBird {...props} user={user} />}
+              exact
+            />
+            <Route path="/individual/:id" component={IndividualProfile} exact />
+            <Route
+              path="/organisation/:id"
+              component={OrganisationProfile}
+              exact
+            />
+            <Route
+              path="/observation/create"
+              component={CreateObservation}
+              exact
+            />
           </Switch>
-
         </BrowserRouter>
       </HelmetProvider>
-
-    )
+    );
   }
 }
 
-export default App
+export default App;

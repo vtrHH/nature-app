@@ -20,8 +20,8 @@ const observationSchema = new mongoose.Schema({
       default: 'Point',
       required: true
     }
+    // required: true
   },
-  
   bird: {
     type: String,
     required: true

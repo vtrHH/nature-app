@@ -30,13 +30,19 @@ router.get('/list', async (req, res, next) => {
 
 router.post('/', routeGuard, async (req, res, next) => {
   try {
-    const { api_id, commonName, scientificName, description, picture } = req.body;
+    const {
+      api_id,
+      commonName,
+      scientificName,
+      description,
+      picture
+    } = req.body;
     const bird = await Pet.create({
-        api_id,
-        commonName,
-        scientificName,
-        description,
-        picture
+      api_id,
+      commonName,
+      scientificName,
+      description,
+      picture
     });
     res.json({ bird });
   } catch (error) {
