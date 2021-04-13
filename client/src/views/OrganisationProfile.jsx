@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { Helmet } from 'react-helmet-async';
 // import { Link } from 'react-router-dom';
 
-import { loadOrganisation } from '../services/users';
+import { loadOrganisation } from '../services/organisation';
 // import PetList from '../components/PetList';
 
 class OrganisationProfile extends Component {

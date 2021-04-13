@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { loadIndividual } from '../services/users';
+import { loadIndividual } from '../services/individual';
 
 class IndividualProfile extends Component {
   state = {
