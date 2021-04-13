@@ -9,14 +9,14 @@ class SignUp extends Component {
     role: ''
   };
 
-  handleFormSubmission = async event => {
+  handleFormSubmission = async (event) => {
     event.preventDefault();
     const { username, email, password, role } = this.state;
     const user = await signUp({ username, email, password, role });
     this.props.onUserChange(user);
   };
 
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
