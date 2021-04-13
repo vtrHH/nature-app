@@ -15,8 +15,7 @@ const organisationSchema = new mongoose.Schema({
         type: String
     },
     birds: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Bird'
+        type: [String],
     },
     pictures: {
         type: [String]
