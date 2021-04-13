@@ -23,7 +23,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', routeGuard, async (req, res, next) => {
   try {
-    fileUpload.single('picture'),
+    //fileUpload.single('picture'),
     const { location, bird, creator } = req.body;
     //add picture
     const observation = await Observation.create({
@@ -41,7 +41,7 @@ router.post('/', routeGuard, async (req, res, next) => {
 router.patch(
   '/:id/edit',
   routeGuard,
-  fileUpload.single('picture'),
+  //fileUpload.single('picture'),
   async (req, res, next) => {
     const { location, bird, picture } = req.body;
     try {
