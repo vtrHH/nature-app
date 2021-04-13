@@ -21,9 +21,9 @@ const observationSchema = new mongoose.Schema({
       required: true
     }
   },
+  
   bird: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Bird',
+    type: String,
     required: true
   },
   picture: {

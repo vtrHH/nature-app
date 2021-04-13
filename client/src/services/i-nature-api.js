@@ -3,7 +3,7 @@ import axios from 'axios';
 //search for all species matching the query
 export const searchSpecie = async (query) => {
   const response = await axios.get(
-    `https://api.inaturalist.org/v1/taxa?q=${query}&rank=species`
+    `https://api.inaturalist.org/v1/taxa?q=${query}&is_active=true&taxon_id=3&rank=species%2Csubspecies`
   );
   return response.data.results;
 };
