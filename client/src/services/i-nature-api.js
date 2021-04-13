@@ -1,11 +1,19 @@
 import axios from 'axios';
 
 //search for all species matching the query
+<<<<<<< HEAD
 export const searchSpecie = async(query) => {
     const response = await axios.get(
         `https://api.inaturalist.org/v1/taxa?q=${query}&is_active=true&taxon_id=3&rank=species%2Csubspecies`
     );
     return response.data.results;
+=======
+export const searchSpecie = async (query) => {
+  const response = await axios.get(
+    `https://api.inaturalist.org/v1/taxa?q=${query}&is_active=true&taxon_id=3&rank=species%2Csubspecies`
+  );
+  return response.data.results;
+>>>>>>> 60fd988bb85ce122b22bbbba0c792f7162d3af12
 };
 
 //search for an specific specie matching the id in the api

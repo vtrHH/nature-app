@@ -12,10 +12,7 @@ const individualSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
-    observations: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Observation'
-    },
+
     preferences: {
         type: [String]
             // enum: ... ?
