@@ -14,6 +14,7 @@ const cors = require('cors');
 
 const baseRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
+const observationRouter = require('./routes/observation');
 
 const app = express();
 
@@ -34,9 +35,9 @@ app.use(
     proxy: true,
     cookie: {
       maxAge: 15 * 24 * 60 * 60 * 1000,
-      httpOnly: true,
-      sameSite: 'none',
-      secure: true
+      httpOnly: true
+      // sameSite: 'none',
+      // secure: true
     },
     store: new (connectMongo(expressSession))({
       mongooseConnection: mongoose.connection,
@@ -49,6 +50,7 @@ app.use(bindUserToViewLocals);
 
 app.use('/', baseRouter);
 app.use('/authentication', authenticationRouter);
+app.use('/observation', observationRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {
