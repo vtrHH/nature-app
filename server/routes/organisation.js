@@ -39,9 +39,9 @@ router.patch('/:id/edit', routeGuard, async (req, res, next) => {
       req.params.id,
       {
         $set: {
-            organisationName, 
-            address, 
-            phoneNumber, 
+          organisationName,
+          address,
+          phoneNumber
         }
       },
       { new: true }
@@ -69,3 +69,5 @@ router.patch('/birds', routeGuard, async (req, res, next) => {
     next(error);
   }
 });
+
+module.exports = router;

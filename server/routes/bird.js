@@ -50,4 +50,6 @@ router.post('/', routeGuard, async (req, res, next) => {
   }
 });
 
+module.exports = router;
+
 //include patch only if needed
