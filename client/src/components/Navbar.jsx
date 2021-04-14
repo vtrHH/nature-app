@@ -5,7 +5,6 @@ import './Navbar.scss';
 const Navbar = ({ user, onSignOut }) => {
   console.log(user);
   return (
-    
     <nav className="navbar">
       <Link to="/">
         <strong>NatureApp</strong>
@@ -14,7 +13,9 @@ const Navbar = ({ user, onSignOut }) => {
       <Link to="/sign-up">Sign Up</Link>   */}
       {user && (
         <>
-          {user.role === 'individual' && <Link to="/observation/create">Create Observation</Link>}
+          {user.role === 'individual' && (
+            <Link to="/observation/create">Create Observation</Link>
+          )}
         </>
       )}
       <div>
@@ -31,7 +32,9 @@ const Navbar = ({ user, onSignOut }) => {
           </>
         )) || (
           <>
-            <Link to="/observation/create" disabled>Create Observation</Link>
+            <Link to="/observation/create" disabled>
+              Create Observation
+            </Link>
             <Link to="/sign-in">Sign In</Link>
             <Link to="/sign-up">Sign Up</Link>
           </>

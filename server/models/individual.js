@@ -4,19 +4,19 @@ const mongoose = require('mongoose');
 const User = require('./user');
 
 const individualSchema = new mongoose.Schema({
-    firstName: {
-        type: String,
-        trim: true,
-    },
-    lastName: {
-        type: String,
-        trim: true,
-    },
+  firstName: {
+    type: String,
+    trim: true
+  },
+  lastName: {
+    type: String,
+    trim: true
+  },
 
-    preferences: {
-        type: [String]
-            // enum: ... ?
-    }
+  preferences: {
+    type: [String]
+    // enum: ... ?
+  }
 });
 
 const Individual = User.discriminator('individual', individualSchema);

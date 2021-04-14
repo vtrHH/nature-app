@@ -8,7 +8,7 @@ const app = require('./app');
 const mongoose = require('mongoose');
 
 const PORT = parseInt(process.env.PORT, 10);
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_EXTERNAL_URI = process.env.MONGODB_EXTERNAL_URI;
 
 const terminate = (error) => {
   if (error) debug(error);
@@ -59,19 +59,19 @@ const initiate = () => {
 };
 
 mongoose
-  .connect(MONGODB_URI, {
+  .connect(MONGODB_EXTERNAL_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: true
   })
   .then(() => {
-    debug(`Database connected to URI "${MONGODB_URI}"`);
+    debug(`Database connected to URI "${MONGODB_EXTERNAL_URI}"`);
     initiate();
   })
   .catch((error) => {
     console.error(
-      `There was an error connecting the database to URI "${MONGODB_URI}"`
+      `There was an error connecting the database to URI "${MONGODB_EXTERNAL_URI}"`
     );
     debug(error);
     process.exit(1);
