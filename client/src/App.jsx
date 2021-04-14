@@ -81,9 +81,11 @@ class App extends Component {
               component={OrganisationProfile}
               exact
             />
-            <Route
+            <ProtectedRoute
               path="/observation/create"
               component={CreateObservation}
+              authorized={user && user.role === 'individual'}
+              redirect="/"
               exact
             />
           </Switch>

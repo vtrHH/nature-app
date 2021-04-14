@@ -33,15 +33,15 @@ router.get('/list', async (req, res, next) => {
 });
 
 router.patch('/:id/edit', routeGuard, async (req, res, next) => {
-  const {firstName, lastName } = req.body;
+  const { firstName, lastName } = req.body;
   try {
     //add picture
     const individual = await Individual.findByIdAndUpdate(
       req.params.id,
       {
         $set: {
-            firstName, 
-            lastName 
+          firstName,
+          lastName
         }
       },
       { new: true }
@@ -69,3 +69,5 @@ router.patch('/preferences', routeGuard, async (req, res, next) => {
     next(error);
   }
 });
+
+module.exports = router;
