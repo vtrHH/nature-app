@@ -1,5 +1,5 @@
 import L from 'leaflet';
-import birdIcon from './assets/birdLogo.png';
+import birdIcon from './assets/bird-icon.png';
 
 export const BirdIcon = L.icon({
   iconUrl: birdIcon,

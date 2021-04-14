@@ -2,6 +2,8 @@ import { Component } from 'react';
 import birds from '../data/kiwi-species-subspecies.json';
 
 import { searchSpecie } from './../services/i-nature-api';
+import { listOfObservations } from './../services/observation';
+
 import BirdList from '../components/BirdList';
 import SearchBar from '../components/SearchBar';
 import MapView from '../components/Map/MapView';
@@ -15,14 +17,15 @@ class Home extends Component {
     this.state = {
       user: this.props.user,
       search: '',
-      birds: []
+      birds: [],
+      observations: []
     };
   }
 
   async componentDidMount() {
-    // const pets = await listPets();
-    // this.setState({ birds: birds.results });
-    console.log(this.state.user);
+    const observations = await listOfObservations();
+    // console.log(this.state);
+    this.setState({ observations });
   }
 
   updateSearch = (search) => {
@@ -61,7 +64,7 @@ class Home extends Component {
         <BirdList birds={birds} />
         {/* <div>{birds.map(bird => 
           <h2 key={bird._id} >{bird.name}</h2>)}</div> */}
-        <MapView />
+        <MapView observations={this.state.observations} />
       </main>
     );
   }

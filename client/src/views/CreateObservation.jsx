@@ -38,7 +38,9 @@ class CreateObservation extends Component {
 
   handleFormSubmission = async (e) => {
     e.preventDefault();
-    const observationLocation = [this.state.lat, this.state.lng];
+    const observationLocation = {
+      coordinates: [this.state.lat, this.state.lng]
+    };
     console.log(observationLocation);
     const date = this.state.date;
     const bird = this.state.bird;

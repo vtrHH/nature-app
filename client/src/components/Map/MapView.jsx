@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, TileLayer, Markers } from 'react-leaflet';
+import ObservationMarkers from './ObservationMarkers';
 import 'leaflet/dist/leaflet.css';
 import './Map.scss';
 
@@ -8,9 +9,11 @@ class MapView extends Component {
     super(props);
     this.state = {
       currentLocation: { lat: 52.52437, lng: 13.41053 },
-      zoom: 4
+      zoom: 12
     };
+    console.log(props.observations);
   }
+
   render() {
     const { currentLocation, zoom } = this.state;
     // console.log(this.props.observations);
@@ -20,6 +23,7 @@ class MapView extends Component {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
+        <ObservationMarkers observations={this.props.observations} />
       </MapContainer>
     );
   }
