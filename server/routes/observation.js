@@ -23,14 +23,14 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', routeGuard, async (req, res, next) => {
   try {
-    fileUpload.single('picture'),
+    //  fileUpload.single('picture'),
     const { location, bird, creator } = req.body;
     //add picture
     const observation = await Observation.create({
       location,
       bird,
-      creator,
-      picture
+      creator
+      //   picture
     });
     res.json({ observation });
   } catch (error) {
