@@ -15,7 +15,7 @@ const router = new Router();
 
 router.get('/list', async (req, res, next) => {
   try {
-    const observations = await Observation.find().limit(5);
+    const observations = await Observation.find();
     res.json({ observations });
   } catch (error) {
     next(error);
