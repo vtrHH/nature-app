@@ -15,11 +15,11 @@ const BirdItem = ({ bird }) => {
         
       </div>
     
-        <div className="bird__item__details">
+        <div className="bird-item__details">
           <h3>{bird.preferred_common_name}</h3>
           <h5>{bird.name}</h5>
           <small>
-            {bird.matched_term} | {bird.iconic_taxon_name} | {bird.preferred_common_name}
+            {bird.matched_term} <br/> {bird.iconic_taxon_name} | {bird.preferred_common_name}
           </small>      
         </div>
     </div>
