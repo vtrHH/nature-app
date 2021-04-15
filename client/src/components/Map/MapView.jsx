@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { MapContainer, TileLayer, Markers } from 'react-leaflet';
 import ObservationMarkers from './ObservationMarkers';
 import 'leaflet/dist/leaflet.css';
-import './Map.scss';
 
 class MapView extends Component {
   constructor(props) {
@@ -18,13 +17,14 @@ class MapView extends Component {
     const { currentLocation, zoom } = this.state;
     // console.log(this.props.observations);
     return (
-      <MapContainer center={currentLocation} zoom={zoom}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        />
-        <ObservationMarkers observations={this.props.observations} />
-      </MapContainer>
+        <MapContainer center={currentLocation} zoom={zoom}>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          />
+          <ObservationMarkers observations={this.props.observations} />
+        </MapContainer>
+
     );
   }
 }

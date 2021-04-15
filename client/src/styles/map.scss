@@ -1,15 +1,16 @@
 .leaflet-container {
-  margin-top: 3em;
-  width: 80vw;
-  height: 50vh;
+  margin: 0 auto;
+  width: 800px;
+  height: 400px;
 }
+
 
 .bird_popup,
 .leaflet-popup-content-wrapper {
   display: flex;
   justify-content: center;
-  width: 400px;
-  height: 200px;
+  width: 800px;
+  height: 400px;
   img {
     width: 100px;
     height: 100px;
