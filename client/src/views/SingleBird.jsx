@@ -9,15 +9,15 @@ class SingleBird extends Component {
 
     this.state = {
       user: this.props.user,
-      bird: {}
+      bird: null
     };
   }
   
   async componentDidMount() {
     const bird = await searchSpecieById(this.props.match.params.id);
-    const singleBird = bird[0]
+    // const singleBird = bird[0]
     // console.log(singleBird.id)
-    this.setState({ bird: singleBird });
+    this.setState({ bird: bird[0] });
     
     };
 
@@ -29,6 +29,8 @@ class SingleBird extends Component {
         
     return (
       <div class="single-bird">
+      { bird && (
+        <>
         {/* <h1>SingleBird</h1> */}
         <h1>{bird.name}</h1>
         <h2>{bird.preferred_common_name}</h2>
@@ -47,6 +49,8 @@ class SingleBird extends Component {
           </small>
           <p dangerouslySetInnerHTML={{__html:bird.wikipedia_summary}}></p>
         </div>
+        </>
+      )}
       </div>
     );
   }
