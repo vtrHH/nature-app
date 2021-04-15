@@ -6,7 +6,7 @@ import { createObservation } from '../services/observation';
 class CreateObservation extends Component {
   state = {
     date: '',
-    location: [52.52437, 13.41053],
+    location: null,
     lat: 0,
     lng: 0,
     bird: ''
@@ -14,36 +14,34 @@ class CreateObservation extends Component {
     // picture: ''
   };
 
-  currentPosition() {
-    // let lat = 11;
-    // let lng = 33;
-    navigator.geolocation.getCurrentPosition(function (position) {
-      console.log('Latitude is :', position.coords.latitude);
-      console.log('Longitude is :', position.coords.longitude);
-    });
-
-    // console.log(lat,lng);
-    // this.setState({
-    //     lat : lat,
-    //     lng : lng
-    // })
-  }
-
   componentDidMount() {
-    if ('geolocation' in navigator) {
-      console.log('geolocation Available');
-    } else {
-      console.log('geolocation Not Available');
-    }
-    // this.currentPosition()
+    const latitudeInput = document.getElementById('input-lat');
+    const longitudeInput = document.getElementById('input-lng');
+    this.getUserLocation()
+      .then((location) => {
+        const { latitude, longitude } = location.coords;
+        latitudeInput.value = latitude;
+        longitudeInput.value = longitude;
+        console.log(latitude, longitude);
+        this.setState({ lat: latitude, lng: longitude });
+      })
+      .catch((error) => {
+        console.log('There was an error locating the user.');
+        console.log(error);
+      });
   }
+
+  getUserLocation = (options) =>
+    new Promise((resolve, reject) =>
+      navigator.geolocation.getCurrentPosition(resolve, reject, options)
+    );
 
   handleFormSubmission = async (e) => {
     e.preventDefault();
     const observationLocation = {
       coordinates: [this.state.lat, this.state.lng]
     };
-    console.log(observationLocation);
+    // console.log(observationLocation);
     const date = this.state.date;
     const bird = this.state.bird;
     const data = {
@@ -51,8 +49,6 @@ class CreateObservation extends Component {
       date: date,
       bird: bird
     };
-    //  console.log(data);
-    //   console.log(observationLocation, date, bird)
 
     const observation = await createObservation(data);
     this.props.history.push(`/observation/${observation._id}`);
@@ -66,6 +62,10 @@ class CreateObservation extends Component {
       [name]: value,
       location: [this.state.lat, this.state.lng]
     });
+  };
+
+  handleCurrentLocationSearch = () => {
+    console.log('Button is clicked');
   };
 
   render() {
@@ -87,11 +87,13 @@ class CreateObservation extends Component {
           />
           <label htmlFor="input-location">Set Location</label>
 
+          {/* <button onClick={this.handleCurrentLocationSearch}>Locate Me</button> */}
+
           {/*<MapView />*/}
 
           <label htmlFor="input-lat">Latitude</label>
           <input
-            type="number"
+            type="text"
             id="input-lat"
             name="lat"
             value={this.state.lat}
@@ -101,7 +103,7 @@ class CreateObservation extends Component {
           />
           <label htmlFor="input-lng">Longitude</label>
           <input
-            type="number"
+            type="text"
             id="input-lng"
             name="lng"
             value={this.state.lng}
