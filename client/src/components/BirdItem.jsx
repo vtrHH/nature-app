@@ -10,7 +10,7 @@ const BirdItem = ({ bird }) => {
   return (
     <>
     <div>
-        {bird.default_photo !== null && <img src={bird.default_photo.square_url} alt={bird.name}/> || <img src="" alt=""/>}    
+        {bird.default_photo ? <img src={bird.default_photo.square_url} alt={bird.name}/> : <img src="" alt=""/>}    
       
     </div>
    

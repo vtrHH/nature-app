@@ -13,6 +13,15 @@ const routeGuard = require('./../middleware/route-guard');
 
 const router = new Router();
 
+router.get('/list', async (req, res, next) => {
+  try {
+    const observations = await Observation.find().limit(5);
+    res.json({ observations });
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/:id', async (req, res, next) => {
   try {
     const observation = await Observation.findById(req.params.id);
@@ -66,14 +75,5 @@ router.patch(
     }
   }
 );
-
-router.get('/list', async (req, res, next) => {
-  try {
-    const observations = await Observation.find().limit(5);
-    res.json({ observations });
-  } catch (error) {
-    next(error);
-  }
-});
 
 module.exports = router;
