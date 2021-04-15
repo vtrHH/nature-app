@@ -11,6 +11,7 @@ import Home from './views/Home';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
 import CreateObservation from './views/CreateObservation';
+import SingleObservation from './views/SingleObservation';
 import SingleBird from './views/SingleBird';
 import IndividualProfile from './views/IndividualProfile';
 import OrganisationProfile from './views/OrganisationProfile';
@@ -68,6 +69,11 @@ class App extends Component {
               )}
               authorized={!user}
               redirect="/"
+              exact
+            />
+            <Route
+              path="/observation/:id"
+              render={(props) => <SingleObservation {...props} user={user} />}
               exact
             />
             <Route

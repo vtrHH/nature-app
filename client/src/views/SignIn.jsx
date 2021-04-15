@@ -55,7 +55,7 @@ class SignIn extends Component {
             <div id="sign-up-box">
               <p>
                 If you don't have an account, <br/>
-                <a href="/sign-up">
+                <a href="/sign-up" className="form__a">
                   SIGN UP HERE.
                 </a>
               </p>
