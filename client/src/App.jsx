@@ -72,6 +72,11 @@ class App extends Component {
               exact
             />
             <Route
+              path="/observation/create"
+              component={CreateObservation}
+              exact
+            />
+            <Route
               path="/observation/:id"
               render={(props) => <SingleObservation {...props} user={user} />}
               exact
@@ -85,11 +90,6 @@ class App extends Component {
             <Route
               path="/organisation/:id"
               component={OrganisationProfile}
-              exact
-            />
-            <Route
-              path="/observation/create"
-              component={CreateObservation}
               exact
             />
           </Switch>
