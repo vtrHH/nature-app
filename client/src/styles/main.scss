@@ -1,0 +1,71 @@
+@import 'variables';
+@import 'map';
+@import 'forms';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 60em;
+  margin: 0 auto;
+  padding: 0 1em;
+  font-family: $font-body;
+  line-height: 1.5;
+  text-align: center;
+}
+
+a {
+  text-decoration:underline;
+  color: inherit;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  div{
+    padding:5px, 5px;
+    margin-bottom: 20px;
+}
+
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+    font-size: 1.2em;
+    a,
+    button {
+        display: inline-flex;
+        padding: 1em 0;
+        margin-right: 1em;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+      button {
+        margin-bottom: 0;
+      }
+    & > div {
+      margin-left: auto;
+    }
+  }
+
+.container--home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 800px;
+  margin: auto;
+}
+
+.two-column-box{
+    display:flex;
+    align-items:center;
+    padding: 50px 50px;  
+    justify-content: space-around;
+}
+
+

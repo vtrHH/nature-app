@@ -39,7 +39,7 @@ export class SearchBar extends Component {
         <input
           name="q"
           value={this.state.search}
-          placeholder={"Search product"}
+          placeholder={"Search for birds"}
           onChange={this.handleSearchInputChange}        
         />
         <button onClick={this.handleClick} >Search</button>

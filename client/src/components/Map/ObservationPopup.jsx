@@ -1,6 +1,5 @@
 import React from 'react';
 import { Popup } from 'react-leaflet';
-import './Map.scss';
 
 const ObservationPopup = (props) => {
   const observation = props.data;
