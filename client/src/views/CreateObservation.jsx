@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { createObservation } from '../services/observation';
 
+// import MapView from './../components/Map/MapView';
+
 class CreateObservation extends Component {
   state = {
     date: '',
@@ -73,7 +75,7 @@ class CreateObservation extends Component {
           <h1>Add your Observation</h1>
         </header>
         <form onSubmit={this.handleFormSubmission}>
-          <label htmlFor="input-bird">Bird</label>
+          <label htmlFor="input-bird">Name</label>
           <input
             type="text"
             id="input-bird"
@@ -83,6 +85,10 @@ class CreateObservation extends Component {
             onChange={this.handleInputChange}
             required
           />
+          <label htmlFor="input-location">Set Location</label>
+
+          {/*<MapView />*/}
+
           <label htmlFor="input-lat">Latitude</label>
           <input
             type="number"
