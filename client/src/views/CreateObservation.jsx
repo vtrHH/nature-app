@@ -23,11 +23,6 @@ class CreateObservation extends Component {
     console.log('Component Did Mount');
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    this.state.zoom !== prevState.zoom &&
-      console.log('Updated' + this.state.zoom, prevState.zoom);
-  }
-
   getUserLocation = (options) =>
     new Promise((resolve, reject) =>
       navigator.geolocation.getCurrentPosition(resolve, reject, options)
@@ -71,11 +66,10 @@ class CreateObservation extends Component {
         this.setState({
           lat: latitude,
           lng: longitude,
-          currentLocation: [latitude, longitude],
-          zoom: 12
+          currentLocation: [latitude, longitude]
         });
         const { map, currentLocation } = this.state;
-        if (map) map.flyTo(currentLocation);
+        if (map) map.flyTo(currentLocation, 12, { duration: 3 });
       })
       .catch((error) => {
         console.log('There was an error locating the user.');
@@ -101,52 +95,29 @@ class CreateObservation extends Component {
             required
           />
           <label htmlFor="input-location">Set Location</label>
-
           <button onClick={this.handleCurrentLocationSearch}>Locate Me</button>
-
           {/*  <LocationMapView lat={this.state.lat} lng={this.state.lng} /> */}
-          {this.state.zoom === 2 && (
-            <MapContainer
-              center={this.state.currentLocation}
-              zoom={this.state.zoom}
-              whenCreated={(map) => this.setState({ map })}
-            >
-              <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              />
-              {this.state.lat && this.state.lng ? (
-                <Marker
-                  position={[this.state.lat, this.state.lng]}
-                  icon={LocationIcon}
-                >
-                  <Popup closeButton={false}>You are here</Popup>
-                </Marker>
-              ) : (
-                'Location is loading'
-              )}
-            </MapContainer>
-          )}
-
-          {this.state.zoom !== 2 && (
-            <MapContainer center={this.state.currentLocation} zoom={12}>
-              <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              />
-              {this.state.lat && this.state.lng ? (
-                <Marker
-                  position={[this.state.lat, this.state.lng]}
-                  icon={LocationIcon}
-                >
-                  <Popup closeButton={false}>You are here</Popup>
-                </Marker>
-              ) : (
-                'Location is loading'
-              )}
-            </MapContainer>
-          )}
-
+          <MapContainer
+            center={this.state.currentLocation}
+            zoom={this.state.zoom}
+            whenCreated={(map) => this.setState({ map })}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            />
+            {this.state.lat && this.state.lng ? (
+              <Marker
+                position={[this.state.lat, this.state.lng]}
+                icon={LocationIcon}
+              >
+                <Popup closeButton={false}>You are here</Popup>
+              </Marker>
+            ) : (
+              'Location is loading'
+            )}
+          </MapContainer>
+          )
           <input
             type="hidden"
             id="input-lat"
