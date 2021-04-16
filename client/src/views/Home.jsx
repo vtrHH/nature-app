@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import birds from '../data/kiwi-species-subspecies.json';
 
-import { searchSpecie } from './../services/i-nature-api';
-import { listOfObservations } from './../services/observation';
+import { searchSpecie } from '../services/i-nature-api';
+import { listOfObservations } from '../services/observation';
 
 import BirdList from '../components/BirdList';
 import SearchBar from '../components/SearchBar';

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import './../App.css';
 
-import { searchSpecie } from './../services/i-nature-api';
+// import { searchSpecie } from './../services/i-nature-api';
 
 export class SearchBar extends Component {
 
@@ -13,8 +12,7 @@ export class SearchBar extends Component {
   handleSearchInputChange = (e) => {
     const value = e.target.value;
     this.setState({
-      search : value
-      
+      search : value      
     })
     this.props.onSearchBar(e.target.value)
   }

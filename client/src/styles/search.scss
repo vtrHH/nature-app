@@ -1,0 +1,49 @@
+.search,
+.search__bird-list {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 2px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid grey;
+    justify-content: space-between;
+    img {
+        width: 75px;
+        height: 100%;
+        object-fit: cover;
+    }
+    div {
+        margin-bottom: 0;
+    }
+}
+
+main div {
+    margin-bottom: 0;
+}
+
+.search__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.search__bird-list {
+    // height: 20em;
+    width: 20em;
+}
+
+.search-item__details {
+    font-size: 0.8em;
+    h3,
+    h5 {
+        margin-block-end: 0;
+        margin-block-start: 0;
+    }
+}

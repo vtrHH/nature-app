@@ -10,7 +10,7 @@ import Navbar from './components/Navbar';
 import Home from './views/Home';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
-import CreateObservation from './views/CreateObservation';
+import CreateObservationSearch from './views/CreateObservationSearch';
 import SingleObservation from './views/SingleObservation';
 import SingleBird from './views/SingleBird';
 import IndividualProfile from './views/IndividualProfile';
@@ -73,7 +73,7 @@ class App extends Component {
             />
             <Route
               path="/observation/create"
-              component={CreateObservation}
+              component={CreateObservationSearch}
               exact
             />
             <Route
