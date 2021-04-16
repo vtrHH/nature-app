@@ -26,8 +26,7 @@ class Search extends Component {
   //   this.setState({
   //     results : results
   // })
-}
-  
+}  
 
   searchApi = async () => {
     const query  = this.state.searchQuery ;
@@ -73,7 +72,10 @@ class Search extends Component {
     // });
   };
 
-  
+  handleResultId = (id) => {
+    console.log(`Search------------${id}`)
+    // this.props.onSelectClicked(id)
+  }
 
   render() {
     let user = this.state.user;
@@ -81,13 +83,13 @@ class Search extends Component {
     console.log(user);
     return (
          
-        <div className="container--home">
+        <div className="container--search">
         
           <SearchBar
             onSearchBar={this.handleQueryChange}            
           />
           {results && (
-           <SearchList results={results} />
+           <SearchList results={results} onSearchClicked={() => this.handleResultId()} />
           )}
         
                 

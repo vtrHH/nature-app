@@ -41,7 +41,7 @@ export class SearchBar extends Component {
 
   render() {
     return (
-      <div>
+      <div className="searchbar">
        
         <input
           name="q"
