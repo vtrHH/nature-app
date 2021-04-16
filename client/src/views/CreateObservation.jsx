@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { createObservation } from '../services/observation';
 
-// import MapView from './../components/Map/MapView';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { LocationIcon } from './../components/Map/LocationIcon';
+import 'leaflet/dist/leaflet.css';
 
 class CreateObservation extends Component {
   state = {
@@ -9,26 +11,21 @@ class CreateObservation extends Component {
     location: null,
     lat: 0,
     lng: 0,
-    bird: ''
+    bird: '',
+    currentLocation: [0, 0],
+    zoom: 2,
+    map: null
     // verified: false
     // picture: ''
   };
 
   componentDidMount() {
-    const latitudeInput = document.getElementById('input-lat');
-    const longitudeInput = document.getElementById('input-lng');
-    this.getUserLocation()
-      .then((location) => {
-        const { latitude, longitude } = location.coords;
-        latitudeInput.value = latitude;
-        longitudeInput.value = longitude;
-        console.log(latitude, longitude);
-        this.setState({ lat: latitude, lng: longitude });
-      })
-      .catch((error) => {
-        console.log('There was an error locating the user.');
-        console.log(error);
-      });
+    console.log('Component Did Mount');
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this.state.zoom !== prevState.zoom &&
+      console.log('Updated' + this.state.zoom, prevState.zoom);
   }
 
   getUserLocation = (options) =>
@@ -41,7 +38,6 @@ class CreateObservation extends Component {
     const observationLocation = {
       coordinates: [this.state.lat, this.state.lng]
     };
-    // console.log(observationLocation);
     const date = this.state.date;
     const bird = this.state.bird;
     const data = {
@@ -65,7 +61,26 @@ class CreateObservation extends Component {
   };
 
   handleCurrentLocationSearch = () => {
-    console.log('Button is clicked');
+    const latitudeInput = document.getElementById('input-lat');
+    const longitudeInput = document.getElementById('input-lng');
+    this.getUserLocation()
+      .then((location) => {
+        const { latitude, longitude } = location.coords;
+        latitudeInput.value = latitude;
+        longitudeInput.value = longitude;
+        this.setState({
+          lat: latitude,
+          lng: longitude,
+          currentLocation: [latitude, longitude],
+          zoom: 12
+        });
+        const { map, currentLocation } = this.state;
+        if (map) map.flyTo(currentLocation);
+      })
+      .catch((error) => {
+        console.log('There was an error locating the user.');
+        console.log(error);
+      });
   };
 
   render() {
@@ -87,13 +102,53 @@ class CreateObservation extends Component {
           />
           <label htmlFor="input-location">Set Location</label>
 
-          {/* <button onClick={this.handleCurrentLocationSearch}>Locate Me</button> */}
+          <button onClick={this.handleCurrentLocationSearch}>Locate Me</button>
 
-          {/*<MapView />*/}
+          {/*  <LocationMapView lat={this.state.lat} lng={this.state.lng} /> */}
+          {this.state.zoom === 2 && (
+            <MapContainer
+              center={this.state.currentLocation}
+              zoom={this.state.zoom}
+              whenCreated={(map) => this.setState({ map })}
+            >
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              />
+              {this.state.lat && this.state.lng ? (
+                <Marker
+                  position={[this.state.lat, this.state.lng]}
+                  icon={LocationIcon}
+                >
+                  <Popup closeButton={false}>You are here</Popup>
+                </Marker>
+              ) : (
+                'Location is loading'
+              )}
+            </MapContainer>
+          )}
 
-          <label htmlFor="input-lat">Latitude</label>
+          {this.state.zoom !== 2 && (
+            <MapContainer center={this.state.currentLocation} zoom={12}>
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              />
+              {this.state.lat && this.state.lng ? (
+                <Marker
+                  position={[this.state.lat, this.state.lng]}
+                  icon={LocationIcon}
+                >
+                  <Popup closeButton={false}>You are here</Popup>
+                </Marker>
+              ) : (
+                'Location is loading'
+              )}
+            </MapContainer>
+          )}
+
           <input
-            type="text"
+            type="hidden"
             id="input-lat"
             name="lat"
             value={this.state.lat}
@@ -101,9 +156,8 @@ class CreateObservation extends Component {
             onChange={this.handleInputChange}
             required
           />
-          <label htmlFor="input-lng">Longitude</label>
           <input
-            type="text"
+            type="hidden"
             id="input-lng"
             name="lng"
             value={this.state.lng}
@@ -130,44 +184,3 @@ class CreateObservation extends Component {
 }
 
 export default CreateObservation;
-
-// { lat: 52.52437, lng: 13.41053 }
-// date
-// location
-// bird
-// picture
-// verified
-// creator
-
-// date: {
-//         type: Date,
-//         required: true
-//     },
-//     location: {
-//         coordinates: [{
-//             type: Number,
-//             min: -180,
-//             max: 180
-//         }],
-//         type: {
-//             type: String,
-//             default: 'Point',
-//             required: true
-//         }
-//         // required: true
-//     },
-//     bird: {
-//         type: String,
-//         required: true
-//     },
-//     picture: {
-//         type: String,
-//         required: true
-//     },
-//     verified: {
-//         type: Boolean
-//     },
-//     creator: {
-//         type: mongoose.Schema.Types.ObjectId,
-//         ref: 'User'
-//     }
