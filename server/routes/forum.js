@@ -52,22 +52,20 @@ router.get('/:id', async (req, res, next) => {
 });
 
 router.post('/:id', routeGuard, async (req, res, next) => {
-    try {
-      const text = req.body.text;
-      const relatedpost = req.params._id;
-      const creator = req.user._id;
-      const post = await Post.create({
-        text,
-        creator,
-        relatedpost
-        // picture
-      });
-      res.json({ post });
-    } catch (error) {
-      next(error);
-    }
-  });
-
-
+  try {
+    const text = req.body.text;
+    const relatedpost = req.params._id;
+    const creator = req.user._id;
+    const post = await Post.create({
+      text,
+      creator,
+      relatedpost
+      // picture
+    });
+    res.json({ post });
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;

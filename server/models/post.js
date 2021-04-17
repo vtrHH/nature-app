@@ -3,17 +3,17 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema(
-  { 
+  {
     title: {
-      type: String,
+      type: String
       // required: true
     },
 
     text: {
-      type: String,
+      type: String
       // required: true
     },
-     
+
     location: {
       coordinates: [
         {
@@ -43,7 +43,7 @@ const postSchema = new mongoose.Schema(
     date: {
       type: Date
       //  required: true
-    },
+    }
   },
   {
     timestamps: {
