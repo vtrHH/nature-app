@@ -13,7 +13,7 @@ export const editIndividual = async (id, data) => {
 };
 
 //edit the preferences of an individual
-export const editBirdsInOrganisation = async (data) => {
+export const editPreferences = async (data) => {
   const response = await api.patch(`/individual/preferences`, data);
   return response.data.individual;
 };
