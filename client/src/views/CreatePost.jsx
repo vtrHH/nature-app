@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { QuestionIcon } from './../components/Map/QuestionIcon';
 import 'leaflet/dist/leaflet.css';
 
+
 class CreatePost extends Component {
   state = {
     date: '',
