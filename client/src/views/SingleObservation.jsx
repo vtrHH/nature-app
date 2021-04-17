@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import bird from '../data/20496-North-Island-Brown-Kiwi.json';
+import ObservationMapView from '../components/Map/ObservationMapView';
 import { loadObservation } from '../services/observation';
 
 class SingleObservation extends Component {
@@ -16,23 +16,23 @@ class SingleObservation extends Component {
     const observation = await loadObservation(this.props.match.params.id);
     this.setState({ observation: observation });
 
-    console.log('-------------componentDidMount()-------------------');
-    console.log(observation);
-    console.log(observation.location.coordinates[0]);
+    //  console.log('-------------componentDidMount()-------------------');
+    //  console.log(observation);
+    //  console.log(observation.location.coordinates[0]);
   }
 
   componentDidUpdate(previousProps, previousState) {
-    console.log('-------------componentDidUpdate-------------------');
-    console.log(previousProps, this.props);
-    console.log(previousState, this.state);
+    //  console.log('-------------componentDidUpdate-------------------');
+    //  console.log(previousProps, this.props);
+    //  console.log(previousState, this.state);
   }
 
   componentWillUnmount() {
-    console.log('---------------componentWillUnmount---------------');
+    //  console.log('---------------componentWillUnmount---------------');
   }
 
   render() {
-    console.log('-------------render-------------');
+    //  console.log('-------------render-------------');
     const observation = this.state.observation;
 
     return (
@@ -48,6 +48,9 @@ class SingleObservation extends Component {
             <span>{observation.location.coordinates[0]}</span>
             <br></br>
             <span>{observation.date.toString()}</span>
+            <ObservationMapView
+              observationLocation={observation.location.coordinates}
+            />
           </>
         )}
       </div>

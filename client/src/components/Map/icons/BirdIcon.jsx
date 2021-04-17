@@ -1,8 +1,8 @@
 import L from 'leaflet';
-import questionIcon from './assets/questionmark-icon.png';
+import birdIcon from './../assets/bird-icon.png';
 
-export const QuestionIcon = L.icon({
-  iconUrl: questionIcon,
+export const BirdIcon = L.icon({
+  iconUrl: birdIcon,
   iconSize: [35, 35],
   iconAnchor: null,
   shadowUrl: null,

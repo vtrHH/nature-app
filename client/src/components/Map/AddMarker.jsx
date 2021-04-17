@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { Marker, useMapEvents } from 'react-leaflet';
-import { BirdIcon } from './BirdIcon';
+import { LocationIcon } from './icons/LocationIcon';
 
-const AddMarker = () => {
+const AddMarker = (props) => {
   const [position, setPosition] = useState(null);
 
   useMapEvents({
     click: (e) => {
       setPosition(e.latlng);
-      console.log(e.latlng);
+      props.onClick(e.latlng);
     }
   });
 
   return position === null ? null : (
-    <Marker position={position} icon={BirdIcon}></Marker>
+    <Marker position={position} icon={LocationIcon}></Marker>
   );
 };
 

@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { createObservation } from '../services/observation';
 
-import Search from '../components/Search/Search'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { LocationIcon } from './../components/Map/LocationIcon';
+import Search from '../components/Search/Search';
+import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import AddMarker from './../components/Map/AddMarker';
 
 class CreateObservation extends Component {
-  state = {  
-    APIid: '',   
+  state = {
+    APIid: '',
     date: '',
-    location: null,
     lat: 0,
     lng: 0,
     currentLocation: [0, 0],
@@ -20,11 +18,6 @@ class CreateObservation extends Component {
     // verified: false
     // picture: ''
   };
-
-  getUserLocation = (options) =>
-    new Promise((resolve, reject) =>
-      navigator.geolocation.getCurrentPosition(resolve, reject, options)
-    );
 
   handleFormSubmission = async (e) => {
     e.preventDefault();
@@ -43,26 +36,25 @@ class CreateObservation extends Component {
     this.props.history.push(`/observation/${observation._id}`);
   };
 
-  
-
   handleInputChange = (e) => {
     console.log(e.target.name.value);
     const { name, value } = e.target;
 
     this.setState({
-      [name]: value,
-      
+      [name]: value
     });
   };
 
+  getUserLocation = (options) =>
+    new Promise((resolve, reject) =>
+      navigator.geolocation.getCurrentPosition(resolve, reject, options)
+    );
+
   handleCurrentLocationSearch = () => {
-    const latitudeInput = document.getElementById('input-lat');
-    const longitudeInput = document.getElementById('input-lng');
     this.getUserLocation()
       .then((location) => {
         const { latitude, longitude } = location.coords;
-        latitudeInput.value = latitude;
-        longitudeInput.value = longitude;
+        console.log(location.coords);
         this.setState({
           lat: latitude,
           lng: longitude,
@@ -77,13 +69,19 @@ class CreateObservation extends Component {
       });
   };
 
+  handleMarkerChange = (latlng) => {
+    this.setState({
+      lat: latlng.lat,
+      lng: latlng.lng
+    });
+  };
+
   handleResult = (result) => {
     console.log(`Parent------------${result.id}`);
     this.setState({
-      APIid : result.id
-    })
-    // this.props.onSelectClicked(id)
-  }
+      APIid: result.id
+    });
+  };
 
   render() {
     return (
@@ -91,20 +89,20 @@ class CreateObservation extends Component {
         <header>
           <h1>Add your Observation</h1>
         </header>
-        <Search onParent={(result) => this.handleResult(result)}/>
-        <form onSubmit={this.handleFormSubmission}>          
+        <Search onParent={(result) => this.handleResult(result)} />
+        <form onSubmit={this.handleFormSubmission}>
           <input
             type="hidden"
             id="input-APIid"
             name="APIid"
             placeholder=""
-            value={this.state.APIid} 
-            onChange={this.handleInputChange}            
+            value={this.state.APIid}
+            onChange={this.handleInputChange}
             required
           />
-          <label htmlFor="input-location">Set Location</label>
+          <label>Set Location</label>
           <button onClick={this.handleCurrentLocationSearch}>Locate Me</button>
-          {/*  <LocationMapView lat={this.state.lat} lng={this.state.lng} /> */}
+
           <MapContainer
             center={this.state.currentLocation}
             zoom={this.state.zoom}
@@ -114,37 +112,9 @@ class CreateObservation extends Component {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
-            {this.state.lat && this.state.lng ? (
-              <Marker
-                position={[this.state.lat, this.state.lng]}
-                icon={LocationIcon}
-              >
-                <Popup closeButton={false}>You are here</Popup>
-              </Marker>
-            ) : (
-              'Location is loading'
-            )}
-            <AddMarker />
+            <AddMarker onClick={this.handleMarkerChange} />
           </MapContainer>
 
-          <input
-            type="hidden"
-            id="input-lat"
-            name="lat"
-            value={this.state.lat}
-            placeholder="latitude"
-            onChange={this.handleInputChange}
-            required
-          />
-          <input
-            type="hidden"
-            id="input-lng"
-            name="lng"
-            value={this.state.lng}
-            placeholder="longitude"
-            onChange={this.handleInputChange}
-            required
-          />
           <label htmlFor="input-date">Date</label>
           <input
             type="date"
@@ -155,7 +125,6 @@ class CreateObservation extends Component {
             onChange={this.handleInputChange}
             required
           />
-          {/* <button onClick={this.currentPosition}> Get Current Positon</button> */}
           <button>Add Observation</button>
         </form>
       </main>
