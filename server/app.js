@@ -23,7 +23,7 @@ app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(
   cors({
-    origin: ['http://localhost:3001'],
+    origin: (process.env.ALLOWED_CORS_ORIGINS || '').split(','),
     credentials: true
   })
 );
