@@ -117,7 +117,7 @@ class CreateObservation extends Component {
               'Location is loading'
             )}
           </MapContainer>
-          )
+          
           <input
             type="hidden"
             id="input-lat"
