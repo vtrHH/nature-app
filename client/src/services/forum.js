@@ -16,13 +16,16 @@ export const createPost = async (data) => {
 //loads a post and their comments
 export const loadPost = async (id) => {
   const response = await api.get(`/forum/${id}`);
-  // i return all data because 
-  //inside there should be data.post and data.comments
-  return response.data;
+  return response.data.post;
 };
 
 //create a comment on a post
-export const createComment = async (data) => {
-  const response = await api.post('/forum/${id}', data);
-  return response.data.comment;
+export const createComment = async (id, data) => {
+  const response = await api.post(`/forum/${id}`, data);
+  return response.data.post;
+};
+
+export const loadComments = async (id) => {
+  const response = await api.get(`/forum/${id}/comments`);
+  return response.data.comments;
 };

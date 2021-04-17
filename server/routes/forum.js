@@ -44,8 +44,7 @@ router.post('/', routeGuard, async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
-    const comments = await Comment.find({ post: req.params.id });
-    res.json({ post, comments });
+    res.json({ post });
   } catch (error) {
     next(error);
   }
@@ -54,20 +53,27 @@ router.get('/:id', async (req, res, next) => {
 router.post('/:id', routeGuard, async (req, res, next) => {
     try {
       const text = req.body.text;
-      const relatedpost = req.params._id;
+      const relatedpost = req.params.id;
       const creator = req.user._id;
-      const post = await Post.create({
+      const comment = await Comment.create({
         text,
         creator,
         relatedpost
         // picture
       });
-      res.json({ post });
+      res.json({ comment });
     } catch (error) {
       next(error);
     }
   });
 
-
+  router.get('/:id/comments', async (req, res, next) => {
+    try {
+      const comments = await Comment.find({ relatedpost: req.params.id });
+      res.json({ comments });
+    } catch (error) {
+      next(error);
+    }
+  });
 
 module.exports = router;

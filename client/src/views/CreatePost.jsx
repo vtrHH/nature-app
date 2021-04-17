@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { createPost } from '../services/forum';
 
+
 class CreatePost extends Component {
   state = {
     date: '',
