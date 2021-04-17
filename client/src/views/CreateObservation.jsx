@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { createObservation } from '../services/observation';
 
+import Search from '../components/Search/Search'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { LocationIcon } from './../components/Map/LocationIcon';
 import 'leaflet/dist/leaflet.css';
 
 class CreateObservation extends Component {
-  state = {
+  state = {  
+    APIid: '',   
     date: '',
     location: null,
     lat: 0,
     lng: 0,
-    bird: '',
     currentLocation: [0, 0],
     zoom: 2,
     map: null
@@ -30,16 +31,18 @@ class CreateObservation extends Component {
       coordinates: [this.state.lat, this.state.lng]
     };
     const date = this.state.date;
-    const bird = this.state.bird;
+    const APIid = this.state.APIid;
     const data = {
       location: observationLocation,
       date: date,
-      bird: bird
+      APIid: APIid
     };
 
     const observation = await createObservation(data);
     this.props.history.push(`/observation/${observation._id}`);
   };
+
+  
 
   handleInputChange = (e) => {
     console.log(e.target.name.value);
@@ -47,7 +50,7 @@ class CreateObservation extends Component {
 
     this.setState({
       [name]: value,
-      location: [this.state.lat, this.state.lng]
+      
     });
   };
 
@@ -73,21 +76,29 @@ class CreateObservation extends Component {
       });
   };
 
+  handleResult = (result) => {
+    console.log(`Parent------------${result.id}`);
+    this.setState({
+      APIid : result.id
+    })
+    // this.props.onSelectClicked(id)
+  }
+
   render() {
     return (
       <main>
         <header>
           <h1>Add your Observation</h1>
         </header>
-        <form onSubmit={this.handleFormSubmission}>
-          <label htmlFor="input-bird">Name</label>
+        <Search onParent={(result) => this.handleResult(result)}/>
+        <form onSubmit={this.handleFormSubmission}>          
           <input
-            type="text"
-            id="input-bird"
-            name="bird"
-            placeholder="Bird name"
-            value={this.state.bird}
-            onChange={this.handleInputChange}
+            type="hidden"
+            id="input-APIid"
+            name="APIid"
+            placeholder=""
+            value={this.state.APIid} 
+            onChange={this.handleInputChange}            
             required
           />
           <label htmlFor="input-location">Set Location</label>
@@ -119,7 +130,7 @@ class CreateObservation extends Component {
             id="input-lat"
             name="lat"
             value={this.state.lat}
-            placeholder="52.52437"
+            placeholder="latitude"
             onChange={this.handleInputChange}
             required
           />
@@ -128,7 +139,7 @@ class CreateObservation extends Component {
             id="input-lng"
             name="lng"
             value={this.state.lng}
-            placeholder="13.41053"
+            placeholder="longitude"
             onChange={this.handleInputChange}
             required
           />
