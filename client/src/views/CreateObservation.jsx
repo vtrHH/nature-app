@@ -19,10 +19,6 @@ class CreateObservation extends Component {
     // picture: ''
   };
 
-  componentDidMount() {
-    console.log('Component Did Mount');
-  }
-
   getUserLocation = (options) =>
     new Promise((resolve, reject) =>
       navigator.geolocation.getCurrentPosition(resolve, reject, options)
@@ -117,7 +113,7 @@ class CreateObservation extends Component {
               'Location is loading'
             )}
           </MapContainer>
-          
+
           <input
             type="hidden"
             id="input-lat"

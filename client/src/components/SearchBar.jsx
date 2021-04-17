@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import './../App.css';
 
-import { searchSpecie } from './../services/i-nature-api';
-
 export class SearchBar extends Component {
 
   state= {

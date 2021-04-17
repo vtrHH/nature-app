@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import PostList from '../components/PostList';
-import { listOfPosts, createPost } from '../services/forum';
+import { listOfPosts } from '../services/forum';
 
 class Forum extends Component {
   state = {
@@ -23,11 +23,11 @@ class Forum extends Component {
           <h1>What is this bird?</h1>
           <h2>Get your answers and help others here</h2>
         </header>
-            {posts && (
-            <div className="container--home">
-                <PostList posts={posts} />
-            </div>
-            )}
+        {posts && (
+          <div className="container--home">
+            <PostList posts={posts} />
+          </div>
+        )}
         <>
           <Link to="/forum/newpost">Add a Question</Link>
         </>
