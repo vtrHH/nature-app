@@ -5,8 +5,7 @@ import { listOfObservations } from '../services/observation';
 
 import BirdList from '../components/BirdList';
 import SearchBar from '../components/SearchBar';
-import MapView from '../components/Map/MapView';
-
+import HomeMapView from '../components/Map/HomeMapView';
 
 class Home extends Component {
   constructor(props) {
@@ -65,8 +64,7 @@ class Home extends Component {
           <BirdList birds={birds} />
           {/* <div>{birds.map(bird => 
             <h2 key={bird._id} >{bird.name}</h2>)}</div> */}
-          <MapView observations={this.state.observations} />
-
+          <HomeMapView observations={this.state.observations} />
         </div>
       </main>
     );

@@ -15,6 +15,7 @@ const cors = require('cors');
 const baseRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
 const observationRouter = require('./routes/observation');
+const forumRouter = require('./routes/forum');
 
 const app = express();
 
@@ -22,7 +23,7 @@ app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(
   cors({
-    origin: ['http://localhost:3001'],
+    origin: (process.env.ALLOWED_CORS_ORIGINS || '').split(','),
     credentials: true
   })
 );
@@ -35,9 +36,9 @@ app.use(
     proxy: true,
     cookie: {
       maxAge: 15 * 24 * 60 * 60 * 1000,
-      httpOnly: true
-      // sameSite: 'none',
-      // secure: true
+      httpOnly: true,
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : false,
+      secure: process.env.NODE_ENV === 'production'
     },
     store: new (connectMongo(expressSession))({
       mongooseConnection: mongoose.connection,
@@ -51,6 +52,7 @@ app.use(bindUserToViewLocals);
 app.use('/', baseRouter);
 app.use('/authentication', authenticationRouter);
 app.use('/observation', observationRouter);
+app.use('/forum', forumRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {

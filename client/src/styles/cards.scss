@@ -1,5 +1,6 @@
 .card,
-.card__bird-list {
+.card__bird-list,
+.card__post-list {
     position: relative;
     display: -ms-flexbox;
     display: flex;
@@ -30,4 +31,9 @@
 .card__bird-list{
     height: 20em;
     width: 15em;
+}
+
+.card__post-list{
+    height: 10em;
+    width: 50em;
 }

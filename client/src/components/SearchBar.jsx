@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-// import { searchSpecie } from './../services/i-nature-api';
-
 export class SearchBar extends Component {
 
   state= {
