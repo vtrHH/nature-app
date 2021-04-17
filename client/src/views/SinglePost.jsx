@@ -1,6 +1,5 @@
 import { Component } from 'react';
-import { loadPost, createComment, loadComments } from '../services/forum';
-import { Link } from 'react-router-dom';
+import { loadPost, loadComments } from '../services/forum';
 
 class SinglePost extends Component {
   state = {
@@ -24,11 +23,11 @@ class SinglePost extends Component {
 
   handleFormSubmission = async (e) => {
     e.preventDefault();
-    const text = this.state.text;
-    const data = {
+    //const text = this.state.text;
+    /*const data = {
       text: text
-    };
-    const comments = await createComment(this.state.post._id, data);
+    }; */
+    //const comments = await createComment(this.state.post._id, data);
     this.props.history.push(`/forum/${this.state.post._id}`);
   };
 
@@ -57,9 +56,7 @@ class SinglePost extends Component {
         {comments && (
           <>
             {comments.map((comment) => (
-              <p key={comment._id}>
-                {comment.text}
-              </p>
+              <p key={comment._id}>{comment.text}</p>
             ))}
           </>
         )}
