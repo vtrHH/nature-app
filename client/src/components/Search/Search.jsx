@@ -6,6 +6,7 @@ import { listOfObservations } from '../../services/observation';
 
 import SearchBar from '../Search/SearchBar';
 import SearchList from '../Search/SearchList';
+import SelectedItem from '../Search/SelectedItem';
 // import MapView from '../Map/MapView';
 
 
@@ -16,6 +17,7 @@ class Search extends Component {
     this.state = {      
       searchQuery : null,
       results: null,
+      selected: null
     };
   }
 
@@ -72,14 +74,16 @@ class Search extends Component {
     // });
   };
 
-  handleResultId = (id) => {
-    console.log(`Search------------${id}`)
-    // this.props.onSelectClicked(id)
+  handleResult = (result) => {
+    console.log(`Search------------${result.id}`)  
+    this.setState({selected:result}); 
+    this.props.onParent(result)
   }
 
   render() {
     let user = this.state.user;
     let results = this.state.results;
+    let selected = this.state.selected;
     console.log(user);
     return (
          
@@ -88,10 +92,12 @@ class Search extends Component {
           <SearchBar
             onSearchBar={this.handleQueryChange}            
           />
-          {results && (
-           <SearchList results={results} onSearchClicked={() => this.handleResultId()} />
+          {results && !selected && (
+           <SearchList results={results} onSearch={(result) => this.handleResult(result)} />
           )}
-        
+          {selected && (
+          <SelectedItem result={selected} selected={selected}/>
+          )}
                 
         </div>
     );

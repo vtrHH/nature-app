@@ -6,7 +6,7 @@ import { Component } from 'react';
 // const getHumanReadableGender = gender =>
 //   ({ male: 'Male', female: 'Female' }[gender]);
 
-class SearchItem extends Component { 
+class SelectedItem extends Component { 
   
   constructor(props) {
     super(props);
@@ -29,7 +29,7 @@ class SearchItem extends Component {
   handleSelect = (e, id) => {
     e.preventDefault();
     console.log('Select button was clicked.');
-    console.log(`SearchItem------------${id}`)
+    console.log(`SelectedItem------------${id}`)
     this.setState({
           isSelected: !this.state.isSelected
         })    
@@ -52,7 +52,7 @@ class SearchItem extends Component {
           <h3>{result.preferred_common_name}</h3>
           <h5>{result.name}</h5>
           <h5>{result.id}</h5>
-          <button onClick={(e) => this.handleSelect(e, result.id)}>Select</button>     
+          <button onClick={(e) => this.handleSelect(e, result.id)}>Clear selection</button>     
         </div>
     </div>
     </>
@@ -62,7 +62,7 @@ class SearchItem extends Component {
 };
 
 
-export default SearchItem;
+export default SelectedItem;
 
 //  <h2 key={bird._id} >{bird.name}</h2>
 

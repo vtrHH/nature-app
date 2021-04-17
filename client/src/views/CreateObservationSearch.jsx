@@ -47,13 +47,18 @@ class CreateObservationSearch extends Component {
     console.log('Button is clicked');
   };
 
+  handleResult = (result) => {
+    console.log(`Parent------------${result.id}`)   
+    // this.props.onSelectClicked(id)
+  }
+
   render() {
     return (
       <main>
         <header>
           <h1>Add your Observation</h1>
         </header>
-        <Search />
+        <Search onParent={(result) => this.handleResult(result)}/>
         <form onSubmit={this.handleFormSubmission}>
           <label htmlFor="input-bird">Bird Name</label>
           <input

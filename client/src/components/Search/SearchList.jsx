@@ -10,13 +10,21 @@ import SearchItem from './SearchItem';
       super(props);
       this.state = {
         APIid: null,
-        results: props.results
+        results: props.results,
+        selected: null
       }
   }
 
-  handleResultId = (id) => {
-    console.log(`SearchList------------${id}`)
-    // this.props.onSearchClicked(id)
+  componentDidUpdate(previousProps, previousState) {
+    console.log('-------------componentDidUpdate-------------------');
+    console.log(previousProps, this.props);
+    console.log(previousState, this.state);    
+  }
+
+  handleResult = (result) => {
+    console.log(`SearchList------------${result.id}`)  
+    this.setState({selected:result});
+    this.props.onSearch(result)
   }
 
   render() {
@@ -26,7 +34,7 @@ import SearchItem from './SearchItem';
     <div className="search__list">
       {results.map(result => (
         <Link key={result.id} to={`/bird/${result.id}`}>
-          <SearchItem result={result} onListClicked={() => this.handleResultId(result.id)}/>
+          <SearchItem result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
         </Link>
       ))}
     </div>
@@ -35,3 +43,5 @@ import SearchItem from './SearchItem';
   }
 
 export default SearchList; 
+
+{/* <button onClick={(e) => this.handleSelect(e, result.id)}>Select</button>  */}
