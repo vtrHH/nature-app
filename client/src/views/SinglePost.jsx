@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { loadPost, createComment, loadComments } from '../services/forum';
-import { Link } from 'react-router-dom';
 
 class SinglePost extends Component {
   state = {
@@ -28,7 +27,7 @@ class SinglePost extends Component {
     const data = {
       text: text
     };
-    const comments = await createComment(this.state.post._id, data);
+    //const comments = await createComment(this.state.post._id, data);
     this.props.history.push(`/forum/${this.state.post._id}`);
   };
 
