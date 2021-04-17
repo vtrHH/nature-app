@@ -15,6 +15,7 @@ const cors = require('cors');
 const baseRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
 const observationRouter = require('./routes/observation');
+const forumRouter = require('./routes/forum');
 
 const app = express();
 
@@ -51,6 +52,7 @@ app.use(bindUserToViewLocals);
 app.use('/', baseRouter);
 app.use('/authentication', authenticationRouter);
 app.use('/observation', observationRouter);
+app.use('/forum', forumRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {

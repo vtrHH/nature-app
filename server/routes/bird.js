@@ -10,19 +10,19 @@ const routeGuard = require('./../middleware/route-guard');
 
 const router = new express.Router();
 
-router.get('/:api_id_value', async (req, res, next) => {
+router.get('/list', async (req, res, next) => {
   try {
-    const bird = await Bird.find({ api_id: api_id_value });
-    res.json({ bird });
+    const birds = await Bird.find().limit(5);
+    res.json({ birds });
   } catch (error) {
     next(error);
   }
 });
 
-router.get('/list', async (req, res, next) => {
+router.get('/:api_id_value', async (req, res, next) => {
   try {
-    const birds = await Bird.find().limit(5);
-    res.json({ birds });
+    const bird = await Bird.find({ api_id: api_id_value });
+    res.json({ bird });
   } catch (error) {
     next(error);
   }
