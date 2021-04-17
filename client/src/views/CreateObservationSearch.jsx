@@ -7,7 +7,7 @@ import Search from '../components/Search/Search'
 class CreateObservationSearch extends Component {
   state = {
     date: '',    
-    birdId: '',
+    APIid: '',
    
     // verified: false
     // picture: ''
@@ -23,10 +23,10 @@ class CreateObservationSearch extends Component {
     e.preventDefault();
    
     const date = this.state.date;
-    const birdId = this.state.birdId;
+    const APIid = this.state.APIid;
     const data = {
       date: date,
-      birdId: birdId
+      APIid: APIid
     };
 
     const observation = await createObservation(data);
@@ -48,7 +48,10 @@ class CreateObservationSearch extends Component {
   };
 
   handleResult = (result) => {
-    console.log(`Parent------------${result.id}`)   
+    console.log(`Parent------------${result.id}`);
+    this.setState({
+      APIid : result.id
+    })
     // this.props.onSelectClicked(id)
   }
 
@@ -60,14 +63,13 @@ class CreateObservationSearch extends Component {
         </header>
         <Search onParent={(result) => this.handleResult(result)}/>
         <form onSubmit={this.handleFormSubmission}>
-          <label htmlFor="input-bird">Bird Name</label>
+          <label htmlFor="input-bird">APIid</label>
           <input
             type="text"
-            id="input-bird"
-            name="bird"
-            placeholder="Bird name"
-            value={this.state.bird}
-            onChange={this.handleInputChange}
+            id="input-APIid"
+            name="APIid"
+            placeholder=""
+            value={this.state.APIid}            
             required
           />
           <label htmlFor="input-location">Set Location</label>

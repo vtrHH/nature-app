@@ -55,7 +55,6 @@ class Search extends Component {
     if (previousState.searchQuery !== this.state.searchQuery ) {
       console.log("changedddddddddd");
       this.searchApi()
-
     }
   }
 
@@ -80,6 +79,11 @@ class Search extends Component {
     this.props.onParent(result)
   }
 
+  handleClear = () => {
+    this.setState({selected:null}); 
+    // this.props.onParent(result)
+  }
+
   render() {
     let user = this.state.user;
     let results = this.state.results;
@@ -92,11 +96,12 @@ class Search extends Component {
           <SearchBar
             onSearchBar={this.handleQueryChange}            
           />
+          
           {results && !selected && (
            <SearchList results={results} onSearch={(result) => this.handleResult(result)} />
           )}
           {selected && (
-          <SelectedItem result={selected} selected={selected}/>
+          <SelectedItem result={selected} selected={selected} onSearchClearSelected={() => this.handleClear()}/>
           )}
                 
         </div>

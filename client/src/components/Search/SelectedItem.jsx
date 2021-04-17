@@ -12,37 +12,21 @@ class SelectedItem extends Component {
     super(props);
     this.state = {
       result: props.result,
-      selected: props.selected,
-      APIid: null,
-      isSelected: false      
+      selected: props.selected
     }
   }
-    // ({ result, onSelectClicked }) => {
-  // filterSelected = (id) => {
-  //   const list = this.state.results;
-  //   const selected = list.filter(item => item.id === id);
-  //   this.setState({
-  //     selected: selected
-  //   })
-  // }
 
-  handleSelect = (e, id) => {
-    e.preventDefault();
-    console.log('Select button was clicked.');
-    console.log(`SelectedItem------------${id}`)
-    this.setState({
-          isSelected: !this.state.isSelected
-        })    
-    this.props.onList()
+  handleClear = (e) => {
+    e.preventDefault();    
+    this.props.onSearchClearSelected()
   }
     
   render() {
-    const isSelected = this.state.isSelected;
     const result = this.props.result;
     return (
     <>
     {/* <div className={isSelected && ("search__bird-list isSelected") || ("search__bird-list") }> */}
-    <div className="search__bird-list">
+    <div className="search__bird-list selected-item">
       <div >
           {result.default_photo ? <img src={result.default_photo.square_url} alt={result.name}/> : <img src="" alt=""/>}    
         
@@ -51,8 +35,8 @@ class SelectedItem extends Component {
         <div className="search-item__details">
           <h3>{result.preferred_common_name}</h3>
           <h5>{result.name}</h5>
-          <h5>{result.id}</h5>
-          <button onClick={(e) => this.handleSelect(e, result.id)}>Clear selection</button>     
+          {/* <h5>{result.id}</h5> */}
+          <button onClick={(e) => this.handleClear(e)}>Clear selection</button>     
         </div>
     </div>
     </>

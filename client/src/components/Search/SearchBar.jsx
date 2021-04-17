@@ -42,7 +42,7 @@ export class SearchBar extends Component {
   render() {
     return (
       <div className="searchbar">
-       
+         <label htmlFor="q">Search Bird</label>
         <input
           name="q"
           value={this.state.searchTerm}
