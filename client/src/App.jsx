@@ -11,6 +11,7 @@ import Home from './views/Home';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
 import CreateObservation from './views/CreateObservation';
+import SingleObservation from './views/SingleObservation';
 import SingleBird from './views/SingleBird';
 import IndividualProfile from './views/IndividualProfile';
 import OrganisationProfile from './views/OrganisationProfile';
@@ -74,6 +75,16 @@ class App extends Component {
               exact
             />
             <Route
+              path="/observation/create"
+              component={CreateObservation}
+              exact
+            />
+            <Route
+              path="/observation/:id"
+              render={(props) => <SingleObservation {...props} user={user} />}
+              exact
+            />
+            <Route
               path="/bird/:id"
               render={(props) => <SingleBird {...props} user={user} />}
               exact
@@ -84,14 +95,11 @@ class App extends Component {
               component={OrganisationProfile}
               exact
             />
-            <Route
-              path="/observation/create"
-              component={CreateObservation}
-              exact
-            />
+                
             <Route path="/forum" component={Forum} exact />
             <Route path="/forum/newpost" component={CreatePost} exact />
             <Route path="/forum/:id" component={SinglePost} exact />
+
           </Switch>
         </BrowserRouter>
       </HelmetProvider>

@@ -8,41 +8,49 @@ class SingleObservation extends Component {
 
     this.state = {
       user: this.props.user,
-      observation: {}
+      observation: null
     };
   }
 
   async componentDidMount() {
     const observation = await loadObservation(this.props.match.params.id);
     this.setState({ observation: observation });
+
+    console.log("-------------componentDidMount()-------------------")
     console.log(observation);
+    console.log(observation.location.coordinates[0])    
   }
 
+  componentDidUpdate(previousProps, previousState) {
+    console.log('-------------componentDidUpdate-------------------');
+    console.log(previousProps, this.props);
+    console.log(previousState, this.state);
+  }
+
+  componentWillUnmount() {
+    console.log('---------------componentWillUnmount---------------');
+  }
+  
   render() {
+    console.log('-------------render-------------');
     const user = this.state.user;
-    let observation = this.state.observation;
+    const observation = this.state.observation;
 
     return (
-      <div>
-      <h1>Single Observation</h1>
-        <span>{observation.bird}</span>
-        <span>{observation.date}</span>
-        {/* <span>{observation.location.coordinates}</span> */}
-        {/* <div>
-          {(observation.default_photo !== null && (
-            <img src={observation.default_photo.medium_url} alt={observation.name} />
-          )) || <img src="" alt="" />}
-        </div>
-
-        <div className="observation__item__details">
-          <h3>{observation.preferred_common_name}</h3>
-          <h5>{observation.name}</h5>
-          <small>
-            {observation.matched_term} | {observation.iconic_taxon_name} |{' '}
-            {observation.preferred_common_name}
-          </small>
-          <p>{observation.wikipedia_summary}</p>
-        </div> */}
+      <div>  
+        {observation && (
+          <>
+        <h1>{observation.bird}</h1>
+        <br></br>
+        <span>Obervation date: {observation.date}</span>
+        <br></br>
+        <span>Observation creator: {observation.creator}</span>
+        <br></br>
+        <span>{observation.location.coordinates[0]}</span>
+        <br></br>
+        <span>{observation.date.toString()}</span>       
+          </>
+        )}    
       </div>
     );
   }

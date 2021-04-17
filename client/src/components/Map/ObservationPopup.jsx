@@ -13,7 +13,7 @@ const ObservationPopup = (props) => {
         {'  '}
         {observation.bird}
         <br />
-        <span>{observation.creator}</span>
+        {/* } <span>{observation.creator.name}</span> */}
         {/*   {props.data.taxon.default_photo.url && (
           <img
             src={props.data.taxon.default_photo.url}
