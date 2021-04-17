@@ -3,8 +3,6 @@ import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import { BirdIcon } from './../Map/icons/BirdIcon';
 import 'leaflet/dist/leaflet.css';
 
-import { loadObservationsByBirdId } from './../../services/observation';
-
 class BirdMapView extends Component {
   constructor(props) {
     super(props);
@@ -13,10 +11,6 @@ class BirdMapView extends Component {
       zoom: 12
     };
     console.log(props);
-  }
-
-  async componentDidMount() {
-    const observations = await loadObservationsByBirdId();
   }
 
   render() {
