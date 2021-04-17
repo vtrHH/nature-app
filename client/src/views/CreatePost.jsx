@@ -20,6 +20,10 @@ class CreatePost extends Component {
     // picture: ''
   };
 
+  // async componentDidMount() {
+  //   await this.handleCurrentLocationSearch();
+  // }
+
   getUserLocation = (options) =>
     new Promise((resolve, reject) =>
       navigator.geolocation.getCurrentPosition(resolve, reject, options)
@@ -117,6 +121,7 @@ class CreatePost extends Component {
             center={this.state.currentLocation}
             zoom={this.state.zoom}
             whenCreated={(map) => this.setState({ map })}
+            onClick={this.handleMapClickLocationSearch}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
