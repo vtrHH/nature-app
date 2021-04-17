@@ -23,7 +23,7 @@ app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(
   cors({
-    origin: ['http://localhost:3001'],
+    origin: (process.env.ALLOWED_CORS_ORIGINS || '').split(','),
     credentials: true
   })
 );
@@ -36,9 +36,9 @@ app.use(
     proxy: true,
     cookie: {
       maxAge: 15 * 24 * 60 * 60 * 1000,
-      httpOnly: true
-      // sameSite: 'none',
-      // secure: true
+      httpOnly: true,
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : false,
+      secure: process.env.NODE_ENV === 'production'
     },
     store: new (connectMongo(expressSession))({
       mongooseConnection: mongoose.connection,
