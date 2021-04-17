@@ -43,5 +43,3 @@ import SearchItem from './SearchItem';
   }
 
 export default SearchList; 
-
-{/* <button onClick={(e) => this.handleSelect(e, result.id)}>Select</button>  */}

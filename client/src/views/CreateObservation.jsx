@@ -2,52 +2,31 @@ import React, { Component } from 'react';
 import { createObservation } from '../services/observation';
 
 // import MapView from './../components/Map/MapView';
+import Search from '../components/Search/Search'
 
-class CreateObservation extends Component {
+class CreateObservationSearch extends Component {
   state = {
-    date: '',
-    location: null,
-    lat: 0,
-    lng: 0,
-    bird: ''
+    date: '',    
+    APIid: '',
+   
     // verified: false
     // picture: ''
   };
 
   componentDidMount() {
-    const latitudeInput = document.getElementById('input-lat');
-    const longitudeInput = document.getElementById('input-lng');
-    this.getUserLocation()
-      .then((location) => {
-        const { latitude, longitude } = location.coords;
-        latitudeInput.value = latitude;
-        longitudeInput.value = longitude;
-        console.log(latitude, longitude);
-        this.setState({ lat: latitude, lng: longitude });
-      })
-      .catch((error) => {
-        console.log('There was an error locating the user.');
-        console.log(error);
-      });
+    
   }
 
-  getUserLocation = (options) =>
-    new Promise((resolve, reject) =>
-      navigator.geolocation.getCurrentPosition(resolve, reject, options)
-    );
+  
 
   handleFormSubmission = async (e) => {
     e.preventDefault();
-    const observationLocation = {
-      coordinates: [this.state.lat, this.state.lng]
-    };
-    // console.log(observationLocation);
+   
     const date = this.state.date;
-    const bird = this.state.bird;
+    const APIid = this.state.APIid;
     const data = {
-      location: observationLocation,
       date: date,
-      bird: bird
+      APIid: APIid
     };
 
     const observation = await createObservation(data);
@@ -60,7 +39,7 @@ class CreateObservation extends Component {
 
     this.setState({
       [name]: value,
-      location: [this.state.lat, this.state.lng]
+      
     });
   };
 
@@ -68,21 +47,29 @@ class CreateObservation extends Component {
     console.log('Button is clicked');
   };
 
+  handleResult = (result) => {
+    console.log(`Parent------------${result.id}`);
+    this.setState({
+      APIid : result.id
+    })
+    // this.props.onSelectClicked(id)
+  }
+
   render() {
     return (
       <main>
         <header>
           <h1>Add your Observation</h1>
         </header>
+        <Search onParent={(result) => this.handleResult(result)}/>
         <form onSubmit={this.handleFormSubmission}>
-          <label htmlFor="input-bird">Name</label>
+          <label htmlFor="input-bird">APIid</label>
           <input
             type="text"
-            id="input-bird"
-            name="bird"
-            placeholder="Bird name"
-            value={this.state.bird}
-            onChange={this.handleInputChange}
+            id="input-APIid"
+            name="APIid"
+            placeholder=""
+            value={this.state.APIid}            
             required
           />
           <label htmlFor="input-location">Set Location</label>
@@ -97,7 +84,7 @@ class CreateObservation extends Component {
             id="input-lat"
             name="lat"
             value={this.state.lat}
-            placeholder="52.52437"
+            placeholder="latitude"
             onChange={this.handleInputChange}
             required
           />
@@ -107,7 +94,7 @@ class CreateObservation extends Component {
             id="input-lng"
             name="lng"
             value={this.state.lng}
-            placeholder="13.41053"
+            placeholder="longitude"
             onChange={this.handleInputChange}
             required
           />
@@ -129,45 +116,4 @@ class CreateObservation extends Component {
   }
 }
 
-export default CreateObservation;
-
-// { lat: 52.52437, lng: 13.41053 }
-// date
-// location
-// bird
-// picture
-// verified
-// creator
-
-// date: {
-//         type: Date,
-//         required: true
-//     },
-//     location: {
-//         coordinates: [{
-//             type: Number,
-//             min: -180,
-//             max: 180
-//         }],
-//         type: {
-//             type: String,
-//             default: 'Point',
-//             required: true
-//         }
-//         // required: true
-//     },
-//     bird: {
-//         type: String,
-//         required: true
-//     },
-//     picture: {
-//         type: String,
-//         required: true
-//     },
-//     verified: {
-//         type: Boolean
-//     },
-//     creator: {
-//         type: mongoose.Schema.Types.ObjectId,
-//         ref: 'User'
-//     }
+export default CreateObservationSearch;

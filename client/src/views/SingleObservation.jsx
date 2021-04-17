@@ -33,7 +33,6 @@ class SingleObservation extends Component {
   
   render() {
     console.log('-------------render-------------');
-    const user = this.state.user;
     const observation = this.state.observation;
 
     return (

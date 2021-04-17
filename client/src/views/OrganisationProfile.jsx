@@ -20,7 +20,7 @@ class OrganisationProfile extends Component {
   }
 
   render() {
-    const { organisation, birds, donations } = this.state;
+    const { organisation } = this.state;
     return (
       <main>
         {organisation && (

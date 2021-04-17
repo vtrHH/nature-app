@@ -37,7 +37,6 @@ class SearchItem extends Component {
   }
     
   render() {
-    const isSelected = this.state.isSelected;
     const result = this.props.result;
     return (
     <>

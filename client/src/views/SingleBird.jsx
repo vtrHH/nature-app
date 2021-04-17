@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import bird from '../data/20496-North-Island-Brown-Kiwi.json';
 import {searchSpecieById} from '../services/i-nature-api'
 
 
@@ -23,7 +22,6 @@ class SingleBird extends Component {
 
 
   render() {
-    const user = this.state.user;    
     const bird = this.state.bird;      
     console.log(bird)
         
