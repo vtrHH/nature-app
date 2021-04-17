@@ -2,12 +2,18 @@
 
 const mongoose = require('mongoose');
 
-const observationSchema = new mongoose.Schema(
-  {
-    date: {
-      type: Date
-      //  required: true
+const postSchema = new mongoose.Schema(
+  { 
+    title: {
+      type: String,
+      // required: true
     },
+
+    text: {
+      type: String,
+      // required: true
+    },
+     
     location: {
       coordinates: [
         {
@@ -23,21 +29,21 @@ const observationSchema = new mongoose.Schema(
       }
       // required: true
     },
-    bird: {
-      type: String,
-      //required: true
-    },
+
     picture: {
       type: String
       // required: true
     },
-    verified: {
-      type: Boolean
-    },
+
     creator: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
-    }
+    },
+
+    date: {
+      type: Date
+      //  required: true
+    },
   },
   {
     timestamps: {
@@ -47,4 +53,4 @@ const observationSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Observation', observationSchema);
+module.exports = mongoose.model('Post', postSchema);
