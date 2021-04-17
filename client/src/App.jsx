@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { signOut, verify } from './services/authentication';
 
@@ -95,11 +95,10 @@ class App extends Component {
               component={OrganisationProfile}
               exact
             />
-                
+
             <Route path="/forum" component={Forum} exact />
             <Route path="/forum/newpost" component={CreatePost} exact />
             <Route path="/forum/:id" component={SinglePost} exact />
-
           </Switch>
         </BrowserRouter>
       </HelmetProvider>

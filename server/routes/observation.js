@@ -69,7 +69,7 @@ router.patch(
 
 router.patch('/bird/:bird_id', async (req, res, next) => {
   try {
-    const observations = await Post.findById({bird:req.params.bird_id});
+    const observations = await Post.findById({ bird: req.params.bird_id });
     res.json({ observations });
   } catch (error) {
     next(error);

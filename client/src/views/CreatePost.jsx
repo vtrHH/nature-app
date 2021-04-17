@@ -1,42 +1,34 @@
 import React, { Component } from 'react';
 import { createPost } from '../services/forum';
 
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { QuestionIcon } from './../components/Map/QuestionIcon';
+import 'leaflet/dist/leaflet.css';
+
 
 class CreatePost extends Component {
   state = {
     date: '',
-    location: [52.52437, 13.41053],
+    location: null,
     lat: 0,
     lng: 0,
     title: '',
-    text: ''
+    text: '',
+    currentLocation: [0, 0],
+    zoom: 2,
+    map: null
     // verified: false
     // picture: ''
   };
 
-  currentPosition() {
-    // let lat = 11;
-    // let lng = 33;
-    navigator.geolocation.getCurrentPosition(function (position) {
-      console.log('Latitude is :', position.coords.latitude);
-      console.log('Longitude is :', position.coords.longitude);
-    });
+  // async componentDidMount() {
+  //   await this.handleCurrentLocationSearch();
+  // }
 
-    // console.log(lat,lng);
-    // this.setState({
-    //     lat : lat,
-    //     lng : lng
-    // })
-  }
-
-  componentDidMount() {
-    if ('geolocation' in navigator) {
-      console.log('geolocation Available');
-    } else {
-      console.log('geolocation Not Available');
-    }
-    // this.currentPosition()
-  }
+  getUserLocation = (options) =>
+    new Promise((resolve, reject) =>
+      navigator.geolocation.getCurrentPosition(resolve, reject, options)
+    );
 
   handleFormSubmission = async (e) => {
     e.preventDefault();
@@ -51,8 +43,8 @@ class CreatePost extends Component {
     const data = {
       location: observationLocation,
       date: date,
-      bird: bird, 
-      title:title,
+      bird: bird,
+      title: title,
       text: text
     };
     const post = await createPost(data);
@@ -67,6 +59,32 @@ class CreatePost extends Component {
       [name]: value,
       location: [this.state.lat, this.state.lng]
     });
+  };
+
+  handleCurrentLocationSearch = () => {
+    const latitudeInput = document.getElementById('input-lat');
+    const longitudeInput = document.getElementById('input-lng');
+    this.getUserLocation()
+      .then((location) => {
+        const { latitude, longitude } = location.coords;
+        latitudeInput.value = latitude;
+        longitudeInput.value = longitude;
+        this.setState({
+          lat: latitude,
+          lng: longitude,
+          currentLocation: [latitude, longitude]
+        });
+        const { map, currentLocation } = this.state;
+        if (map) map.flyTo(currentLocation, 12, { duration: 3 });
+      })
+      .catch((error) => {
+        console.log('There was an error locating the user.');
+        console.log(error);
+      });
+  };
+
+  handleMapClickLocationSearch = () => {
+    console.log('Map was clicked');
   };
 
   render() {
@@ -96,9 +114,34 @@ class CreatePost extends Component {
             onChange={this.handleInputChange}
             required
           />
-          <label htmlFor="input-lat">Latitude</label>
+          <label htmlFor="input-location">Set Location</label>
+          <button onClick={this.handleCurrentLocationSearch}>Locate Me</button>
+          <p>Or just click on the map to add a marker</p>
+          {/*  <LocationMapView lat={this.state.lat} lng={this.state.lng} /> */}
+          <MapContainer
+            center={this.state.currentLocation}
+            zoom={this.state.zoom}
+            whenCreated={(map) => this.setState({ map })}
+            onClick={this.handleMapClickLocationSearch}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            />
+            {this.state.lat && this.state.lng ? (
+              <Marker
+                position={[this.state.lat, this.state.lng]}
+                icon={QuestionIcon}
+              >
+                <Popup closeButton={false}>You are here</Popup>
+              </Marker>
+            ) : (
+              'Location is loading'
+            )}
+          </MapContainer>
+
           <input
-            type="number"
+            type="hidden"
             id="input-lat"
             name="lat"
             value={this.state.lat}
@@ -106,9 +149,8 @@ class CreatePost extends Component {
             onChange={this.handleInputChange}
             required
           />
-          <label htmlFor="input-lng">Longitude</label>
           <input
-            type="number"
+            type="hidden"
             id="input-lng"
             name="lng"
             value={this.state.lng}
