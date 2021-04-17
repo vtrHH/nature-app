@@ -14,6 +14,11 @@ const Navbar = ({ user, onSignOut }) => {
         <>
           {user.role === 'individual' && (
             <Link to="/observation/create">Create Observation</Link>
+
+          )}
+                    {user.role === 'individual' && (
+
+            <Link to="/forum">Forum</Link>
           )}
         </>
       )}

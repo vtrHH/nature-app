@@ -14,6 +14,9 @@ import CreateObservation from './views/CreateObservation';
 import SingleBird from './views/SingleBird';
 import IndividualProfile from './views/IndividualProfile';
 import OrganisationProfile from './views/OrganisationProfile';
+import Forum from './views/Forum';
+import SinglePost from './views/SinglePost';
+import CreatePost from './views/CreatePost';
 
 class App extends Component {
   state = {
@@ -86,6 +89,9 @@ class App extends Component {
               component={CreateObservation}
               exact
             />
+            <Route path="/forum" component={Forum} exact />
+            <Route path="/forum/newpost" component={CreatePost} exact />
+            <Route path="/forum/:id" component={SinglePost} exact />
           </Switch>
         </BrowserRouter>
       </HelmetProvider>
