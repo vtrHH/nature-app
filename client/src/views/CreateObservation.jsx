@@ -4,6 +4,7 @@ import { createObservation } from '../services/observation';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { LocationIcon } from './../components/Map/LocationIcon';
 import 'leaflet/dist/leaflet.css';
+import AddMarker from './../components/Map/AddMarker';
 
 class CreateObservation extends Component {
   state = {
@@ -112,6 +113,7 @@ class CreateObservation extends Component {
             ) : (
               'Location is loading'
             )}
+            <AddMarker />
           </MapContainer>
 
           <input
