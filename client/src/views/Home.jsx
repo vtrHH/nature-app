@@ -6,6 +6,7 @@ import { listOfObservations } from '../services/observation';
 import BirdList from '../components/BirdList';
 import SearchBar from '../components/SearchBar';
 import HomeMapView from '../components/Map/HomeMapView';
+import Carousel from '../components/Carousel/Carousel';
 
 class Home extends Component {
   constructor(props) {
@@ -65,6 +66,7 @@ class Home extends Component {
           {/* <div>{birds.map(bird => 
             <h2 key={bird._id} >{bird.name}</h2>)}</div> */}
           <HomeMapView observations={this.state.observations} />
+          <Carousel />
         </div>
       </main>
     );

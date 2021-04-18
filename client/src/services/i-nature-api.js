@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //search for all species matching the query
-export const searchSpecie = async(query) => {
+export const searchSpecie = async(query, options) => {
     const response = await axios.get(
         `https://api.inaturalist.org/v1/taxa?q=${query}&is_active=true&taxon_id=3&rank=species%2Csubspecies`
     );
@@ -17,6 +17,15 @@ export const searchSpecieById = async(api_id) => {
 };
 
 
+//search for observations
+export const searchApi = async(query, options) => {
+    const urlQuery = `q=${query}`;
+    const urlOptions = `&is_active=${options.is_active}&taxon_id=${options.taxon_id}&rank=${options.rank}&per_page=${options.per_page}&order=${options.order}&order_by=${options.order_by}`
+    const url = `https://api.inaturalist.org/v1/${options.route}?` + urlOptions + urlQuery;
+    console.log(url)
+    const response = await axios.get(url);
+    return response.data.results;
+};
 
 // https: //api.inaturalist.org/v1/taxa?q=kiwi&is_active=true&taxon_id=3&rank=species%2Csubspecies
 
@@ -25,3 +34,14 @@ export const searchSpecieById = async(api_id) => {
 //     taxon_id = 3 &
 //     rank = species % 2 Csubspecies
 // rank = species, Csubspecies
+
+// options: {
+//             route: 'taxa',
+//             q: null,
+//             is_active: true,
+//             taxon_id: 3,
+//             rank: 'species%2Csubspecies',
+//             per_page: 50,
+//             order: 'desc',
+//             order_by: 'created_at'
+//           }
