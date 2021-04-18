@@ -29,14 +29,24 @@ class CreateObservation extends Component {
     const observationLocation = {
       coordinates: [this.state.lat, this.state.lng]
     };
-    const date = this.state.date;
-    const bird = this.state.bird;
+    const { date, bird, pictures } = this.state;
     const data = {
       location: observationLocation,
-      date: date,
-      bird: bird
+      date,
+      bird,
+      pictures
     };
-
+    const body = new FormData();
+    for (let key in data) {
+      const value = data[key];
+      if (value instanceof Array) {
+        for (let item of value) {
+          body.append(key, item);
+        }
+      } else {
+        body.append(key, value);
+      }
+    }
     const observation = await createObservation(data);
     this.props.history.push(`/observation/${observation._id}`);
   };
@@ -48,6 +58,17 @@ class CreateObservation extends Component {
     this.setState({
       [name]: value,
       location: [this.state.lat, this.state.lng]
+    });
+  };
+
+  handleFileInputChange = (event) => {
+    const { name, files } = event.target;
+    const arrayOfFiles = [];
+    for (const file of files) {
+      arrayOfFiles.push(file);
+    }
+    this.setState({
+      [name]: arrayOfFiles
     });
   };
 
@@ -80,6 +101,16 @@ class CreateObservation extends Component {
           <h1>Add your Observation</h1>
         </header>
         <form onSubmit={this.handleFormSubmission}>
+          <label htmlFor="input-pictures">Pictures</label>
+          <input
+            id="input-pictures"
+            type="file"
+            name="pictures"
+            multiple
+            required
+            onChange={this.handleFileInputChange}
+          />
+
           <label htmlFor="input-bird">Name</label>
           <input
             type="text"
