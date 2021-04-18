@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { searchSpecieById } from '../services/i-nature-api';
 
+import BirdMapView from './../components/Map/BirdMapView';
+
 class SingleBird extends Component {
   constructor(props) {
     super(props);
@@ -50,6 +52,7 @@ class SingleBird extends Component {
                 dangerouslySetInnerHTML={{ __html: bird.wikipedia_summary }}
               ></p>
             </div>
+            <BirdMapView bird={bird.id} />
           </>
         )}
       </div>

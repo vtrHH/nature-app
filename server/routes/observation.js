@@ -25,12 +25,12 @@ router.get('/list', async (req, res, next) => {
 router.post('/', routeGuard, async (req, res, next) => {
   try {
     //fileUpload.single('picture'),
-    const { location, bird, date } = req.body;
+    const { location, APIid, date } = req.body;
     const creator = req.user._id;
     //add picture
     const observation = await Observation.create({
       location,
-      bird,
+      APIid,
       date,
       creator
       // picture

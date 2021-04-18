@@ -5,7 +5,7 @@ const ObservationPopup = (props) => {
   const observation = props.data;
 
   return (
-    <Popup class="bird_popup">
+    <Popup className="bird_popup">
       <div>
         <span>
           <b>Name:</b>
