@@ -1,6 +1,6 @@
 import React from 'react';
 import { Marker } from 'react-leaflet';
-import { BirdIcon } from './BirdIcon';
+import { BirdIcon } from './icons/BirdIcon';
 import ObservationPopup from './ObservationPopup';
 
 const ObservationMarkers = (props) => {

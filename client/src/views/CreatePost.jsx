@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { createPost } from '../services/forum';
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { QuestionIcon } from './../components/Map/QuestionIcon';
+import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-
+import AddMarker from './../components/Map/AddMarker';
 
 class CreatePost extends Component {
   state = {
     date: '',
-    location: null,
     lat: 0,
     lng: 0,
     title: '',
@@ -20,15 +18,6 @@ class CreatePost extends Component {
     // verified: false
     // picture: ''
   };
-
-  // async componentDidMount() {
-  //   await this.handleCurrentLocationSearch();
-  // }
-
-  getUserLocation = (options) =>
-    new Promise((resolve, reject) =>
-      navigator.geolocation.getCurrentPosition(resolve, reject, options)
-    );
 
   handleFormSubmission = async (e) => {
     e.preventDefault();
@@ -61,14 +50,16 @@ class CreatePost extends Component {
     });
   };
 
+  getUserLocation = (options) =>
+    new Promise((resolve, reject) =>
+      navigator.geolocation.getCurrentPosition(resolve, reject, options)
+    );
+
   handleCurrentLocationSearch = () => {
-    const latitudeInput = document.getElementById('input-lat');
-    const longitudeInput = document.getElementById('input-lng');
     this.getUserLocation()
       .then((location) => {
         const { latitude, longitude } = location.coords;
-        latitudeInput.value = latitude;
-        longitudeInput.value = longitude;
+        console.log(location.coords);
         this.setState({
           lat: latitude,
           lng: longitude,
@@ -83,8 +74,11 @@ class CreatePost extends Component {
       });
   };
 
-  handleMapClickLocationSearch = () => {
-    console.log('Map was clicked');
+  handleMarkerChange = (latlng) => {
+    this.setState({
+      lat: latlng.lat,
+      lng: latlng.lng
+    });
   };
 
   render() {
@@ -114,50 +108,21 @@ class CreatePost extends Component {
             onChange={this.handleInputChange}
             required
           />
-          <label htmlFor="input-location">Set Location</label>
+          <label>Set Location</label>
           <button onClick={this.handleCurrentLocationSearch}>Locate Me</button>
-          <p>Or just click on the map to add a marker</p>
-          {/*  <LocationMapView lat={this.state.lat} lng={this.state.lng} /> */}
+
           <MapContainer
             center={this.state.currentLocation}
             zoom={this.state.zoom}
             whenCreated={(map) => this.setState({ map })}
-            onClick={this.handleMapClickLocationSearch}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
-            {this.state.lat && this.state.lng ? (
-              <Marker
-                position={[this.state.lat, this.state.lng]}
-                icon={QuestionIcon}
-              >
-                <Popup closeButton={false}>You are here</Popup>
-              </Marker>
-            ) : (
-              'Location is loading'
-            )}
+            <AddMarker onClick={this.handleMarkerChange} />
           </MapContainer>
 
-          <input
-            type="hidden"
-            id="input-lat"
-            name="lat"
-            value={this.state.lat}
-            placeholder="52.52437"
-            onChange={this.handleInputChange}
-            required
-          />
-          <input
-            type="hidden"
-            id="input-lng"
-            name="lng"
-            value={this.state.lng}
-            placeholder="13.41053"
-            onChange={this.handleInputChange}
-            required
-          />
           <label htmlFor="input-date">Date</label>
           <input
             type="date"
@@ -169,7 +134,6 @@ class CreatePost extends Component {
             required
           />
 
-          {/* <button onClick={this.currentPosition}> Get Current Positon</button> */}
           <button>Add Post</button>
         </form>
       </main>
