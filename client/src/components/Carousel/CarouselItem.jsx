@@ -9,14 +9,14 @@ const CarouselItem = ({ result }) => {
     
   return (
     <>
-    <div className="card__bird-list">
+    <div className="card__carousel-list">
     <h1>{result.created_time_zone}</h1>
       <div >
           {result.default_photo ? <img src={result.default_photo.square_url} alt={result.name}/> : <img src="" alt=""/>}    
         
       </div>
     
-        <div className="bird-item__details">
+        <div className="carousel-item__details">
           <h3>{result.preferred_common_name}</h3>
           <h5>{result.name}</h5>
           <small>

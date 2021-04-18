@@ -1,6 +1,8 @@
  import React, { Component } from 'react'
  import {searchApi} from '../../services/i-nature-api'
  
+ import './Carousel.scss'
+
  import CarouselList from './CarouselList'
  
  class Carousel extends Component {
@@ -26,11 +28,6 @@
     
       async componentDidMount() {
         this.launchSearch()
-        //   const query  = this.state.searchQuery ;
-        //   const results = await searchSpecie(query);
-        //   this.setState({
-        //     results : results
-        // })
       }
 
       launchSearch = async () => {
@@ -55,13 +52,14 @@
 
 
      render() {
+         const show = this.props.show
          const results = this.state.results;
          return (
             <>
-            {results && (
-            <div>
-                <CarouselList results={results} />
-            </div>                
+            {results && (                
+                <div className="carousel-container">
+                    <CarouselList results={results} show={show}/>
+                </div>
             )}
             </>
          )

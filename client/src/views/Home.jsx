@@ -24,8 +24,8 @@ class Home extends Component {
 
   async componentDidMount() {
     const observations = await listOfObservations();
-    // console.log(this.state);
     this.setState({ observations });
+    console.log(this.state.observations);
   }
 
   updateSearch = (search) => {
@@ -37,16 +37,7 @@ class Home extends Component {
     //   stockCheck: this.state.stockCheck,
     // });
   };
-
-  launchSearch = async () => {
-    const search = this.state.search;
-    const birds = await searchSpecie(search);
-    console.log(`launchSearch on Parent search= ${search}`);
-    this.setState({
-      birds: birds
-    });
-  };
-
+  
   render() {
     let user = this.state.user;
     let birds = this.state.birds;
@@ -63,10 +54,8 @@ class Home extends Component {
             onButtonClicked={this.launchSearch}
           />
           <BirdList birds={birds} />
-          {/* <div>{birds.map(bird => 
-            <h2 key={bird._id} >{bird.name}</h2>)}</div> */}
           <HomeMapView observations={this.state.observations} />
-          <Carousel />
+          <Carousel show={3} />
         </div>
       </main>
     );
