@@ -14,29 +14,39 @@ class CreatePost extends Component {
     text: '',
     currentLocation: [0, 0],
     zoom: 2,
-    map: null
+    map: null,
+    pictures: ''
     // verified: false
     // picture: ''
   };
 
   handleFormSubmission = async (e) => {
     e.preventDefault();
-    const observationLocation = {
+    /*     const observationLocation = {
       coordinates: [this.state.lat, this.state.lng]
-    };
-    console.log(observationLocation);
-    const date = this.state.date;
-    const bird = this.state.bird;
-    const title = this.state.title;
-    const text = this.state.text;
+    }; */
+    const { lat, lng, date, title, text, pictures } = this.state;
     const data = {
-      location: observationLocation,
-      date: date,
-      bird: bird,
-      title: title,
-      text: text
+      lat,
+      lng,
+      date,
+      title,
+      text,
+      pictures
     };
-    const post = await createPost(data);
+
+    const body = new FormData();
+    body.append('date', data.date);
+    body.append('title', data.title);
+    body.append('text', data.text);
+    body.append('lat', data.lat);
+    body.append('lng', data.lng);
+
+    for (let picture of data.pictures) {
+      body.append('pictures', picture);
+    }
+
+    const post = await createPost(body);
     this.props.history.push(`/forum/${post._id}`);
   };
 
@@ -47,6 +57,15 @@ class CreatePost extends Component {
     this.setState({
       [name]: value,
       location: [this.state.lat, this.state.lng]
+    });
+  };
+
+  handleFileInputChange = (event) => {
+    const { name, files } = event.target;
+    const arrayOfFiles = [];
+    for (const file of files) arrayOfFiles.push(file);
+    this.setState({
+      [name]: arrayOfFiles
     });
   };
 
@@ -108,6 +127,16 @@ class CreatePost extends Component {
             onChange={this.handleInputChange}
             required
           />
+
+          <label htmlFor="input-pictures">Pictures</label>
+          <input
+            id="input-pictures"
+            type="file"
+            name="pictures"
+            multiple
+            onChange={this.handleFileInputChange}
+          />
+
           <label>Set Location</label>
           <button onClick={this.handleCurrentLocationSearch}>Locate Me</button>
 
