@@ -20,8 +20,8 @@ export const editObservation = async (id) => {
 
 //lists all observation
 //(maybe filtered, sorted, etc in th serverside)
-export const listOfObservations = async () => {
-  const response = await api.get('/observation/list');
+export const listOfObservations = async (limit) => {
+  const response = await api.get('/observation/list', limit);
   return response.data.observations;
 };
 

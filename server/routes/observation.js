@@ -14,8 +14,9 @@ const fileUpload = require('./../middleware/file-upload');
 const router = new Router();
 
 router.get('/list', async (req, res, next) => {
+  
   try {
-    const observations = await Observation.find();
+    const observations = await Observation.find().limit(req.body.limit);
     res.json({ observations });
   } catch (error) {
     next(error);
