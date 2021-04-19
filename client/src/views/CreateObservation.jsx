@@ -14,25 +14,55 @@ class CreateObservation extends Component {
     lng: 0,
     currentLocation: [0, 0],
     zoom: 2,
-    map: null
+    map: null,
+    pictures: ''
     // verified: false
     // picture: ''
   };
 
   handleFormSubmission = async (e) => {
     e.preventDefault();
-    const observationLocation = {
+    /*     const observationLocation = {
       coordinates: [this.state.lat, this.state.lng]
-    };
-    const date = this.state.date;
-    const APIid = this.state.APIid;
+    }; */
+    const { date, APIid, pictures } = this.state;
     const data = {
-      location: observationLocation,
-      date: date,
-      APIid: APIid
+      lat: this.state.lat,
+      lng: this.state.lng,
+      date,
+      APIid,
+      pictures
     };
+    console.log(data.pictures);
+    const body = new FormData();
 
-    const observation = await createObservation(data);
+    body.append('date', data.date);
+    body.append('APIid', data.APIid);
+    body.append('lat', data.lat);
+    body.append('lng', data.lng);
+
+    for (let picture of data.pictures) {
+      body.append('pictures', picture);
+    }
+
+    /* for (let key in data) body.append(key, data[key]) */
+
+    /*     for (let key in data) {
+      const value = data[key];
+      if (value instanceof Array) {
+        for (let item of value) {
+          body.append(key, item);
+        }
+      } else {
+        body.append(key, value);
+      }
+    } */
+
+    for (let [key, values] of body.entries()) {
+      console.log(`${key}:${values} `);
+    }
+
+    const observation = await createObservation(body);
     this.props.history.push(`/observation/${observation._id}`);
   };
 
@@ -42,6 +72,15 @@ class CreateObservation extends Component {
 
     this.setState({
       [name]: value
+    });
+  };
+
+  handleFileInputChange = (event) => {
+    const { name, files } = event.target;
+    const arrayOfFiles = [];
+    for (const file of files) arrayOfFiles.push(file);
+    this.setState({
+      [name]: arrayOfFiles
     });
   };
 
@@ -91,6 +130,16 @@ class CreateObservation extends Component {
         </header>
         <Search onParent={(result) => this.handleResult(result)} />
         <form onSubmit={this.handleFormSubmission}>
+          <label htmlFor="input-pictures">Pictures</label>
+          <input
+            id="input-pictures"
+            type="file"
+            name="pictures"
+            multiple
+            onChange={this.handleFileInputChange}
+          />
+
+          <label htmlFor="input-bird">Name</label>
           <input
             type="hidden"
             id="input-APIid"

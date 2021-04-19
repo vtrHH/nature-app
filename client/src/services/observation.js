@@ -25,8 +25,8 @@ export const listOfObservations = async () => {
   return response.data.observations;
 };
 
-//loads all the observatuins related to one bird
-export const loadObservationsByBirdId = async (bird_id) => {
-  const response = await api.patch(`/observation/bird/${bird_id}`);
+//loads all the observations related to one bird
+export const loadObservationsByBirdId = async (api_id) => {
+  const response = await api.get(`/observation/bird/${api_id}`);
   return response.data.observations;
 };
