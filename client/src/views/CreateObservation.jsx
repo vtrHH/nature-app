@@ -14,26 +14,40 @@ class CreateObservation extends Component {
     lng: 0,
     currentLocation: [0, 0],
     zoom: 2,
-    map: null
+    map: null,
+    pictures: ''
     // verified: false
     // picture: ''
   };
 
   handleFormSubmission = async (e) => {
     e.preventDefault();
-    const observationLocation = {
+    /*     const observationLocation = {
       coordinates: [this.state.lat, this.state.lng]
-    };
+    }; */
     const { date, APIid, pictures } = this.state;
     const data = {
-      location: observationLocation,
+      lat: this.state.lat,
+      lng: this.state.lng,
       date,
       APIid,
       pictures
-
     };
+    console.log(data.pictures);
     const body = new FormData();
-    for (let key in data) {
+
+    body.append('date', data.date);
+    body.append('APIid', data.APIid);
+    body.append('lat', data.lat);
+    body.append('lng', data.lng);
+
+    for (let picture of data.pictures) {
+      body.append('pictures', picture);
+    }
+
+    /* for (let key in data) body.append(key, data[key]) */
+
+    /*     for (let key in data) {
       const value = data[key];
       if (value instanceof Array) {
         for (let item of value) {
@@ -42,8 +56,13 @@ class CreateObservation extends Component {
       } else {
         body.append(key, value);
       }
+    } */
+
+    for (let [key, values] of body.entries()) {
+      console.log(`${key}:${values} `);
     }
-    const observation = await createObservation(data);
+
+    const observation = await createObservation(body);
     this.props.history.push(`/observation/${observation._id}`);
   };
 
@@ -56,23 +75,19 @@ class CreateObservation extends Component {
     });
   };
 
-<<<<<<< HEAD
   handleFileInputChange = (event) => {
     const { name, files } = event.target;
     const arrayOfFiles = [];
-    for (const file of files) {
-      arrayOfFiles.push(file);
-    }
+    for (const file of files) arrayOfFiles.push(file);
     this.setState({
       [name]: arrayOfFiles
     });
   };
-=======
+
   getUserLocation = (options) =>
     new Promise((resolve, reject) =>
       navigator.geolocation.getCurrentPosition(resolve, reject, options)
     );
->>>>>>> 43daea18d3c16c2a63d7f0270294a4f9ad884d70
 
   handleCurrentLocationSearch = () => {
     this.getUserLocation()
@@ -115,20 +130,16 @@ class CreateObservation extends Component {
         </header>
         <Search onParent={(result) => this.handleResult(result)} />
         <form onSubmit={this.handleFormSubmission}>
-<<<<<<< HEAD
           <label htmlFor="input-pictures">Pictures</label>
           <input
             id="input-pictures"
             type="file"
             name="pictures"
             multiple
-            required
             onChange={this.handleFileInputChange}
           />
 
           <label htmlFor="input-bird">Name</label>
-=======
->>>>>>> 43daea18d3c16c2a63d7f0270294a4f9ad884d70
           <input
             type="hidden"
             id="input-APIid"
