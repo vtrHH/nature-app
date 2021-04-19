@@ -78,7 +78,9 @@ router.patch(
 
 router.get('/bird/:api_id', async (req, res, next) => {
   try {
-    const observations = await Observation.findById({ APIid: req.params.api_id });
+    const observations = await Observation.find({
+      APIid: req.params.api_id
+    });
     res.json({ observations });
   } catch (error) {
     next(error);
