@@ -5,6 +5,7 @@ import Search from '../components/Search/Search';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import AddMarker from './../components/Map/AddMarker';
+import Geolocation from './../components/Map/Geolocation';
 
 class CreateObservation extends Component {
   state = {
@@ -45,19 +46,6 @@ class CreateObservation extends Component {
       body.append('pictures', picture);
     }
 
-    /* for (let key in data) body.append(key, data[key]) */
-
-    /*     for (let key in data) {
-      const value = data[key];
-      if (value instanceof Array) {
-        for (let item of value) {
-          body.append(key, item);
-        }
-      } else {
-        body.append(key, value);
-      }
-    } */
-
     for (let [key, values] of body.entries()) {
       console.log(`${key}:${values} `);
     }
@@ -84,35 +72,18 @@ class CreateObservation extends Component {
     });
   };
 
-  getUserLocation = (options) =>
-    new Promise((resolve, reject) =>
-      navigator.geolocation.getCurrentPosition(resolve, reject, options)
-    );
-
-  handleCurrentLocationSearch = () => {
-    this.getUserLocation()
-      .then((location) => {
-        const { latitude, longitude } = location.coords;
-        console.log(location.coords);
-        this.setState({
-          lat: latitude,
-          lng: longitude,
-          currentLocation: [latitude, longitude]
-        });
-        const { map, currentLocation } = this.state;
-        if (map) map.flyTo(currentLocation, 12, { duration: 3 });
-      })
-      .catch((error) => {
-        console.log('There was an error locating the user.');
-        console.log(error);
-      });
-  };
-
   handleMarkerChange = (latlng) => {
     this.setState({
       lat: latlng.lat,
       lng: latlng.lng
     });
+  };
+
+  updateLocationOfState = (location) => {
+    this.setState({ currentLocation: location });
+    const { map, currentLocation } = this.state;
+    if (map) map.flyTo(currentLocation, 12, { duration: 3 });
+    console.log(this.state.currentLocation);
   };
 
   handleResult = (result) => {
@@ -149,8 +120,10 @@ class CreateObservation extends Component {
             onChange={this.handleInputChange}
             required
           />
-          <label>Set Location</label>
-          <button onClick={this.handleCurrentLocationSearch}>Locate Me</button>
+
+          <Geolocation
+            whenLocationSearchtriggered={this.updateLocationOfState}
+          />
 
           <MapContainer
             center={this.state.currentLocation}
