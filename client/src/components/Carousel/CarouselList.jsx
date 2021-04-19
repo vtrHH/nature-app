@@ -1,6 +1,7 @@
 import {Component} from 'react'
 import { Link } from 'react-router-dom';
-import CarouselItem from './CarouselItem';
+import CarouselItemTaxa from './CarouselItemTaxa';
+import CarouselItemObservation from './CarouselItemObservation';
 
 class CarouselList extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class CarouselList extends Component {
 
   navigate = increment => {
     this.setState({
-      index: this.state.index + increment
+      index: Math.min(Math.max(this.state.index + increment, 0), this.props.results.length -this.props.show)
     })
   }
 
@@ -27,14 +28,25 @@ class CarouselList extends Component {
               &lt;
           </button>
             <div className="carousel-content-wrapper">
-              <div className={`carousel-content show-${show}`}>
-              {results.map((result, index) => (
-                this.state.index === index && (
-                <Link key={result.id} to={`/bird/${result.id}`}>
-                  <CarouselItem result={result} />
-                </Link>
-                )
-              ))}                          
+              <div className={`carousel-content show-${show}`} style={{ transform: `translateX(-${this.state.index * 100 / show}%)` }}>
+              {this.props.content === "taxa" && (
+                <>
+                {results.map((result, index) => (
+                    <Link key={result.id} to={`/bird/${result.id}`}>
+                    <CarouselItemTaxa key={result.id} result={result} show={show} />
+                    </Link>
+                ))}                          
+                </>
+              )}
+              {this.props.content === "observations" && (
+                <>
+                {results.map((result, index) => (
+                    <Link key={result.id} to={`/obsrvations/${result.id}`}>
+                    <CarouselItemObservation key={result.id} result={result} show={show} />
+                    </Link>
+                ))}                          
+                </>
+              )}
               </div>
             </div>
             <button className="right-arrow" onClick={() => this.navigate(1)}>

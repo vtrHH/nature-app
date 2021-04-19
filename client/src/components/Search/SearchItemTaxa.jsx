@@ -1,3 +1,4 @@
+import { Component } from 'react';
 // import './BirdItem.scss';
 
 // import { getHumanReadableGender } from './../common';
@@ -5,31 +6,64 @@
 // const getHumanReadableGender = gender =>
 //   ({ male: 'Male', female: 'Female' }[gender]);
 
-const CarouselItem = ({ result }) => {
+class SearchItem extends Component { 
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      result: props.result,
+      selected: props.selected,
+      APIid: null,
+      isSelected: false      
+    }
+  }
+    // ({ result, onSelectClicked }) => {
+  // filterSelected = (id) => {
+  //   const list = this.state.results;
+  //   const selected = list.filter(item => item.id === id);
+  //   this.setState({
+  //     selected: selected
+  //   })
+  // }
+
+  handleSelect = (e, id) => {
+    e.preventDefault();
+    console.log('Select button was clicked.');
+    console.log(`SearchItem------------${id}`)
+    this.setState({
+          isSelected: !this.state.isSelected
+        })    
+    this.props.onList()
+  }
     
-  return (
+  render() {
+    const result = this.props.result;
+    return (
     <>
-    <div className="card__carousel-list">
-    <h1>{result.created_time_zone}</h1>
+    {/* <div className={isSelected && ("search__bird-list isSelected") || ("search__bird-list") }> */}
+    <div className="search__bird-list">
       <div >
           {result.default_photo ? <img src={result.default_photo.square_url} alt={result.name}/> : <img src="" alt=""/>}    
         
       </div>
     
-        <div className="carousel-item__details">
+        <div className="search-item__details">
+          <div>
           <h3>{result.preferred_common_name}</h3>
           <h5>{result.name}</h5>
-          <small>
-            {result.matched_term} <br/> {result.iconic_taxon_name} | {result.preferred_common_name}
-          </small>      
+          </div>
+          {/* <h5>{result.id}</h5> */}
+          <button onClick={(e) => this.handleSelect(e, result.id)}>Select</button>     
         </div>
     </div>
     </>
-  );
+    );
+  }
     
 };
 
-export default CarouselItem;
+
+export default SearchItem;
 
 //  <h2 key={bird._id} >{bird.name}</h2>
 

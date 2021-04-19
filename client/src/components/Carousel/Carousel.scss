@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin: 2em 0;
 }
 
 .carousel-wrapper {
@@ -12,8 +13,9 @@
 
 .carousel-content-wrapper {
     overflow: hidden;
-    width: 100%;
+    width: 80%;
     height: 100%;
+    margin: 0 auto;
 }
 
 .carousel-content {
@@ -81,7 +83,7 @@
 }
 
 .card__carousel-list {
-    height: 20em;
+    // height: 20em;
     // width: 15em;
     position: relative;
     display: -ms-flexbox;
@@ -92,15 +94,40 @@
     background-color: #fff;
     background-clip: border-box;
     border-radius: 2px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    border: 1px solid grey;
-    justify-content: center;
+    margin: calc(100%/15);
+    // border: 1px solid grey;
+    justify-content: flex-start;
     img {
-        width: 125px;
+        width: 100%;
+        // height: 150px;
+        object-fit: cover;
+        border-radius: 10%;
     }
 }
 
+.carousel-item__img {
+    width: 100%;
+    margin-bottom: 0px;
+}
+
 .carousel-item__details {
-    font-size: 0.8em;
+    padding: 0 5px;
+    text-align: left;
+    h3 {
+        font-size: 1em;
+    }
+    ;
+    h5 {
+        font-size: 0.7em;
+    }
+    ;
+    small {
+        font-size: 0.5em;
+    }
+}
+
+.placeholder-img {
+    filter: invert(1);
+    opacity: 0.2;
+    ;
 }

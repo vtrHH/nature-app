@@ -1,23 +1,4 @@
 import React, { Component } from 'react'
-// import './../App.css';
-
-// const SearchBar = (props) => {
-
-//   const handleInputChange = (e) => {
-//     const value = e.target.value;        
-//     this.props.onSearchBar(value)
-//   }
-
-//   return (      
-//     <input 
-//       type=" search"
-//       placeholder="Search here" 
-//       value={props.query}
-//       onChange={handleInputChange}/>
-//     )
-// }
-
-// export default SearchBar;
 
 export class SearchBar extends Component {
 
@@ -32,24 +13,28 @@ export class SearchBar extends Component {
     })
     this.props.onSearchBar(e.target.value)
   }
-  
-  // handleClick = (e) => {
-  //   e.preventDefault();
-  //   console.log('On Search Component button was clicked.');
-  //   this.props.onButtonClicked()
-  // }
 
   render() {
+    
+    let content = ""
+    if (this.props.content === "taxa") {
+      content = "Birds";
+    } else if (this.props.content === "observations") {
+      content = "Observations";
+    } else {
+      content = "";
+    }
+    // let content = (this.props.content === "taxa") ? (this.props.content === "observations" ? "Observations") : "Birds";
+   
     return (
       <div className="searchbar">
-        <label htmlFor="q">Search Bird</label>
+       <label htmlFor="q">Search {content}</label>
         <input
           name="q"
           value={this.state.searchTerm}
-          placeholder={"Search for birds"}
+          placeholder={`Search for ${content}`}
           onChange={this.handleInputChange}        
         />
-        {/* <button onClick={this.handleClick} >Search</button> */}
         
       </div>
     )

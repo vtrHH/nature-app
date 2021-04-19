@@ -89,7 +89,7 @@ class CreateObservation extends Component {
         <header>
           <h1>Add your Observation</h1>
         </header>
-        <Search onParent={(result) => this.handleResult(result)} />
+        <Search content={"taxa"} onParent={(result) => this.handleResult(result)} />
         <form onSubmit={this.handleFormSubmission}>
           <input
             type="hidden"

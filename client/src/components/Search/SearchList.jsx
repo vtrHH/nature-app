@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SearchItem from './SearchItem';
+import SearchItemTaxa from './SearchItemTaxa';
+import SearchItemObservation from './SearchItemObservation';
 
 // const SearchList = ({ results }) => {
 
@@ -28,13 +30,32 @@ import SearchItem from './SearchItem';
   }
 
   render() {
-
+    const content= this.props.content;
+    console.log(content)
     const results = this.props.results;
     return (
     <div className="search__list">
       {results.map(result => (
         <Link key={result.id} to={`/bird/${result.id}`}>
-          <SearchItem result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
+          
+        {content === "taxa" && (
+          <>
+          <SearchItemTaxa content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
+          </>
+        )}
+
+        {content === "observations" && (
+          <>
+          <SearchItemObservation content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
+          </>
+        )}
+
+        {content === "" && (
+          <>
+          <SearchItem content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
+          </>
+        )}
+
         </Link>
       ))}
     </div>
@@ -43,3 +64,4 @@ import SearchItem from './SearchItem';
   }
 
 export default SearchList; 
+

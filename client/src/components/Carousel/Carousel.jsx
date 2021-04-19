@@ -10,7 +10,7 @@
         super(props);
     
         this.state = {
-          searchQuery: null,
+          searchQuery: this.props.searchQuery,
           results: null,
           selected: null,
           options: {
@@ -19,7 +19,7 @@
             is_active: true,
             taxon_id: 3,
             rank: 'species%2Csubspecies',
-            per_page: 15,
+            per_page: 12,
             order: 'desc',
             order_by: 'created_at'
           }
@@ -31,34 +31,40 @@
       }
 
       launchSearch = async () => {
-        const search = this.state.searchQuery;
-        const options =this.state.options;
-        const results = await searchApi(search, options);
-        console.log(`launchSearch on Parent search= ${search}`);
+        let query = this.props.options.q;
+        if (query === null) {
+          query = "";
+      };
+        // const query = this.props.options.q;
+        const options =this.props.options;
+        const results = await searchApi(query, options);
+        console.log(`launchSearch on Parent search= ${query}`);
         this.setState({
             results: results
         });
       };
 
-      // 'https://api.inaturalist.org/v1/observations?per_page=50&order=desc&order_by=created_at'
-
-      
-        // export const searchSpecie = async(query, options) => {
-        //     const response = await axios.get(
-        //         `https://api.inaturalist.org/v1/taxa?q=${query}&is_active=true&taxon_id=3&rank=species%2Csubspecies`
-        //     );
-        //     return response.data.results;
-        // };
 
 
      render() {
-         const show = this.props.show
+         const show = this.props.show;
+         const content = this.props.content;
          const results = this.state.results;
          return (
             <>
+             {this.props.content === "taxa" && (
+                <>
+                <h2 style={{fontSize:"2em", marginBottom:"0px"}}>Latest Birds</h2>
+                </>
+             )}
+             {this.props.content === "observations" && (
+                <>
+                <h2 style={{fontSize:"2em", marginBottom:"0px"}}>Latest Observations</h2>
+                </>
+             )}
             {results && (                
                 <div className="carousel-container">
-                    <CarouselList results={results} show={show}/>
+                    <CarouselList content={content} results={results} show={show}/>
                 </div>
             )}
             </>
