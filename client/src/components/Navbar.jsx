@@ -11,34 +11,23 @@ const Navbar = ({ user, onSignOut }) => {
       {/* <Link to="/sign-in">Sign In</Link>
       <Link to="/sign-up">Sign Up</Link>   */}
       {user && (
-        <>
-          {user.role === 'individual' && (
-            <Link to="/observation/create">Create Observation</Link>
-
-          )}
-                    {user.role === 'individual' && (
-
-            <Link to="/forum">Forum</Link>
-          )}
-        </>
+        <>{user.role === 'individual' && <Link to="/forum">Forum</Link>}</>
       )}
       <div>
         {(user && (
           <>
+            {user.role === 'individual' && (
+              <Link to="/observation/create">Create Observation</Link>
+            )}
             {user.profilePicture && (
               <img src={user.profilePicture} alt={user.username} />
             )}
             <Link to={`/${user.role}/${user._id}`}>{user.username}</Link>
-            {/* {user.role === 'individual' && (
-              <Link to="/profile">Profile</Link>
-            )} */}
+            
             <button onClick={onSignOut}>Sign Out</button>
           </>
         )) || (
           <>
-            <Link to="/observation/create" disabled>
-              Create Observation
-            </Link>
             <Link to="/sign-in">Sign In</Link>
             <Link to="/sign-up">Sign Up</Link>
           </>
