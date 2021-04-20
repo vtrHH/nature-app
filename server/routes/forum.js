@@ -14,8 +14,7 @@ const router = new Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const posts = await Post.find().sort({ creationDate: -1 }).limit(20);
-
+    const posts = await Post.find().sort({ creationDate: -1 }).limit(20).populate('creator');
     res.json({ posts });
   } catch (error) {
     next(error);

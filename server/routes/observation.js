@@ -30,7 +30,7 @@ router.post(
     async(req, res, next) => {
         const pictures = req.files.map((file) => file.path);
         console.log(req.files, req.body);
-        const { lat, lng, APIid, date, preferred_common_name } = req.body;
+        const { lat, lng, APIid, date, description, preferred_common_name } = req.body;
         const location = {
             coordinates: [lat, lng]
         };
@@ -43,6 +43,7 @@ router.post(
                 preferred_common_name,
                 date,
                 creator,
+                description,
                 pictures
             });
             res.json({ observation });
