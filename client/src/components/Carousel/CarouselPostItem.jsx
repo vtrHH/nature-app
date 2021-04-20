@@ -8,32 +8,34 @@
 const CarouselItemObservation = ({ result, show }) => {
   // console.log("CarouselItemObservation")
   // console.log(result)
-  
+
   // const show = this.props.show;
   // const result = this.props.results;
-    
+
   return (
     <>
-    <div className={`carousel-content show-${show}`}>
-    <div className="card__carousel-list">
-      <div className="carousel-item__img">
-          {/* {result.taxon.default_photo ? <img src={result.taxon.default_photo.square_url} alt={result.name}/> : <img src="https://polartowels.weebly.com/uploads/1/0/0/3/10036170/s233308597275768966_p5_i2_w632.jpeg" alt="" className="placeholder-img"/>}     */}
-         <img src="https://source.unsplash.com/1600x900/?post"/>
-        
-      </div>
-    
-        <div className="carousel-item__details">
-          <h3>Title: {result.title}</h3>
-          <h3>Text: {result.text}</h3>
-          <small>
-            Date: {result.addedDate} <br/>User: {result.creator}
-          </small>      
+      <div className={`carousel-content show-${show}`}>
+        <div className="card__carousel-list">
+          <div className="carousel-item__img">
+            {/* {result.taxon.default_photo ? <img src={result.taxon.default_photo.square_url} alt={result.name}/> : <img src="https://polartowels.weebly.com/uploads/1/0/0/3/10036170/s233308597275768966_p5_i2_w632.jpeg" alt="" className="placeholder-img"/>}     */}
+            <img
+              src="https://source.unsplash.com/1600x900/?post"
+              alt="nice bird"
+            />
+          </div>
+
+          <div className="carousel-item__details">
+            <h3>Title: {result.title}</h3>
+            <h3>Text: {result.text}</h3>
+            <small>
+              Date: {result.addedDate} <br />
+              User: {result.creator}
+            </small>
+          </div>
         </div>
-    </div>
-    </div>
+      </div>
     </>
   );
-    
 };
 
 export default CarouselItemObservation;
@@ -50,7 +52,6 @@ export default CarouselItemObservation;
 // captive
 // :
 // false
-
 
 // comments
 // :
@@ -131,7 +132,6 @@ export default CarouselItemObservation;
 // :
 // true
 
-
 // non_owner_ids
 // :
 // []
@@ -147,7 +147,6 @@ export default CarouselItemObservation;
 // obscured
 // :
 // false
-
 
 // observation_photos
 // :
@@ -176,7 +175,6 @@ export default CarouselItemObservation;
 // owners_identification_from_vision
 // :
 // false
-
 
 // photos
 // :

@@ -27,7 +27,7 @@ class CreateObservation extends Component {
       coordinates: [this.state.lat, this.state.lng]
     }; */
     const { date, APIid, pictures } = this.state;
-    const preferred_common_name =  this.state.preferred_common_name;
+    const preferred_common_name = this.state.preferred_common_name;
     const data = {
       lat: this.state.lat,
       lng: this.state.lng,
@@ -94,8 +94,7 @@ class CreateObservation extends Component {
     console.log(`Parent------------${result.id}`);
     this.setState({
       APIid: result.id,
-      preferred_common_name: result.preferred_common_name,
-      
+      preferred_common_name: result.preferred_common_name
     });
   };
 
@@ -105,7 +104,10 @@ class CreateObservation extends Component {
         <header>
           <h1>Add your Observation</h1>
         </header>
-        <Search content={"taxa"} onParent={(result) => this.handleResult(result)} />
+        <Search
+          content={'taxa'}
+          onParent={(result) => this.handleResult(result)}
+        />
         <form onSubmit={this.handleFormSubmission}>
           <label htmlFor="input-pictures">Pictures</label>
           <input
@@ -135,8 +137,6 @@ class CreateObservation extends Component {
             onChange={this.handleInputChange}
             required
           />
-          <label>Set Location</label>
-          <button onClick={this.handleCurrentLocationSearch}>Locate Me</button>
 
           <Geolocation
             whenLocationSearchtriggered={this.updateLocationOfState}
