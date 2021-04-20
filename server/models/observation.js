@@ -24,6 +24,10 @@ const observationSchema = new mongoose.Schema({
         type: String,
         //required: true
     },
+    preferred_common_name: {
+        type: String,
+        //required: true
+    },
     picture: {
         type: String
             // required: true
