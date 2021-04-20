@@ -13,6 +13,16 @@ const fileUpload = require('./../middleware/file-upload');
 
 const router = new Router();
 
+<<<<<<< HEAD
+router.get('/list', async(req, res, next) => {
+    try {
+        const observations = await Observation.find();
+        res.json({ observations });
+    } catch (error) {
+        next(error);
+    }
+});
+=======
 router.get('/list', async (req, res, next) => {
   
   try {
@@ -50,33 +60,61 @@ router.post(
     }
   }
 );
+>>>>>>> 2cf89e2b279f0c6f7fed1e97d788e4a668102bd9
+
+router.post('/', routeGuard, async(req, res, next) => {
+    try {
+        //fileUpload.single('picture'),
+        const { location, APIid, date, preferred_common_name } = req.body;
+        const creator = req.user._id;
+        //add picture
+        const observation = await Observation.create({
+            location,
+            APIid,
+            preferred_common_name,
+            date,
+            creator
+            // picture
+        });
+        res.json({ observation });
+    } catch (error) {
+        next(error);
+    }
+});
 
 router.patch(
-  '/:id/edit',
-  routeGuard,
-  //fileUpload.single('picture'),
-  async (req, res, next) => {
-    const { location, bird, picture } = req.body;
-    try {
-      //add picture
-      const observation = await Observation.findByIdAndUpdate(
-        req.params.id,
-        {
-          $set: {
-            location,
-            bird,
-            picture
-          }
-        },
-        { new: true }
-      );
-      res.json({ observation });
-    } catch (error) {
-      next(error);
+    '/:id/edit',
+    routeGuard,
+    //fileUpload.single('picture'),
+    async(req, res, next) => {
+        const { location, bird, picture } = req.body;
+        try {
+            //add picture
+            const observation = await Observation.findByIdAndUpdate(
+                req.params.id, {
+                    $set: {
+                        location,
+                        bird,
+                        picture
+                    }
+                }, { new: true }
+            );
+            res.json({ observation });
+        } catch (error) {
+            next(error);
+        }
     }
-  }
 );
 
+<<<<<<< HEAD
+router.patch('/bird/:bird_id', async(req, res, next) => {
+    try {
+        const observations = await Post.findById({ bird: req.params.bird_id });
+        res.json({ observations });
+    } catch (error) {
+        next(error);
+    }
+=======
 router.get('/bird/:api_id', async (req, res, next) => {
   try {
     const observations = await Observation.find({
@@ -86,15 +124,16 @@ router.get('/bird/:api_id', async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+>>>>>>> 2cf89e2b279f0c6f7fed1e97d788e4a668102bd9
 });
 
-router.get('/:id', async (req, res, next) => {
-  try {
-    const observation = await Observation.findById(req.params.id);
-    res.json({ observation });
-  } catch (error) {
-    next(error);
-  }
+router.get('/:id', async(req, res, next) => {
+    try {
+        const observation = await Observation.findById(req.params.id);
+        res.json({ observation });
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;

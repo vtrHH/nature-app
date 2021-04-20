@@ -1,6 +1,12 @@
 import { Component } from 'react';
+// import './BirdItem.scss';
 
-class SearchItemTaxa extends Component { 
+// import { getHumanReadableGender } from './../common';
+
+// const getHumanReadableGender = gender =>
+//   ({ male: 'Male', female: 'Female' }[gender]);
+
+class SearchItemObservation extends Component { 
   
   constructor(props) {
     super(props);
@@ -11,11 +17,19 @@ class SearchItemTaxa extends Component {
       isSelected: false      
     }
   }
+    // ({ result, onSelectClicked }) => {
+  // filterSelected = (id) => {
+  //   const list = this.state.results;
+  //   const selected = list.filter(item => item.id === id);
+  //   this.setState({
+  //     selected: selected
+  //   })
+  // }
 
   handleSelect = (e, id) => {
     e.preventDefault();
     console.log('Select button was clicked.');
-    console.log(`SearchItemTaxa------------${id}`)
+    console.log(`SearchItemObservation------------${id}`)
     this.setState({
           isSelected: !this.state.isSelected
         })    
@@ -29,17 +43,17 @@ class SearchItemTaxa extends Component {
     {/* <div className={isSelected && ("search__bird-list isSelected") || ("search__bird-list") }> */}
     <div className="search__bird-list">
       <div >
-          {result.default_photo ? <img src={result.default_photo.square_url} alt={result.name}/> : <img src="" alt=""/>}    
+          {result.taxon.default_photo ? <img src={result.taxon.default_photo.square_url} alt={result.taxon.name}/> : <img src="" alt=""/>}    
         
       </div>
     
         <div className="search-item__details">
           <div>
-          <h3>{result.preferred_common_name}</h3>
-          <h5>{result.name}</h5>
+          <h3>{result.taxon.preferred_common_name}</h3>
+          <h5>{result.taxon.name}</h5>
           </div>
           {/* <h5>{result.id}</h5> */}
-          <button onClick={(e) => this.handleSelect(e, result.id)}>Select</button>     
+          {/* <button onClick={(e) => this.handleSelect(e, result.id)}>Select</button>      */}
         </div>
     </div>
     </>
@@ -49,7 +63,7 @@ class SearchItemTaxa extends Component {
 };
 
 
-export default SearchItemTaxa;
+export default SearchItemObservation;
 
 //  <h2 key={bird._id} >{bird.name}</h2>
 
