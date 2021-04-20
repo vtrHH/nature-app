@@ -7,20 +7,17 @@
 
 .small-map {
   margin: 0 auto;
-  width: 80%;
+  width: 60%;
   height: 30em;
   margin-top: 2em;
 }
 
-.bird_popup,
 .leaflet-popup-content-wrapper {
-  display: flex;
-  justify-content: center;
-  width: 15em;
-  height: 5em;
-  img {
-    width: 100px;
-    height: 100px;
-    margin-top: 1em;
-  }
+  text-align: center;
+  minwidth: 15em;
+  minheight: 7em;
+}
+
+.leaflet-popup-tip-container {
+  visibility: hidden;
 }

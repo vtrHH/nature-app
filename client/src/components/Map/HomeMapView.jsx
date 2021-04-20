@@ -3,6 +3,7 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import ObservationMarkers from './ObservationMarkers';
 import Geolocation from './Geolocation';
 import 'leaflet/dist/leaflet.css';
+import './map.scss';
 
 class MapView extends Component {
   constructor(props) {

@@ -1,26 +1,30 @@
 import React from 'react';
 import { Popup } from 'react-leaflet';
+import './map.scss';
 
 const ObservationPopup = (props) => {
   const observation = props.data;
 
   return (
-    <Popup className="bird_popup">
+    <Popup className="bird_popup" closeButton={false}>
       <div>
+        {observation.preferred_common_name && (
+          <>
+            <span>
+              <b>Common name:</b>
+            </span>
+            {'  '}
+            {observation.preferred_common_name}
+            <br />
+          </>
+        )}
         <span>
-          <b>Name:</b>
+          <b>Observed by:</b>
         </span>
         {'  '}
-        {observation.bird}
+        {observation.creator}
         <br />
-        {/* } <span>{observation.creator.name}</span> */}
-        {/*   {props.data.taxon.default_photo.url && (
-          <img
-            src={props.data.taxon.default_photo.url}
-            alt={preferred_common_name}
-          />
-        )}
-        */}
+        <a href={`/observation/${observation._id}`}>Get more details here...</a>
       </div>
     </Popup>
   );

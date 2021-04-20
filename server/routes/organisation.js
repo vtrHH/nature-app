@@ -55,7 +55,7 @@ router.patch('/:id/edit', routeGuard, async (req, res, next) => {
 router.patch('/birds', routeGuard, async (req, res, next) => {
   const { birds } = req.body;
   try {
-    const organisation = await Individual.findByIdAndUpdate(
+    const organisation = await Organisation.findByIdAndUpdate(
       req.user._id,
       {
         $set: {

@@ -14,7 +14,7 @@ const ObservationMarkers = (props) => {
           position={observation.location.coordinates}
           icon={BirdIcon}
         >
-          <ObservationPopup data={observation} />
+          <ObservationPopup className="bird_popup" data={observation} />
         </Marker>
       )
   );
