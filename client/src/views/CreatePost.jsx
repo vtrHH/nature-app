@@ -4,6 +4,7 @@ import { createPost } from '../services/forum';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import AddMarker from './../components/Map/AddMarker';
+import Geolocation from './../components/Map/Geolocation';
 
 class CreatePost extends Component {
   state = {
@@ -22,9 +23,6 @@ class CreatePost extends Component {
 
   handleFormSubmission = async (e) => {
     e.preventDefault();
-    /*     const observationLocation = {
-      coordinates: [this.state.lat, this.state.lng]
-    }; */
     const { lat, lng, date, title, text, pictures } = this.state;
     const data = {
       lat,
@@ -69,35 +67,18 @@ class CreatePost extends Component {
     });
   };
 
-  getUserLocation = (options) =>
-    new Promise((resolve, reject) =>
-      navigator.geolocation.getCurrentPosition(resolve, reject, options)
-    );
-
-  handleCurrentLocationSearch = () => {
-    this.getUserLocation()
-      .then((location) => {
-        const { latitude, longitude } = location.coords;
-        console.log(location.coords);
-        this.setState({
-          lat: latitude,
-          lng: longitude,
-          currentLocation: [latitude, longitude]
-        });
-        const { map, currentLocation } = this.state;
-        if (map) map.flyTo(currentLocation, 12, { duration: 3 });
-      })
-      .catch((error) => {
-        console.log('There was an error locating the user.');
-        console.log(error);
-      });
-  };
-
   handleMarkerChange = (latlng) => {
     this.setState({
       lat: latlng.lat,
       lng: latlng.lng
     });
+  };
+
+  updateLocationOfState = (location) => {
+    this.setState({ currentLocation: location });
+    const { map, currentLocation } = this.state;
+    if (map) map.flyTo(currentLocation, 12, { duration: 3 });
+    console.log(this.state.currentLocation);
   };
 
   render() {
@@ -137,8 +118,9 @@ class CreatePost extends Component {
             onChange={this.handleFileInputChange}
           />
 
-          <label>Set Location</label>
-          <button onClick={this.handleCurrentLocationSearch}>Locate Me</button>
+          <Geolocation
+            whenLocationSearchtriggered={this.updateLocationOfState}
+          />
 
           <MapContainer
             center={this.state.currentLocation}

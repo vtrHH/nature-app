@@ -5,10 +5,12 @@ import Search from '../components/Search/Search';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import AddMarker from './../components/Map/AddMarker';
+import Geolocation from './../components/Map/Geolocation';
 
 class CreateObservation extends Component {
   state = {
     APIid: '',
+    preferred_common_name: null,
     date: '',
     lat: 0,
     lng: 0,
@@ -26,37 +28,28 @@ class CreateObservation extends Component {
       coordinates: [this.state.lat, this.state.lng]
     }; */
     const { date, APIid, pictures } = this.state;
+    const preferred_common_name =  this.state.preferred_common_name;
     const data = {
       lat: this.state.lat,
       lng: this.state.lng,
       date,
       APIid,
+      preferred_common_name,
       pictures
     };
+
     console.log(data.pictures);
     const body = new FormData();
 
     body.append('date', data.date);
     body.append('APIid', data.APIid);
-    body.append('lat', data.lat);
     body.append('lng', data.lng);
+    body.append('lat', data.lat);
+    body.append('preferred_common_name', data.preferred_common_name);
 
     for (let picture of data.pictures) {
       body.append('pictures', picture);
     }
-
-    /* for (let key in data) body.append(key, data[key]) */
-
-    /*     for (let key in data) {
-      const value = data[key];
-      if (value instanceof Array) {
-        for (let item of value) {
-          body.append(key, item);
-        }
-      } else {
-        body.append(key, value);
-      }
-    } */
 
     for (let [key, values] of body.entries()) {
       console.log(`${key}:${values} `);
@@ -84,30 +77,6 @@ class CreateObservation extends Component {
     });
   };
 
-  getUserLocation = (options) =>
-    new Promise((resolve, reject) =>
-      navigator.geolocation.getCurrentPosition(resolve, reject, options)
-    );
-
-  handleCurrentLocationSearch = () => {
-    this.getUserLocation()
-      .then((location) => {
-        const { latitude, longitude } = location.coords;
-        console.log(location.coords);
-        this.setState({
-          lat: latitude,
-          lng: longitude,
-          currentLocation: [latitude, longitude]
-        });
-        const { map, currentLocation } = this.state;
-        if (map) map.flyTo(currentLocation, 12, { duration: 3 });
-      })
-      .catch((error) => {
-        console.log('There was an error locating the user.');
-        console.log(error);
-      });
-  };
-
   handleMarkerChange = (latlng) => {
     this.setState({
       lat: latlng.lat,
@@ -115,10 +84,19 @@ class CreateObservation extends Component {
     });
   };
 
+  updateLocationOfState = (location) => {
+    this.setState({ currentLocation: location });
+    const { map, currentLocation } = this.state;
+    if (map) map.flyTo(currentLocation, 12, { duration: 3 });
+    console.log(this.state.currentLocation);
+  };
+
   handleResult = (result) => {
     console.log(`Parent------------${result.id}`);
     this.setState({
-      APIid: result.id
+      APIid: result.id,
+      preferred_common_name: result.preferred_common_name,
+      
     });
   };
 
@@ -128,7 +106,7 @@ class CreateObservation extends Component {
         <header>
           <h1>Add your Observation</h1>
         </header>
-        <Search onParent={(result) => this.handleResult(result)} />
+        <Search content={"taxa"} onParent={(result) => this.handleResult(result)} />
         <form onSubmit={this.handleFormSubmission}>
           <label htmlFor="input-pictures">Pictures</label>
           <input
@@ -149,8 +127,21 @@ class CreateObservation extends Component {
             onChange={this.handleInputChange}
             required
           />
+          <input
+            type="hidden"
+            id="input-common-name"
+            name="common-name"
+            placeholder=""
+            value={this.state.preferred_common_name}
+            onChange={this.handleInputChange}
+            required
+          />
           <label>Set Location</label>
           <button onClick={this.handleCurrentLocationSearch}>Locate Me</button>
+
+          <Geolocation
+            whenLocationSearchtriggered={this.updateLocationOfState}
+          />
 
           <MapContainer
             center={this.state.currentLocation}
