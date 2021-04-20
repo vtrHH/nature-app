@@ -5,7 +5,7 @@ const PostItem = ({ post }) => {
         <div className="post-item__details">
           <h3>{post.title}</h3>
           <small>
-            {post.creator}
+            {post.creator.username}
           </small>
         </div>
       </div>

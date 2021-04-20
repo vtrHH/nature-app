@@ -10,20 +10,19 @@ const Navbar = ({ user, onSignOut }) => {
       </Link>
       {/* <Link to="/sign-in">Sign In</Link>
       <Link to="/sign-up">Sign Up</Link>   */}
-      {user && (
-        <>{user.role === 'individual' && <Link to="/forum">Forum</Link>}</>
-      )}
+
       <div>
+        <Link to="/forum">Forum</Link>
         {(user && (
           <>
             {user.role === 'individual' && (
               <Link to="/observation/create">Create Observation</Link>
             )}
-            {user.profilePicture && (
+            {/*             {user.profilePicture && (
               <img src={user.profilePicture} alt={user.username} />
-            )}
+            )} */}
             <Link to={`/${user.role}/${user._id}`}>{user.username}</Link>
-            
+
             <button onClick={onSignOut}>Sign Out</button>
           </>
         )) || (

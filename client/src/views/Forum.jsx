@@ -12,7 +12,7 @@ class Forum extends Component {
   async componentDidMount() {
     const posts = await listOfPosts();
     console.log(posts)
-    this.setState({ posts});
+    this.setState({posts});
   }
 
   render() {
