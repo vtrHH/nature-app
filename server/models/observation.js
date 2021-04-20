@@ -28,8 +28,8 @@ const observationSchema = new mongoose.Schema({
         type: String,
         //required: true
     },
-    picture: {
-        type: String
+    pictures: {
+        type: [String]
             // required: true
     },
     verified: {
