@@ -4,6 +4,7 @@ import { createPost } from '../services/forum';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import AddMarker from './../components/Map/AddMarker';
+import Geolocation from './../components/Map/Geolocation';
 
 class CreatePost extends Component {
   state = {
@@ -14,29 +15,36 @@ class CreatePost extends Component {
     text: '',
     currentLocation: [0, 0],
     zoom: 2,
-    map: null
+    map: null,
+    pictures: ''
     // verified: false
     // picture: ''
   };
 
   handleFormSubmission = async (e) => {
     e.preventDefault();
-    const observationLocation = {
-      coordinates: [this.state.lat, this.state.lng]
-    };
-    console.log(observationLocation);
-    const date = this.state.date;
-    const bird = this.state.bird;
-    const title = this.state.title;
-    const text = this.state.text;
+    const { lat, lng, date, title, text, pictures } = this.state;
     const data = {
-      location: observationLocation,
-      date: date,
-      bird: bird,
-      title: title,
-      text: text
+      lat,
+      lng,
+      date,
+      title,
+      text,
+      pictures
     };
-    const post = await createPost(data);
+
+    const body = new FormData();
+    body.append('date', data.date);
+    body.append('title', data.title);
+    body.append('text', data.text);
+    body.append('lat', data.lat);
+    body.append('lng', data.lng);
+
+    for (let picture of data.pictures) {
+      body.append('pictures', picture);
+    }
+
+    const post = await createPost(body);
     this.props.history.push(`/forum/${post._id}`);
   };
 
@@ -50,28 +58,13 @@ class CreatePost extends Component {
     });
   };
 
-  getUserLocation = (options) =>
-    new Promise((resolve, reject) =>
-      navigator.geolocation.getCurrentPosition(resolve, reject, options)
-    );
-
-  handleCurrentLocationSearch = () => {
-    this.getUserLocation()
-      .then((location) => {
-        const { latitude, longitude } = location.coords;
-        console.log(location.coords);
-        this.setState({
-          lat: latitude,
-          lng: longitude,
-          currentLocation: [latitude, longitude]
-        });
-        const { map, currentLocation } = this.state;
-        if (map) map.flyTo(currentLocation, 12, { duration: 3 });
-      })
-      .catch((error) => {
-        console.log('There was an error locating the user.');
-        console.log(error);
-      });
+  handleFileInputChange = (event) => {
+    const { name, files } = event.target;
+    const arrayOfFiles = [];
+    for (const file of files) arrayOfFiles.push(file);
+    this.setState({
+      [name]: arrayOfFiles
+    });
   };
 
   handleMarkerChange = (latlng) => {
@@ -79,6 +72,13 @@ class CreatePost extends Component {
       lat: latlng.lat,
       lng: latlng.lng
     });
+  };
+
+  updateLocationOfState = (location) => {
+    this.setState({ currentLocation: location });
+    const { map, currentLocation } = this.state;
+    if (map) map.flyTo(currentLocation, 12, { duration: 3 });
+    console.log(this.state.currentLocation);
   };
 
   render() {
@@ -108,8 +108,19 @@ class CreatePost extends Component {
             onChange={this.handleInputChange}
             required
           />
-          <label>Set Location</label>
-          <button onClick={this.handleCurrentLocationSearch}>Locate Me</button>
+
+          <label htmlFor="input-pictures">Pictures</label>
+          <input
+            id="input-pictures"
+            type="file"
+            name="pictures"
+            multiple
+            onChange={this.handleFileInputChange}
+          />
+
+          <Geolocation
+            whenLocationSearchtriggered={this.updateLocationOfState}
+          />
 
           <MapContainer
             center={this.state.currentLocation}

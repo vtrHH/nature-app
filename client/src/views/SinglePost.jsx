@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { loadPost, loadComments } from '../services/forum';
+import { loadPost, loadComments, createComment } from '../services/forum';
 
 class SinglePost extends Component {
   state = {
@@ -23,12 +23,15 @@ class SinglePost extends Component {
 
   handleFormSubmission = async (e) => {
     e.preventDefault();
-    //const text = this.state.text;
-    /*const data = {
+    const text = this.state.text;
+    const data = {
       text: text
-    }; */
-    //const comments = await createComment(this.state.post._id, data);
-    this.props.history.push(`/forum/${this.state.post._id}`);
+    }; 
+    await createComment(this.state.post._id, data);
+    const comments = await loadComments(this.state.post._id);
+    this.setState({
+      comments
+    });
   };
 
   handleInputChange = (e) => {
@@ -49,6 +52,10 @@ class SinglePost extends Component {
         {post && (
           <>
             <h1>{post.title}</h1>
+            {post.pictures.map((picture) => (
+              <img key = {picture} src={picture} alt=""/>
+            ))}
+            
             <p>{post.text}</p>
           </>
         )}

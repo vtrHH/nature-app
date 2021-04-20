@@ -52,7 +52,7 @@ class SingleBird extends Component {
                 dangerouslySetInnerHTML={{ __html: bird.wikipedia_summary }}
               ></p>
             </div>
-            <BirdMapView bird={bird.id} />
+            <BirdMapView birdApiID={bird.id} />
           </>
         )}
       </div>

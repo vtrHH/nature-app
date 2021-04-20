@@ -5,6 +5,7 @@ import Search from '../components/Search/Search';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import AddMarker from './../components/Map/AddMarker';
+import Geolocation from './../components/Map/Geolocation';
 
 class CreateObservation extends Component {
   state = {
@@ -15,27 +16,45 @@ class CreateObservation extends Component {
     lng: 0,
     currentLocation: [0, 0],
     zoom: 2,
-    map: null
+    map: null,
+    pictures: ''
     // verified: false
     // picture: ''
   };
 
   handleFormSubmission = async (e) => {
     e.preventDefault();
-    const observationLocation = {
+    /*     const observationLocation = {
       coordinates: [this.state.lat, this.state.lng]
-    };
-    const date = this.state.date;
-    const APIid = this.state.APIid;
+    }; */
+    const { date, APIid, pictures } = this.state;
     const preferred_common_name =  this.state.preferred_common_name;
     const data = {
-      location: observationLocation,
-      date: date,
-      APIid: APIid,
-      preferred_common_name: preferred_common_name
+      lat: this.state.lat,
+      lng: this.state.lng,
+      date,
+      APIid,
+      preferred_common_name: preferred_common_name,
+      pictures
     };
 
-    const observation = await createObservation(data);
+    console.log(data.pictures);
+    const body = new FormData();
+
+    body.append('date', data.date);
+    body.append('APIid', data.APIid);
+    body.append('lat', data.lat);
+    body.append('lng', data.lng);
+
+    for (let picture of data.pictures) {
+      body.append('pictures', picture);
+    }
+
+    for (let [key, values] of body.entries()) {
+      console.log(`${key}:${values} `);
+    }
+
+    const observation = await createObservation(body);
     this.props.history.push(`/observation/${observation._id}`);
   };
 
@@ -48,28 +67,13 @@ class CreateObservation extends Component {
     });
   };
 
-  getUserLocation = (options) =>
-    new Promise((resolve, reject) =>
-      navigator.geolocation.getCurrentPosition(resolve, reject, options)
-    );
-
-  handleCurrentLocationSearch = () => {
-    this.getUserLocation()
-      .then((location) => {
-        const { latitude, longitude } = location.coords;
-        console.log(location.coords);
-        this.setState({
-          lat: latitude,
-          lng: longitude,
-          currentLocation: [latitude, longitude]
-        });
-        const { map, currentLocation } = this.state;
-        if (map) map.flyTo(currentLocation, 12, { duration: 3 });
-      })
-      .catch((error) => {
-        console.log('There was an error locating the user.');
-        console.log(error);
-      });
+  handleFileInputChange = (event) => {
+    const { name, files } = event.target;
+    const arrayOfFiles = [];
+    for (const file of files) arrayOfFiles.push(file);
+    this.setState({
+      [name]: arrayOfFiles
+    });
   };
 
   handleMarkerChange = (latlng) => {
@@ -77,6 +81,13 @@ class CreateObservation extends Component {
       lat: latlng.lat,
       lng: latlng.lng
     });
+  };
+
+  updateLocationOfState = (location) => {
+    this.setState({ currentLocation: location });
+    const { map, currentLocation } = this.state;
+    if (map) map.flyTo(currentLocation, 12, { duration: 3 });
+    console.log(this.state.currentLocation);
   };
 
   handleResult = (result) => {
@@ -96,6 +107,16 @@ class CreateObservation extends Component {
         </header>
         <Search content={"taxa"} onParent={(result) => this.handleResult(result)} />
         <form onSubmit={this.handleFormSubmission}>
+          <label htmlFor="input-pictures">Pictures</label>
+          <input
+            id="input-pictures"
+            type="file"
+            name="pictures"
+            multiple
+            onChange={this.handleFileInputChange}
+          />
+
+          <label htmlFor="input-bird">Name</label>
           <input
             type="hidden"
             id="input-APIid"
@@ -116,6 +137,10 @@ class CreateObservation extends Component {
           />
           <label>Set Location</label>
           <button onClick={this.handleCurrentLocationSearch}>Locate Me</button>
+
+          <Geolocation
+            whenLocationSearchtriggered={this.updateLocationOfState}
+          />
 
           <MapContainer
             center={this.state.currentLocation}
