@@ -7,7 +7,7 @@ export const listOfPosts = async () => {
   return response.data.posts;
 };
 
-//create an post
+//create a post
 export const createPost = async (data) => {
   const response = await api.post('/forum', data);
   return response.data.post;
@@ -25,6 +25,7 @@ export const createComment = async (id, data) => {
   return response.data.post;
 };
 
+//loads answers to this post
 export const loadComments = async (id) => {
   const response = await api.get(`/forum/${id}/comments`);
   return response.data.comments;
