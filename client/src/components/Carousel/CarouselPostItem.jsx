@@ -29,7 +29,7 @@ const CarouselItemObservation = ({ result, show }) => {
             <h3>Text: {result.text}</h3>
             <small>
               Date: {result.addedDate} <br />
-              User: {result.creator}
+              User: {result.creator.username}
             </small>
           </div>
         </div>

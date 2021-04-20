@@ -22,6 +22,7 @@ class Carousel extends Component {
 
   getPosts = async () => {
     const results = await listOfPosts();
+    console.log(results);
     this.setState({
       results: results
     });
