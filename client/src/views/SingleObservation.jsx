@@ -39,7 +39,18 @@ class SingleObservation extends Component {
       <div>
         {observation && (
           <>
-            <h1>{observation.bird}</h1>
+          <div>
+              {(observation.pictures && (
+                <img
+                  className="single-bird__img"
+                  src={observation.pictures[0]}
+                  alt={observation.preferred_common_name}
+                />
+              )) || <img src="" alt="" />}
+            </div>
+            <h1>Bird: {observation.bird}</h1>
+            <h1>Preferred_common_name: {observation.preferred_common_name}</h1>
+            <h1>APIid: {observation.APIid}</h1>
             <br></br>
             <span>Obervation date: {observation.date}</span>
             <br></br>

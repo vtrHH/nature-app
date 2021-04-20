@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import { searchSpecie } from '../../services/i-nature-api';
+import { searchSpecie, searchObservations } from '../../services/i-nature-api';
 
 import SearchBar from '../Search/SearchBar';
 import SearchList from '../Search/SearchList';
@@ -15,41 +15,74 @@ class Search extends Component {
       results: null,
       selected: null
     };
+    
+    if (this.props.content === "taxa"){
+      this.searchApi = async () => {
+        const query = this.state.searchQuery;
+        const results = await searchSpecie(query);
+        console.log(`searchApi on Parent search= ${query}`);
+        this.setState({
+          results: results
+        });
+      };
+    }
+
+    const content = this.props.content;
+    switch (content) {
+      case 'taxa':
+        this.searchApi = async () => {
+          const query = this.state.searchQuery;
+          const results = await searchSpecie(query);
+          console.log(`searchApi on Parent search= ${query}`);
+          this.setState({
+            results: results
+          });
+        };
+        break;
+      case 'observations':
+        this.searchApi = async () => {
+          const query = this.state.searchQuery;
+          const results = await searchObservations(query);
+          console.log(`searchApi on Parent search= ${query}`);
+          this.setState({
+            results: results
+          });
+        };
+        break;
+      case 'user':
+        console.log('Search for users.');
+        break;
+      default:
+        this.searchApi = async () => {
+          const query = this.state.searchQuery;
+          const results = await searchSpecie(query);
+          console.log(`searchApi on Parent search= ${query}`);
+          this.setState({
+            results: results
+          });
+        };
+      }
   }
 
   async componentDidMount() {
-    // this.searchApi()
-    //   const query  = this.state.searchQuery ;
-    //   const results = await searchSpecie(query);
-    //   this.setState({
-    //     results : results
-    // })
   }
-
-  searchApi = async () => {
-    const query = this.state.searchQuery;
-    const results = await searchSpecie(query);
-    console.log(`searchApi on Parent search= ${query}`);
-    this.setState({
-      results: results
-    });
-  };
-
-  // async componentDidMount() {
-  //   const observation = await loadObservation(this.props.match.params.id);
-  //   this.setState({ observation: observation });
-
-  //   console.log("-------------componentDidMount()-------------------")
-  //   console.log(observation);
-  //   console.log(observation.location.coordinates[0])
-  // }
+  
+ 
+  // searchApi = async () => {
+  //   const query = this.state.searchQuery;
+  //   const results = await searchSpecie(query);
+  //   console.log(`searchApi on Parent search= ${query}`);
+  //   this.setState({
+  //     results: results
+  //   });
+  // };
 
   componentDidUpdate(previousProps, previousState) {
-    console.log('-------------componentDidUpdate-------------------');
-    console.log(`Previous props= ${previousProps}, this.props= ${this.props}`);
-    console.log(previousState, this.state);
+    // console.log('-------------componentDidUpdate-------------------');
+    // console.log(`Previous props= ${previousProps}, this.props= ${this.props}`);
+    // console.log(previousState, this.state);
     if (previousState.searchQuery !== this.state.searchQuery) {
-      console.log('changedddddddddd');
+      // console.log('changedddddddddd');
       this.searchApi();
     }
   }
@@ -83,13 +116,15 @@ class Search extends Component {
     let user = this.state.user;
     let results = this.state.results;
     let selected = this.state.selected;
-    console.log(user);
+    // console.log("-------user---------");
+    // console.log(user);
     return (
       <div className="container--search">
-        <SearchBar onSearchBar={this.handleQueryChange} />
+        <SearchBar content={this.props.content} onSearchBar={this.handleQueryChange} />
 
         {results && !selected && (
           <SearchList
+            content={this.props.content}
             results={results}
             onSearch={(result) => this.handleResult(result)}
           />

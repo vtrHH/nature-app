@@ -1,6 +1,12 @@
 import { Component } from 'react';
+// import './BirdItem.scss';
 
-class SearchItemTaxa extends Component { 
+// import { getHumanReadableGender } from './../common';
+
+// const getHumanReadableGender = gender =>
+//   ({ male: 'Male', female: 'Female' }[gender]);
+
+class SearchItem extends Component { 
   
   constructor(props) {
     super(props);
@@ -11,11 +17,19 @@ class SearchItemTaxa extends Component {
       isSelected: false      
     }
   }
+    // ({ result, onSelectClicked }) => {
+  // filterSelected = (id) => {
+  //   const list = this.state.results;
+  //   const selected = list.filter(item => item.id === id);
+  //   this.setState({
+  //     selected: selected
+  //   })
+  // }
 
   handleSelect = (e, id) => {
     e.preventDefault();
     console.log('Select button was clicked.');
-    console.log(`SearchItemTaxa------------${id}`)
+    console.log(`SearchItem------------${id}`)
     this.setState({
           isSelected: !this.state.isSelected
         })    
@@ -49,7 +63,7 @@ class SearchItemTaxa extends Component {
 };
 
 
-export default SearchItemTaxa;
+export default SearchItem;
 
 //  <h2 key={bird._id} >{bird.name}</h2>
 

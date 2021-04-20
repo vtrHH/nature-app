@@ -2,49 +2,48 @@
 
 const mongoose = require('mongoose');
 
-const observationSchema = new mongoose.Schema(
-  {
+const observationSchema = new mongoose.Schema({
     date: {
-      type: Date
-      //  required: true
+        type: Date
+            //  required: true
     },
     location: {
-      coordinates: [
-        {
-          type: Number,
-          min: -180,
-          max: 180
+        coordinates: [{
+            type: Number,
+            min: -180,
+            max: 180
+        }],
+        type: {
+            type: String,
+            default: 'Point',
+            required: true
         }
-      ],
-      type: {
-        type: String,
-        default: 'Point',
-        required: true
-      }
-      // required: true
+        // required: true
     },
     APIid: {
-      type: String
-      //required: true
+        type: String
+            //required: true
+    },
+    preferred_common_name: {
+        type: String,
+        //required: true
     },
     pictures: {
-      type: [String]
-      // required: true
+        type: [String]
+            // required: true
     },
     verified: {
-      type: Boolean
+        type: Boolean
     },
     creator: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
-  },
-  {
+}, {
     timestamps: {
-      createdAt: 'addedDate',
-      updatedAt: 'editDate'
+        createdAt: 'addedDate',
+        updatedAt: 'editDate'
     }
-  }
-);
+});
 
 module.exports = mongoose.model('Observation', observationSchema);
