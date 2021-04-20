@@ -85,8 +85,9 @@ class Home extends Component {
           /> */}
           <BirdList birds={birds} />
           <HomeMapView observations={this.state.observations} />
-          <Carousel show={5} content= {"taxa"} options={carouselSpeciesOptions}/>
-          <Carousel show={3} content= {"observations"} options={carouselObservationOptions}/>
+          {/* <Carousel show={5} content= {"forum"} options={carouselSpeciesOptions}/>
+          <Carousel show={5} content= {"taxa"} options={carouselSpeciesOptions}/> */}
+          <Carousel show={4} content= {"observations"} options={carouselObservationOptions}/>
         </div>
       </main>
     );

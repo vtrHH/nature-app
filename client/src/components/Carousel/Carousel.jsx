@@ -1,5 +1,7 @@
  import React, { Component } from 'react'
  import {searchApi} from '../../services/i-nature-api'
+ import {listOfObservations} from '../../services/observation'
+ import {listOfPosts} from '../../services/forum'
  
  import './Carousel.scss'
 
@@ -27,22 +29,30 @@
       }
     
       async componentDidMount() {
-        this.launchSearch()
+        // this.launchSearch();
+        this.getObservations();
       }
 
-      launchSearch = async () => {
-        let query = this.props.options.q;
-        if (query === null) {
-          query = "";
-      };
-        // const query = this.props.options.q;
-        const options =this.props.options;
-        const results = await searchApi(query, options);
-        console.log(`launchSearch on Parent search= ${query}`);
-        this.setState({
-            results: results
-        });
-      };
+      // launchSearch = async () => {
+      //   let query = this.props.options.q;
+      //   if (query === null) {
+      //     query = "";
+      // };
+      //   // const query = this.props.options.q;
+      //   const options =this.props.options;
+      //   const results = await searchApi(query, options);
+      //   console.log(`launchSearch on Parent search= ${query}`);
+      //   this.setState({
+      //       results: results
+      //   });
+      // };
+
+      getObservations = async () => {
+        const results = await listOfObservations();;
+                this.setState({
+                  results: results
+                });
+      }
 
 
 

@@ -21,8 +21,11 @@ class CarouselList extends Component {
   render () {
     const show = this.props.show;
     const results = this.props.results;
+    console.log(results)
     return (
-     
+
+      <>
+      {results && (
         <div className="carousel-wrapper">
           <button className="left-arrow" onClick={() => this.navigate(-1)}>
               &lt;
@@ -32,7 +35,7 @@ class CarouselList extends Component {
               {this.props.content === "taxa" && (
                 <>
                 {results.map((result, index) => (
-                    <Link key={result.id} to={`/bird/${result.id}`}>
+                    <Link key={result.id} to={`/bird/${result.APIid}`}>
                     <CarouselItemTaxa key={result.id} result={result} show={show} />
                     </Link>
                 ))}                          
@@ -41,7 +44,8 @@ class CarouselList extends Component {
               {this.props.content === "observations" && (
                 <>
                 {results.map((result, index) => (
-                    <Link key={result.id} to={`/obsrvations/${result.id}`}>
+                    //<Link key={result.id} to={`/observations/${result._id}`}>
+                    <Link key={result.id} to={`/observation/${result._id}`}>
                     <CarouselItemObservation key={result.id} result={result} show={show} />
                     </Link>
                 ))}                          
@@ -53,6 +57,9 @@ class CarouselList extends Component {
           &gt;
       </button>
         </div>
+      )}
+        </>
+     
     );
   }
 };
