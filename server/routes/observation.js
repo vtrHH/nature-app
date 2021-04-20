@@ -6,13 +6,14 @@ const { Router } = require('express');
 //const Bird = require('./../models/bird');
 //const User = require('./../models/user');
 const Observation = require('./../models/observation');
-
+//const printSomething = require('./../middleware/print');
 const routeGuard = require('./../middleware/route-guard');
-// const fileUpload = require('./../middleware/file-upload');
+const fileUpload = require('./../middleware/file-upload');
 //const sendEmail = require('./../utilities/send-email');
 
 const router = new Router();
 
+<<<<<<< HEAD
 router.get('/list', async(req, res, next) => {
     try {
         const observations = await Observation.find();
@@ -21,6 +22,45 @@ router.get('/list', async(req, res, next) => {
         next(error);
     }
 });
+=======
+router.get('/list', async (req, res, next) => {
+  
+  try {
+    const observations = await Observation.find().limit(req.body.limit);
+    res.json({ observations });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post(
+  '/',
+  routeGuard,
+  fileUpload.array('pictures', 10),
+  async (req, res, next) => {
+    const pictures = req.files.map((file) => file.path);
+    console.log(req.files, req.body);
+    const { lat, lng, APIid, date } = req.body;
+    const location = {
+      coordinates: [lat, lng]
+    };
+    const creator = req.user._id;
+    //add picture
+    try {
+      const observation = await Observation.create({
+        location,
+        APIid,
+        date,
+        creator,
+        pictures
+      });
+      res.json({ observation });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+>>>>>>> 2cf89e2b279f0c6f7fed1e97d788e4a668102bd9
 
 router.post('/', routeGuard, async(req, res, next) => {
     try {
@@ -66,6 +106,7 @@ router.patch(
     }
 );
 
+<<<<<<< HEAD
 router.patch('/bird/:bird_id', async(req, res, next) => {
     try {
         const observations = await Post.findById({ bird: req.params.bird_id });
@@ -73,6 +114,17 @@ router.patch('/bird/:bird_id', async(req, res, next) => {
     } catch (error) {
         next(error);
     }
+=======
+router.get('/bird/:api_id', async (req, res, next) => {
+  try {
+    const observations = await Observation.find({
+      APIid: req.params.api_id
+    });
+    res.json({ observations });
+  } catch (error) {
+    next(error);
+  }
+>>>>>>> 2cf89e2b279f0c6f7fed1e97d788e4a668102bd9
 });
 
 router.get('/:id', async(req, res, next) => {

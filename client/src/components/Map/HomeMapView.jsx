@@ -1,28 +1,43 @@
 import React, { Component } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import ObservationMarkers from './ObservationMarkers';
+import Geolocation from './Geolocation';
 import 'leaflet/dist/leaflet.css';
 
 class MapView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentLocation: { lat: 52.52437, lng: 13.41053 },
-      zoom: 12
+      currentLocation: [52.52437, 13.41053],
+      zoom: 12,
+      map: null
     };
-    console.log(props.observations);
   }
+
+  updateLocationOfState = (location) => {
+    this.setState({ currentLocation: location });
+    const { map, currentLocation } = this.state;
+    if (map) map.flyTo(currentLocation, 12, { duration: 3 });
+    console.log(this.state.currentLocation);
+  };
 
   render() {
     const { currentLocation, zoom } = this.state;
     return (
-      <MapContainer center={currentLocation} zoom={zoom}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        />
-        <ObservationMarkers observations={this.props.observations} />
-      </MapContainer>
+      <>
+        <Geolocation whenLocationSearchtriggered={this.updateLocationOfState} />
+        <MapContainer
+          center={currentLocation}
+          zoom={zoom}
+          whenCreated={(map) => this.setState({ map })}
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          />
+          <ObservationMarkers observations={this.props.observations} />
+        </MapContainer>
+      </>
     );
   }
 }

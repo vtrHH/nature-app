@@ -30,8 +30,8 @@ const postSchema = new mongoose.Schema(
       // required: true
     },
 
-    picture: {
-      type: String
+    pictures: {
+      type: [String]
       // required: true
     },
 
