@@ -16,16 +16,16 @@ class Search extends Component {
       selected: null
     };
     
-    if (this.props.content === "taxa"){
-      this.searchApi = async () => {
-        const query = this.state.searchQuery;
-        const results = await searchSpecie(query);
-        console.log(`searchApi on Parent search= ${query}`);
-        this.setState({
-          results: results
-        });
-      };
-    }
+    // if (this.props.content === "taxa"){
+    //   this.searchApi = async () => {
+    //     const query = this.state.searchQuery;
+    //     const results = await searchSpecie(query);
+    //     console.log(`searchApi on Parent search= ${query}`);
+    //     this.setState({
+    //       results: results
+    //     });
+    //   };
+    // }
 
     const content = this.props.content;
     switch (content) {

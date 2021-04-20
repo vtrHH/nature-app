@@ -41,7 +41,7 @@ class CarouselList extends Component {
               {this.props.content === "observations" && (
                 <>
                 {results.map((result, index) => (
-                    <Link key={result.id} to={`/obsrvations/${result.id}`}>
+                    <Link key={result.id} to={`/observations/${result.id}`}>
                     <CarouselItemObservation key={result.id} result={result} show={show} />
                     </Link>
                 ))}                          

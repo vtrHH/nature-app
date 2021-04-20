@@ -1,4 +1,6 @@
  import React, { Component } from 'react'
+ import {listOfObservations} from '../../services/observation'
+ import {listOfPosts} from '../../services/forum'
  import {searchApi} from '../../services/i-nature-api'
  
  import './Carousel.scss'
@@ -24,13 +26,43 @@
             order_by: 'created_at'
           }
         };
+
+        
       }
     
       async componentDidMount() {
-        this.launchSearch()
+        const content = this.props.content;
+        console.log(content)
+          switch (content) {
+            case 'forum':
+              this.listForum()
+              break;
+            case 'observation':
+              this.listObservations()              
+              break;
+            case 'user':
+              this.listUsers() 
+              break;
+            default:
+              this.listBirds()
+            }
       }
 
-      launchSearch = async () => {
+      listForum = async () => {
+        const results = await listOfPosts();
+          this.setState({
+              results: results
+          });
+      }
+
+      listObservations = async () => {
+        const results = await listOfObservations();;
+                this.setState({
+                  results: results
+                });
+      }
+
+      listBirds = async () => {
         let query = this.props.options.q;
         if (query === null) {
           query = "";
@@ -38,7 +70,6 @@
         // const query = this.props.options.q;
         const options =this.props.options;
         const results = await searchApi(query, options);
-        console.log(`launchSearch on Parent search= ${query}`);
         this.setState({
             results: results
         });
