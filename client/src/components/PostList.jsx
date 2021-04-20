@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import PostItem from './PostItem';
 
-const PostList = ({ posts }) => {
-    
+const PostList = ({ posts }) => {  
   return (
 
     <div className="card__group">

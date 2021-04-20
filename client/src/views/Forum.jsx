@@ -6,13 +6,13 @@ import { listOfPosts } from '../services/forum';
 
 class Forum extends Component {
   state = {
-    posts: null
+    posts: []
   };
 
   async componentDidMount() {
     const posts = await listOfPosts();
-    // console.log(this.state);
-    this.setState({ posts });
+    console.log(posts)
+    this.setState({ posts});
   }
 
   render() {
