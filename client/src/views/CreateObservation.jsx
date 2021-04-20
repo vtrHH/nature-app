@@ -34,7 +34,7 @@ class CreateObservation extends Component {
       lng: this.state.lng,
       date,
       APIid,
-      preferred_common_name: preferred_common_name,
+      preferred_common_name,
       pictures
     };
 
@@ -43,8 +43,9 @@ class CreateObservation extends Component {
 
     body.append('date', data.date);
     body.append('APIid', data.APIid);
-    body.append('lat', data.lat);
     body.append('lng', data.lng);
+    body.append('lat', data.lat);
+    body.append('preferred_common_name', data.preferred_common_name);
 
     for (let picture of data.pictures) {
       body.append('pictures', picture);
