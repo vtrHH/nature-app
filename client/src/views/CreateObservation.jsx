@@ -18,7 +18,6 @@ class CreateObservation extends Component {
     map: null,
     pictures: ''
     // verified: false
-    // picture: ''
   };
 
   handleFormSubmission = async (e) => {
