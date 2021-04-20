@@ -7,7 +7,8 @@ import BirdList from '../components/BirdList';
 // import SearchBar from '../components/SearchBar';
 import Search from '../components/Search/Search'
 import HomeMapView from '../components/Map/HomeMapView';
-import Carousel from '../components/Carousel/Carousel';
+import CarouselObservations from '../components/Carousel/CarouselObservations';
+import CarouselPosts from '../components/Carousel/CarouselPosts';
 
 class Home extends Component {
   constructor(props) {
@@ -57,8 +58,21 @@ class Home extends Component {
       photos: true
     };
 
-    const carouselObservationOptions = {
+    const carouselObservationsOptions = {
       route: 'observations',
+      q: null,
+      is_active: true,
+      taxon_id: 3,
+      rank: '',
+      // rank: 'species%2Csubspecies',      
+      per_page: 20,
+      order: 'desc',
+      order_by: 'created_at',
+      photos: true
+    };
+
+    const carouselPostsOptions = {
+      route: 'forum',
       q: null,
       is_active: true,
       taxon_id: 3,
@@ -85,9 +99,9 @@ class Home extends Component {
           /> */}
           <BirdList birds={birds} />
           <HomeMapView observations={this.state.observations} />
-          {/* <Carousel show={5} content= {"forum"} options={carouselSpeciesOptions}/>
-          <Carousel show={5} content= {"taxa"} options={carouselSpeciesOptions}/> */}
-          <Carousel show={4} content= {"observations"} options={carouselObservationOptions}/>
+          {/* <Carousel show={5} content= {"taxa"} options={carouselSpeciesOptions}/> */}
+          <CarouselPosts show={3} content= {"posts"} options={carouselPostsOptions}/>
+          <CarouselObservations show={4} content= {"observations"} options={carouselObservationsOptions}/>
         </div>
       </main>
     );

@@ -19,11 +19,11 @@
       }
     
       async componentDidMount() {
-        this.getObservations();
+        this.getPosts();
       }
 
-      getObservations = async () => {
-        const results = await listOfObservations();;
+      getPosts = async () => {
+        const results = await listOfPosts();;
                 this.setState({
                   results: results
                 });
@@ -37,16 +37,8 @@
          const results = this.state.results;
          return (
             <>
-             {this.props.content === "taxa" && (
-                <>
-                <h2 style={{fontSize:"2em", marginBottom:"0px"}}>Latest Birds</h2>
-                </>
-             )}
-             {this.props.content === "observations" && (
-                <>
-                <h2 style={{fontSize:"2em", marginBottom:"0px"}}>Latest Observations</h2>
-                </>
-             )}
+             <h2 style={{fontSize:"2em", marginBottom:"0px"}}>Latest Posts</h2>
+                           
             {results && (                
                 <div className="carousel-container">
                     <CarouselList content={content} results={results} show={show}/>

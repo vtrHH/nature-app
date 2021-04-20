@@ -1,7 +1,8 @@
 import {Component} from 'react'
 import { Link } from 'react-router-dom';
-import CarouselItemTaxa from './CarouselItemTaxa';
-import CarouselItemObservation from './CarouselItemObservation';
+// import CarouselItemTaxa from './CarouselItemTaxa';
+import CarouselPostItem from './CarouselPostItem';
+import CarouselObservationItem from './CarouselObservationItem';
 
 class CarouselList extends Component {
   constructor(props) {
@@ -32,11 +33,11 @@ class CarouselList extends Component {
           </button>
             <div className="carousel-content-wrapper">
               <div className={`carousel-content show-${show}`} style={{ transform: `translateX(-${this.state.index * 100 / show}%)` }}>
-              {this.props.content === "taxa" && (
+              {this.props.content === "posts" && (
                 <>
                 {results.map((result, index) => (
-                    <Link key={result.id} to={`/bird/${result.APIid}`}>
-                    <CarouselItemTaxa key={result.id} result={result} show={show} />
+                    <Link key={result._id} to={`/forum/${result._id}`}>
+                    <CarouselPostItem key={result._id} result={result} show={show} />
                     </Link>
                 ))}                          
                 </>
@@ -45,8 +46,8 @@ class CarouselList extends Component {
                 <>
                 {results.map((result, index) => (
                     //<Link key={result.id} to={`/observations/${result._id}`}>
-                    <Link key={result.id} to={`/observation/${result._id}`}>
-                    <CarouselItemObservation key={result.id} result={result} show={show} />
+                    <Link key={result._id} to={`/observation/${result._id}`}>
+                    <CarouselObservationItem key={result._id} result={result} show={show} />
                     </Link>
                 ))}                          
                 </>
