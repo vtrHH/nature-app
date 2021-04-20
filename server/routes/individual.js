@@ -5,7 +5,7 @@ const express = require('express');
 //const Bird = require('./../models/bird');
 //const User = require('./../models/user');
 //const Observation = require('./../models/observation');
-//const Organisation = require('./../models/organisation');
+const Individual = require('./../models/individual');
 const User = require('./../models/organisation');
 
 const routeGuard = require('./../middleware/route-guard');
