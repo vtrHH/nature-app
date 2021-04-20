@@ -34,11 +34,15 @@ class SingleObservation extends Component {
   render() {
     //  console.log('-------------render-------------');
     const observation = this.state.observation;
-
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
     return (
+      
       <div>
         {observation && (
           <>
+
+            <h1>{observation.preferred_common_name}</h1>
+
           <div>
               {(observation.pictures && (
                 <img
@@ -51,12 +55,15 @@ class SingleObservation extends Component {
             <h1>Bird: {observation.bird}</h1>
             <h1>Preferred_common_name: {observation.preferred_common_name}</h1>
             <h1>APIid: {observation.APIid}</h1>
+
             <br></br>
-            <span>Obervation date: {observation.date}</span>
+            {observation.pictures.map((picture) => (
+              <img className="single-bird__img" key = {picture} src={picture} alt=""/>
+            ))}
+            <br></br>
+            <span>Obervation date: { new Date(observation.date).toLocaleDateString('en-GB', options)}</span>
             <br></br>
             <span>Observation creator: {observation.creator}</span>
-            <br></br>
-            <span>{observation.location.coordinates[0]}</span>
             <br></br>
             <span>{observation.date.toString()}</span>
             <ObservationMapView

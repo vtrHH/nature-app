@@ -6,14 +6,30 @@ class SignUp extends Component {
     username: '',   
     email: '',
     password: '',
-    role: ''
+    role: '',
+    profilePicture: '',
   };
 
   handleFormSubmission = async (event) => {
     event.preventDefault();
-    const { username, email, password, role } = this.state;
-    const user = await signUp({ username, email, password, role });
+    const { username, email, password, role, profilePicture } = this.state;
+    const body = new FormData()
+    body.append('username', username);
+    body.append('email', email);
+    body.append('password', password);
+    body.append('role', role);
+    body.append('profilePicture', profilePicture);
+    console.log(profilePicture)
+    const user = await signUp(body);
     this.props.onUserChange(user);
+  };
+
+  handleFileInputChange = event => {
+    const { name, files } = event.target;
+    const file = files[0];
+    this.setState({
+      [name]: file
+    });
   };
 
   handleInputChange = (event) => {
@@ -100,6 +116,14 @@ class SignUp extends Component {
             onChange={this.handleInputChange}
           />
 
+          <label htmlFor="input-picture">Profile picture</label>
+          <input
+            id="input-picture"
+            type="file"
+            name="profilePicture"
+            onChange={this.handleFileInputChange}
+          />
+          
           <button>Sign Up</button>
         </form>
       </main>

@@ -17,6 +17,7 @@ class CreateObservation extends Component {
     currentLocation: [0, 0],
     zoom: 2,
     map: null,
+    description: '',
     pictures: ''
     // verified: false
   };
@@ -26,13 +27,16 @@ class CreateObservation extends Component {
     /*     const observationLocation = {
       coordinates: [this.state.lat, this.state.lng]
     }; */
-    const { date, APIid, pictures } = this.state;
+
+    const { date, APIid,description, pictures } = this.state;
+
     const preferred_common_name = this.state.preferred_common_name;
     const data = {
       lat: this.state.lat,
       lng: this.state.lng,
       date,
       APIid,
+      description,
       preferred_common_name,
       pictures
     };
@@ -44,14 +48,11 @@ class CreateObservation extends Component {
     body.append('APIid', data.APIid);
     body.append('lng', data.lng);
     body.append('lat', data.lat);
+    body.append('', data.description);
     body.append('preferred_common_name', data.preferred_common_name);
 
     for (let picture of data.pictures) {
       body.append('pictures', picture);
-    }
-
-    for (let [key, values] of body.entries()) {
-      console.log(`${key}:${values} `);
     }
 
     const observation = await createObservation(body);
@@ -116,6 +117,17 @@ class CreateObservation extends Component {
             name="pictures"
             multiple
             onChange={this.handleFileInputChange}
+          />
+
+          <label htmlFor="input-description">Description</label>
+          <input
+            type="text"
+            id="input-description"
+            name="description"
+            placeholder="Type your answer"
+            value={this.state.description}
+            onChange={this.handleInputChange}
+            required
           />
 
           <label htmlFor="input-bird">Name</label>
