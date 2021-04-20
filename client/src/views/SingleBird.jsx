@@ -29,8 +29,8 @@ class SingleBird extends Component {
         {bird && (
           <>
             {/* <h1>SingleBird</h1> */}
-            <h1>{bird.name}</h1>
-            <h2>{bird.preferred_common_name}</h2>
+            <h1>{bird.preferred_common_name}</h1>
+            <h2>{bird.name}</h2>
             <div>
               {(bird.default_photo && (
                 <img

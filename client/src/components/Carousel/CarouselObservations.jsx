@@ -1,7 +1,5 @@
  import React, { Component } from 'react'
- import {searchApi} from '../../services/i-nature-api'
  import {listOfObservations} from '../../services/observation'
- import {listOfPosts} from '../../services/forum'
  
  import './Carousel.scss'
 

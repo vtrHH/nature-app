@@ -10,7 +10,7 @@ import Geolocation from './../components/Map/Geolocation';
 class CreateObservation extends Component {
   state = {
     APIid: '',
-    preferred_common_name: null,
+    preferred_common_name: '',
     date: '',
     lat: 0,
     lng: 0,
@@ -20,7 +20,6 @@ class CreateObservation extends Component {
     description: '',
     pictures: ''
     // verified: false
-    // picture: ''
   };
 
   handleFormSubmission = async (e) => {
@@ -28,7 +27,9 @@ class CreateObservation extends Component {
     /*     const observationLocation = {
       coordinates: [this.state.lat, this.state.lng]
     }; */
+
     const { date, APIid,description, pictures } = this.state;
+
     const preferred_common_name = this.state.preferred_common_name;
     const data = {
       lat: this.state.lat,
@@ -148,8 +149,6 @@ class CreateObservation extends Component {
             onChange={this.handleInputChange}
             required
           />
-          <label>Set Location</label>
-          <button onClick={this.handleCurrentLocationSearch}>Locate Me</button>
 
           <Geolocation
             whenLocationSearchtriggered={this.updateLocationOfState}

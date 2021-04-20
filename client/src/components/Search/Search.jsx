@@ -15,8 +15,8 @@ class Search extends Component {
       results: null,
       selected: null
     };
-    
-    if (this.props.content === "taxa"){
+
+    if (this.props.content === 'taxa') {
       this.searchApi = async () => {
         const query = this.state.searchQuery;
         const results = await searchSpecie(query);
@@ -61,13 +61,11 @@ class Search extends Component {
             results: results
           });
         };
-      }
+    }
   }
 
-  async componentDidMount() {
-  }
-  
- 
+  async componentDidMount() {}
+
   // searchApi = async () => {
   //   const query = this.state.searchQuery;
   //   const results = await searchSpecie(query);
@@ -113,14 +111,16 @@ class Search extends Component {
   };
 
   render() {
-    let user = this.state.user;
     let results = this.state.results;
     let selected = this.state.selected;
     // console.log("-------user---------");
     // console.log(user);
     return (
       <div className="container--search">
-        <SearchBar content={this.props.content} onSearchBar={this.handleQueryChange} />
+        <SearchBar
+          content={this.props.content}
+          onSearchBar={this.handleQueryChange}
+        />
 
         {results && !selected && (
           <SearchList
