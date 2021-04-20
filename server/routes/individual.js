@@ -6,7 +6,7 @@ const express = require('express');
 //const User = require('./../models/user');
 //const Observation = require('./../models/observation');
 //const Organisation = require('./../models/organisation');
-const Individual = require('./../models/organisation');
+const User = require('./../models/organisation');
 
 const routeGuard = require('./../middleware/route-guard');
 //const fileUpload = require('./../middleware/file-upload');
@@ -14,13 +14,14 @@ const routeGuard = require('./../middleware/route-guard');
 
 const router = new express.Router();
 
-router.get('/:id', async(req, res, next) => {
-    try {
-        const individual = await Individual.findById(req.params.id);
-        res.json({ individual });
-    } catch (error) {
-        next(error);
-    }
+router.get('/:id', async (req, res, next) => {
+  try {
+    const individual = await User.findById(req.params.id);
+    res.json({individual });
+  } catch (error) {
+    next(error);
+  }
+
 });
 
 router.get('/list', async(req, res, next) => {

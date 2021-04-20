@@ -14,7 +14,8 @@ const router = new Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().sort({ creationDate: -1 }).limit(20);
+
     res.json({ posts });
   } catch (error) {
     next(error);
@@ -39,7 +40,7 @@ router.post(
         text,
         location,
         creator,
-        date, 
+        date,
         pictures
       });
       res.json({ post });
