@@ -13,8 +13,11 @@ const fileUpload = require('./../middleware/file-upload');
 const router = new Router();
 
 router.get('/', async (req, res, next) => {
+
   try {
-    const posts = await Post.find().sort({ creationDate: -1 }).limit(20).populate('creator');
+    const posts = await Post.find()
+      .sort({ creationDate: -1 })
+      .populate('creator');
     res.json({ posts });
   } catch (error) {
     next(error);
@@ -49,6 +52,18 @@ router.post(
   }
 );
 
+router.get('/user/:userId', async (req, res, next) => {
+  try {
+    const posts = await Post.find({
+      creator: req.params.userId
+    })
+      .sort({ creationDate: -1 })
+    res.json({ posts });
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/:id', async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -77,7 +92,9 @@ router.post('/:id', routeGuard, async (req, res, next) => {
 
 router.get('/:id/comments', async (req, res, next) => {
   try {
-    const comments = await Comment.find({ relatedpost: req.params.id });
+    const comments = await Comment.find({ relatedpost: req.params.id })
+      .sort({ creationDate: -1 })
+      .populate('creator');
     res.json({ comments });
   } catch (error) {
     next(error);

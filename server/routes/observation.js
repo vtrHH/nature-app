@@ -15,7 +15,10 @@ const router = new Router();
 
 router.get('/list', async (req, res, next) => {
   try {
-    const observations = await Observation.find().limit(req.body.limit);
+    const observations = await Observation.find()
+      .sort({ creationDate: -1 })
+      .populate('creator');
+
     res.json({ observations });
   } catch (error) {
     next(error);
@@ -110,6 +113,17 @@ router.get('/bird/:api_id', async (req, res, next) => {
     const observations = await Observation.find({
       APIid: req.params.api_id
     });
+    res.json({ observations });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/user/:userId', async (req, res, next) => {
+  try {
+    const observations = await Observation.find({
+      creator: req.params.userId
+    }).sort({ creationDate: -1 });
     res.json({ observations });
   } catch (error) {
     next(error);
