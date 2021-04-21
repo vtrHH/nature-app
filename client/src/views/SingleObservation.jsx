@@ -21,47 +21,16 @@ class SingleObservation extends Component {
 
   render() {
     const observation = this.state.observation;
-<<<<<<< HEAD
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
     
-=======
-    const options = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    };
->>>>>>> 5dee2831e1fa9414a1c547e2f26b48f2cc5de69e
     return (
       <div>
         {observation && (
-<<<<<<< HEAD
           <>     
             
             <h1>{observation.preferred_common_name}</h1>
             <br></br>
             <Slider pictures={observation.pictures}/>
-=======
-          <>
-            <h1>{observation.preferred_common_name}</h1>
-
-            <div>
-              <br></br>
-              {observation.pictures.map((picture) => (
-                <img
-                  className="single-bird__img"
-                  key={picture}
-                  src={picture}
-                  alt=""
-                />
-              ))}
-            </div>
-            <br></br>
-            <span>
-              Obervation date:{' '}
-              {new Date(observation.date).toLocaleDateString('en-GB', options)}
-            </span>
->>>>>>> 5dee2831e1fa9414a1c547e2f26b48f2cc5de69e
             <br></br>
             <span>Observation creator: {observation.creator.username}</span>
             <br></br>
