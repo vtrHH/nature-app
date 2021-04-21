@@ -39,7 +39,7 @@ class SearchItemTaxa extends Component {
           <h5>{result.name}</h5>
           </div>
           {/* <h5>{result.id}</h5> */}
-          <button onClick={(e) => this.handleSelect(e, result.id)}>Select</button>     
+          {/* <button onClick={(e) => this.handleSelect(e, result.id)}>Select</button>      */}
         </div>
     </div>
     </>

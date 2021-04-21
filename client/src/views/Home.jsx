@@ -91,7 +91,7 @@ class Home extends Component {
         </header>
         <div className="container--home">
           <Search
-            content={'taxa'}
+            content={''}
             onParent={(result) => this.handleResult(result)}
           />
           <BirdList birds={birds} />
