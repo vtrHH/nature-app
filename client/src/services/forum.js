@@ -7,6 +7,12 @@ export const listOfPosts = async () => {
   return response.data.posts;
 };
 
+//list all post by one user
+export const listOfPostsByUser = async (userId) => {
+  const response = await api.get(`/forum/user/${userId}`);
+  return response.data.posts;
+};
+
 //create a post
 export const createPost = async (data) => {
   const response = await api.post('/forum', data);
@@ -18,6 +24,8 @@ export const loadPost = async (id) => {
   const response = await api.get(`/forum/${id}`);
   return response.data.post;
 };
+
+
 
 //create a comment on a post
 export const createComment = async (id, data) => {

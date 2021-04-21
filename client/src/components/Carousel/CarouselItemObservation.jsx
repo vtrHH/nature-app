@@ -28,7 +28,7 @@ const CarouselItemObservation = ({ result, show }) => {
           <h3>Bird: {result.bird}</h3>
           {/* <h5>{result.taxon.name}</h5> */}
           <small>
-            Date: {result.addedDate} <br/>User: {result.creator} <br/> Location: <br/> Lat:{result.location.coordinates[0]} <br/> Lng:{result.location.coordinates[1]}
+            Date: {result.addedDate} <br/>User: {result.creator.username} <br/> Location: <br/> Lat:{result.location.coordinates[0]} <br/> Lng:{result.location.coordinates[1]}
           </small>      
         </div>
     </div>

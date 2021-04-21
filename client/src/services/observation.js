@@ -20,10 +20,17 @@ export const editObservation = async(id) => {
 
 //lists all observation
 //(maybe filtered, sorted, etc in th serverside)
-export const listOfObservations = async(limit) => {
-    const response = await api.get('/observation/list', limit);
+export const listOfObservations = async() => {
+    const response = await api.get('/observation/list');
     return response.data.observations;
 };
+
+//list of observation by one user
+export const listOfObservationsbyUser = async(userId) => {
+    const response = await api.get(`/observation/user/${userId}`);
+    return response.data.observations;
+};
+
 
 //loads all the observations related to one bird
 export const loadObservationsByBirdId = async(api_id) => {
