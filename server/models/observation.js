@@ -41,7 +41,11 @@ const observationSchema = new mongoose.Schema(
     creator: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
+    },
+    description: {
+      type: String
     }
+
   },
   {
     timestamps: {

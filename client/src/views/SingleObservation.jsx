@@ -34,38 +34,40 @@ class SingleObservation extends Component {
   render() {
     //  console.log('-------------render-------------');
     const observation = this.state.observation;
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    };
     return (
-      
       <div>
         {observation && (
           <>
-
             <h1>{observation.preferred_common_name}</h1>
 
-          <div>
-              {(observation.pictures && (
+            <div>
+              <br></br>
+              {observation.pictures.map((picture) => (
                 <img
                   className="single-bird__img"
-                  src={observation.pictures[0]}
-                  alt={observation.preferred_common_name}
+                  key={picture}
+                  src={picture}
+                  alt=""
                 />
-              )) || <img src="" alt="" />}
+              ))}
             </div>
-            <h1>Bird: {observation.bird}</h1>
-            <h1>Preferred_common_name: {observation.preferred_common_name}</h1>
-            <h1>APIid: {observation.APIid}</h1>
-
             <br></br>
-            {observation.pictures.map((picture) => (
-              <img className="single-bird__img" key = {picture} src={picture} alt=""/>
-            ))}
+            <span>
+              Obervation date:{' '}
+              {new Date(observation.date).toLocaleDateString('en-GB', options)}
+            </span>
             <br></br>
-            <span>Obervation date: { new Date(observation.date).toLocaleDateString('en-GB', options)}</span>
+            <span>Observation creator: {observation.creator.username}</span>
             <br></br>
-            <span>Observation creator: {observation.creator}</span>
+            <span>Obervation date:{ new Date(observation.date).toLocaleDateString('en-GB', options)}</span>
             <br></br>
-            <span>{observation.date.toString()}</span>
+            <span>{observation.description}</span>
             <ObservationMapView
               observationLocation={observation.location.coordinates}
             />
