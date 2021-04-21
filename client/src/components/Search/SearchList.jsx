@@ -41,36 +41,36 @@ import SearchItemObservation from './SearchItemObservation';
     }
     return (
     <>
-    { results.length !== 0 && (
+    { results && results.length === 0 ? (<div>Sorry, no bird found...</div>) : results ? (
       
-    <div className="search__list">
-      
-      {results.map(result => (
-        <Link key={result.id} to={`/bird/${result.id}`}>
-          
-        {content === "taxa" && (
-          <>
-          <SearchItemTaxa content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
-          </>
-        )}
+      <div className="search__list">
+        
+        {results.map(result => (
+          <Link key={result.id} to={`/bird/${result.id}`}>
+            
+          {content === "taxa" && (
+            <>
+            <SearchItemTaxa content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
+            </>
+          )}
 
-        {content === "observations" && (
-          <>
-          <SearchItemObservation content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
-          </>
-        )}
+          {content === "observations" && (
+            <>
+            <SearchItemObservation content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
+            </>
+          )}
 
-        {content === "" && (
-          <>
-          <SearchItem content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
-          </>
-        )}
+          {content === "" && (
+            <>
+            <SearchItem content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
+            </>
+          )}
 
-        </Link>
-      ))}
-    </div>
-    ) || (
-      <div>Sorry, no results found.</div>)}
+          </Link>
+        ))}
+      </div>
+      ) : (<div></div>)
+    }
     </>
   );
 };
