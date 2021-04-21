@@ -66,21 +66,10 @@ class Search extends Component {
 
   async componentDidMount() {}
 
-  // searchApi = async () => {
-  //   const query = this.state.searchQuery;
-  //   const results = await searchSpecie(query);
-  //   console.log(`searchApi on Parent search= ${query}`);
-  //   this.setState({
-  //     results: results
-  //   });
-  // };
-
   componentDidUpdate(previousProps, previousState) {
-    // console.log('-------------componentDidUpdate-------------------');
-    // console.log(`Previous props= ${previousProps}, this.props= ${this.props}`);
-    // console.log(previousState, this.state);
-    if (previousState.searchQuery !== this.state.searchQuery) {
-      // console.log('changedddddddddd');
+    if (this.state.searchQuery === "") {
+
+    } else if (previousState.searchQuery !== this.state.searchQuery) {
       this.searchApi();
     }
   }
@@ -93,10 +82,6 @@ class Search extends Component {
     this.setState({
       searchQuery: query
     });
-    // this.triggerFiltering({
-    //   search: search,
-    //   stockCheck: this.state.stockCheck,
-    // });
   };
 
   handleResult = (result) => {
@@ -122,13 +107,22 @@ class Search extends Component {
           onSearchBar={this.handleQueryChange}
         />
 
-        {results && !selected && (
+        {/* <SearchList
+          content={this.props.content}
+          results={results}
+          onSearch={(result) => this.handleResult(result)}
+        /> */}
+
+        {this.state.searchQuery === "" && (
+          <></>
+        ) || (
           <SearchList
             content={this.props.content}
             results={results}
             onSearch={(result) => this.handleResult(result)}
           />
         )}
+        
         {selected && (
           <SelectedItem
             result={selected}

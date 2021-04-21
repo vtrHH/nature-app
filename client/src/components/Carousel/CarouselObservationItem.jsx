@@ -30,7 +30,8 @@ const CarouselItemObservation = ({ result, show }) => {
             <h3>Bird: {result.bird}</h3>
             {/* <h5>{result.taxon.name}</h5> */}
             <small>
-              Date: {result.addedDate} <br />
+              Date: { new Date(result.addedDate).toLocaleDateString('en-GB')} <br />
+              {/* <span>Obervation date: { new Date(result.addedDate).toLocaleDateString('en-GB', options)}</span> */}
               User: {result.creator} <br /> Location: <br /> Lat:
               {result.location.coordinates[0]} <br /> Lng:
               {result.location.coordinates[1]}

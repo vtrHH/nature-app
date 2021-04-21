@@ -7,7 +7,7 @@ class IndividualProfile extends Component {
   };
 
   async componentDidMount() {
-      console.log(`Params ID is ${this.props.match.params.id}`)
+    console.log(`Params ID is ${this.props.match.params.id}`)
     const individual = await loadIndividual(this.props.match.params.id);
     console.log(`Individual is ${individual}`)
     this.setState({ individual });
@@ -17,6 +17,7 @@ class IndividualProfile extends Component {
     const { individual } = this.state;
     return (
       <main>
+        <h1>Individual Profile</h1>
         {individual && (
           <>
             <h1>{individual.name}</h1>

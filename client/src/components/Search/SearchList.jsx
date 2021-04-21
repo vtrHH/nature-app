@@ -33,8 +33,18 @@ import SearchItemObservation from './SearchItemObservation';
     const content= this.props.content;
     console.log(content)
     const results = this.props.results;
+    console.log(results);
+    console.log(Array.isArray(results));
+    console.log(!!results);
+    if(results) {          
+      console.log(results.length);
+    }
     return (
+    <>
+    { results.length !== 0 && (
+      
     <div className="search__list">
+      
       {results.map(result => (
         <Link key={result.id} to={`/bird/${result.id}`}>
           
@@ -59,6 +69,9 @@ import SearchItemObservation from './SearchItemObservation';
         </Link>
       ))}
     </div>
+    ) || (
+      <div>Sorry, no results found.</div>)}
+    </>
   );
 };
   }
