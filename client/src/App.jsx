@@ -8,13 +8,18 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
 
 import Home from './views/Home';
+import LandingPage from './views/LandingPage';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
 import CreateObservation from './views/CreateObservation';
 import SingleObservation from './views/SingleObservation';
 import SingleBird from './views/SingleBird';
 import IndividualProfile from './views/IndividualProfile';
-import OrganisationProfile from './views/OrganisationProfile';
+
+import OrganisationProfile from './views/Organisations/OrganisationProfile';
+import OrganisationHome from './views/Organisations/OrganisationHome';
+import UpdateOrganisationProfile from './views/Organisations/UpdateOrganisationProfile';
+
 import Forum from './views/Forum';
 import SinglePost from './views/SinglePost';
 import CreatePost from './views/CreatePost';
@@ -51,6 +56,21 @@ class App extends Component {
           </Helmet>
           <Navbar user={user} onSignOut={this.handleSignOut} />
           <Switch>
+            {user && user.role === 'individual' ? (
+              <Route
+                path="/"
+                render={(props) => <Home {...props} user={user} />}
+                exact
+              />
+            ) : user && user.role === 'organisation' ? (
+              <Route
+                path="/"
+                render={(props) => <OrganisationHome {...props} user={user} />}
+                exact
+              />
+            ) : (
+              <Route path="/" component={LandingPage} exact />
+            )}
             <Route
               path="/"
               render={(props) => <Home {...props} user={user} />}
@@ -100,9 +120,27 @@ class App extends Component {
               authorized={user}
               redirect="/sign-up"
             />
+
+            <ProtectedRoute
+              path="/organisation"
+              component={OrganisationHome}
+              exact
+              authorized={user}
+              redirect="/sign-up"
+            />
             <Route
               path="/organisation/:id"
               component={OrganisationProfile}
+              exact
+            />
+
+            <ProtectedRoute
+              path="/organisation/:id/edit"
+              render={(props) => (
+                <UpdateOrganisationProfile {...props} user={user} />
+              )}
+              authorized={user}
+              redirect="/sign-up"
               exact
             />
 

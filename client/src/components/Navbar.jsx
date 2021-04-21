@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = ({ user, onSignOut }) => {
-  console.log(user);
   return (
     <nav className="navbar">
       <Link to="/">
@@ -15,9 +14,12 @@ const Navbar = ({ user, onSignOut }) => {
         {(user && (
           <>
             {user.role === 'individual' && (
-              <Link to="/observation/create">Create Observation</Link>
+              <>
+                <Link to="/observation/create">Create Observation</Link>
+                <Link to="/forum">Forum</Link>
+              </>
             )}
-            <Link to="/forum">Forum</Link>
+
             {/*             {user.profilePicture && (
               <img src={user.profilePicture} alt={user.username} />
             )} */}
