@@ -20,6 +20,8 @@ const Navbar = ({ user, onSignOut }) => {
               </>
             )}
 
+            <Link to="/forum">What´s this bird?</Link>
+            <Link to="/organisations">Organisations</Link>
             {/*             {user.profilePicture && (
               <img src={user.profilePicture} alt={user.username} />
             )} */}

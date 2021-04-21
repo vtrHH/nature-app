@@ -33,8 +33,7 @@ class Carousel extends Component {
     const content = this.props.content;
     const results = this.state.results;
     return (
-      <>
-        <h2 style={{ fontSize: '2em', marginBottom: '0px' }}>Latest Posts</h2>
+      <>       
 
         {results && (
           <div className="carousel-container">

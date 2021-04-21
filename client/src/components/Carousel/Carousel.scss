@@ -1,133 +1,193 @@
-.carousel-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin: 2em 0;
-}
-
-.carousel-wrapper {
-    display: flex;
-    width: 100%;
-    position: relative;
-}
-
-.carousel-content-wrapper {
-    overflow: hidden;
-    width: 80%;
-    height: 100%;
-    margin: 0 auto;
-}
-
-.carousel-content {
-    display: flex;
-    transition: all 250ms linear;
-    -ms-overflow-style: none;
-    /* hide scrollbar in IE and Edge */
-    scrollbar-width: none;
-    /* hide scrollbar in Firefox */
-}
-
-
-/* hide scrollbar in webkit browser */
-
-.carousel-content::-webkit-scrollbar,
-.carousel-content::-webkit-scrollbar {
-    display: none;
-}
-
-.carousel-content>* {
-    width: 100%;
-    flex-shrink: 0;
-    flex-grow: 1;
-}
-
-.left-arrow,
-.right-arrow {
-    position: absolute;
-    z-index: 100;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
-    border-radius: 24px;
-    background-color: white;
-    border: 1px solid #ddd;
-}
-
-.left-arrow {
-    left: 24px;
-}
-
-.right-arrow {
-    right: 24px;
-}
-
-.carousel-content.show-1>* {
-    width: 100%;
-}
-
-.carousel-content.show-2>* {
-    width: 50%;
-}
-
-.carousel-content.show-3>* {
-    width: calc(100% / 3);
-}
-
-.carousel-content.show-4>* {
-    width: calc(100% / 4);
-}
-
-.carousel-content.show-5>* {
-    width: calc(100% / 5);
-}
-
-.card__carousel-list {
-    // height: 20em;
-    // width: 15em;
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border-radius: 2px;
-    margin: calc(100%/15);
-    // border: 1px solid grey;
-    justify-content: flex-start;
-    img {
+    .carousel-container {
         width: 100%;
-        // height: 150px;
-        object-fit: cover;
-        border-radius: 10%;
+        display: flex;
+        flex-direction: column;
+        margin: 2em 0;
     }
-}
-
-.carousel-item__img {
-    width: 100%;
-    margin-bottom: 0px;
-}
-
-.carousel-item__details {
-    padding: 0 5px;
-    text-align: left;
-    h3 {
-        font-size: 1em;
+    
+    .carousel-wrapper {
+        display: flex;
+        width: 100%;
+        position: relative;
     }
-    ;
-    h5 {
-        font-size: 0.7em;
+    
+    .carousel-content-wrapper {
+        overflow: hidden;
+        width: 80%;
+        height: 100%;
+        margin: 0 auto;
     }
-    ;
-    small {
-        font-size: 0.5em;
+    
+    .carousel-content {
+        display: flex;
+        transition: all 250ms linear;
+        -ms-overflow-style: none;
+        /* hide scrollbar in IE and Edge */
+        scrollbar-width: none;
+        /* hide scrollbar in Firefox */
     }
-}
-
-.placeholder-img {
-    filter: invert(1);
-    opacity: 0.2;
-    ;
-}
+    /* hide scrollbar in webkit browser */
+    
+    .carousel-content::-webkit-scrollbar,
+    .carousel-content::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .carousel-content>* {
+        width: 100%;
+        flex-shrink: 0;
+        flex-grow: 1;
+    }
+    
+    .left-arrow,
+    .right-arrow {
+        position: absolute;
+        z-index: 100;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        border-radius: 24px;
+        background-color: white;
+        border: 1px solid #ddd;
+    }
+    
+    .left-arrow {
+        left: 24px;
+    }
+    
+    .right-arrow {
+        right: 24px;
+    }
+    
+    .carousel-content.show-1>* {
+        width: 100%;
+    }
+    
+    .carousel-content.show-2>* {
+        width: 50%;
+    }
+    
+    .carousel-content.show-3>* {
+        width: calc(100% / 3);
+    }
+    
+    .carousel-content.show-4>* {
+        width: calc(100% / 4);
+    }
+    
+    .carousel-content.show-5>* {
+        width: calc(100% / 5);
+    }
+    
+    .card__carousel-list {
+        // height: 20em;
+        // width: 15em;
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border-radius: 2px;
+        margin: calc(100%/15);
+        // border: 1px solid grey;
+        justify-content: flex-start;
+        img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 1em;
+        }
+    }
+    
+    .card__carousel-list.post {
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .post {
+        img {
+            filter: url('#teal-white') opacity(0.43) grayscale(0.3) contrast(1.7) brightness(0.7) saturate(0.6);
+            // filter: grayscale(1);
+            // filter: saturate(0.2);
+            width: 100%;
+            // height: 15em;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+    
+    .carousel-item__img {
+        width: 100%;
+        margin-bottom: 0px;
+    }
+    
+    .carousel-item__details {
+        padding: 0 5px;
+        text-align: left;
+        h3 {
+            font-size: 1em;
+            margin: 0
+        }
+        ;
+        h5 {
+            font-size: 0.7em;
+        }
+        ;
+        small {
+            font-size: 0.6em;
+        }
+    }
+    
+    .carousel_item__user {
+        // border: solid 1px;
+        margin-top: 1em;
+        border-radius: 1em;
+        padding: 0.5em;
+        // margin: 0.5em;
+        background: #f3f3f3;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        & img {
+            width: 20px;
+            height: 20px;
+        }
+        ;
+        strong {
+            font-size: 0.75em;
+            margin-left: 0.3em;
+        }
+    }
+    
+    .carousel-item__details__post {
+        z-index: 25;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1em;
+        text-transform: uppercase;
+        strong {
+            font-size: 0.85em;
+        }
+    }
+    
+    .placeholder-img {
+        filter: invert(1);
+        opacity: 0.2;
+        ;
+    }
+    
+    .card__carousel-list .carousel-item__user {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        img {
+            width: 20%
+        }
+    }
