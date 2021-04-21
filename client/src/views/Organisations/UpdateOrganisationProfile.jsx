@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
-import {
-  editOrganisation,
-  loadOrganisation
-} from './../../services/organisation';
+import { editOrganisation } from './../../services/organisation';
 
 class UpdateOrganisationProfile extends Component {
   constructor(props) {

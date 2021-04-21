@@ -7,7 +7,7 @@ export const loadOrganisation = async (id) => {
 };
 
 //loads a list of organisation
-export const listOfOrganisation = async (id) => {
+export const listOfOrganisation = async () => {
   const response = await api.get(`/organisation/list`);
   return response.data.organisations;
 };

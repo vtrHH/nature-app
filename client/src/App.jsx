@@ -19,6 +19,7 @@ import IndividualProfile from './views/IndividualProfile';
 import OrganisationProfile from './views/Organisations/OrganisationProfile';
 import OrganisationHome from './views/Organisations/OrganisationHome';
 import UpdateOrganisationProfile from './views/Organisations/UpdateOrganisationProfile';
+import OrganisationOverview from './views/OrganisationOverview';
 
 import Forum from './views/Forum';
 import SinglePost from './views/SinglePost';
@@ -125,8 +126,8 @@ class App extends Component {
               />
 
               <ProtectedRoute
-                path="/organisation"
-                component={OrganisationHome}
+                path="/organisations"
+                component={OrganisationOverview}
                 exact
                 authorized={user}
                 redirect="/sign-up"

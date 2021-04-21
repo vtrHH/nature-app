@@ -13,19 +13,19 @@ const routeGuard = require('./../middleware/route-guard');
 
 const router = new express.Router();
 
-router.get('/:id', async (req, res, next) => {
+router.get('/list', async (req, res, next) => {
   try {
-    const organisation = await Organisation.findById(req.params.id);
-    res.json({ organisation });
+    const organisations = await Organisation.find();
+    res.json({ organisations });
   } catch (error) {
     next(error);
   }
 });
 
-router.get('/list', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
-    const organisations = await Organisation.find().limit(5);
-    res.json({ organisations });
+    const organisation = await Organisation.findById(req.params.id);
+    res.json({ organisation });
   } catch (error) {
     next(error);
   }
