@@ -28,11 +28,11 @@ export class SearchBar extends Component {
    
     return (
       <div className="searchbar">
-       <label htmlFor="q">Search {content}</label>
+       {content !== "" ? (<label htmlFor="q">Search {content}</label>) : (<label htmlFor="q"></label>) }
         <input
           name="q"
           value={this.state.searchTerm}
-          placeholder={`Search for ${content}`}
+          placeholder={`Search ${content}`}
           onChange={this.handleInputChange}        
         />
         
