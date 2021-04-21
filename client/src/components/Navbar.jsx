@@ -12,12 +12,12 @@ const Navbar = ({ user, onSignOut }) => {
       <Link to="/sign-up">Sign Up</Link>   */}
 
       <div>
-        <Link to="/forum">Forum</Link>
         {(user && (
           <>
             {user.role === 'individual' && (
               <Link to="/observation/create">Create Observation</Link>
             )}
+            <Link to="/forum">Forum</Link>
             {/*             {user.profilePicture && (
               <img src={user.profilePicture} alt={user.username} />
             )} */}

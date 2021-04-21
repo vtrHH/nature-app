@@ -117,6 +117,13 @@ class CreatePost extends Component {
             onChange={this.handleFileInputChange}
           />
 
+          <label>Location</label>
+          <p>
+            {' '}
+            To add your location details, please first let us localize you by
+            clicking the button below and then choose your location with a click
+            on the map
+          </p>
           <Geolocation
             whenLocationSearchtriggered={this.updateLocationOfState}
           />

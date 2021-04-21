@@ -67,8 +67,7 @@ class Search extends Component {
   async componentDidMount() {}
 
   componentDidUpdate(previousProps, previousState) {
-    if (this.state.searchQuery === "") {
-
+    if (this.state.searchQuery === '') {
     } else if (previousState.searchQuery !== this.state.searchQuery) {
       this.searchApi();
     }
@@ -113,16 +112,16 @@ class Search extends Component {
           onSearch={(result) => this.handleResult(result)}
         /> */}
 
-        {this.state.searchQuery === "" && (
+        {this.state.searchQuery === '' ? (
           <></>
-        ) || (
+        ) : (
           <SearchList
             content={this.props.content}
             results={results}
             onSearch={(result) => this.handleResult(result)}
           />
         )}
-        
+
         {selected && (
           <SelectedItem
             result={selected}

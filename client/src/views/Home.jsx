@@ -90,11 +90,16 @@ class Home extends Component {
           {(user && <h2>Hello {user.username}</h2>) || <h2>Welcome!</h2>}
         </header>
         <div className="container--home">
-                   <Search
+          <Search
             content={'taxa'}
             onParent={(result) => this.handleResult(result)}
           />
           <BirdList birds={birds} />
+          <h2>Find observations close to you</h2>
+          <p>
+            You can either zoom within the map or just let us localize you by
+            clicking the button below
+          </p>
           <HomeMapView observations={this.state.observations} />
           <CarouselPosts
             show={2}

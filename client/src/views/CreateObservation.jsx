@@ -28,7 +28,7 @@ class CreateObservation extends Component {
       coordinates: [this.state.lat, this.state.lng]
     }; */
 
-    const { date, APIid,description, pictures } = this.state;
+    const { date, APIid, description, pictures } = this.state;
 
     const preferred_common_name = this.state.preferred_common_name;
     const data = {
@@ -105,6 +105,7 @@ class CreateObservation extends Component {
         <header>
           <h1>Add your Observation</h1>
         </header>
+        <label>Name</label>
         <Search
           content={'taxa'}
           onParent={(result) => this.handleResult(result)}
@@ -130,7 +131,6 @@ class CreateObservation extends Component {
             required
           />
 
-          <label htmlFor="input-bird">Name</label>
           <input
             type="hidden"
             id="input-APIid"
@@ -150,6 +150,13 @@ class CreateObservation extends Component {
             required
           />
 
+          <label>Location of your observation</label>
+          <p>
+            {' '}
+            To add your location details, please first let us localize you by
+            clicking the button below and then choose your location with a click
+            on the map
+          </p>
           <Geolocation
             whenLocationSearchtriggered={this.updateLocationOfState}
           />

@@ -74,14 +74,18 @@ class App extends Component {
               redirect="/"
               exact
             />
-            <Route
+            <ProtectedRoute
               path="/observation/create"
               component={CreateObservation}
+              authorized={user}
+              redirect="/sign-up"
               exact
             />
-            <Route
+            <ProtectedRoute
               path="/observation/:id"
               render={(props) => <SingleObservation {...props} user={user} />}
+              authorized={user}
+              redirect="/sign-up"
               exact
             />
             <Route
@@ -89,16 +93,40 @@ class App extends Component {
               render={(props) => <SingleBird {...props} user={user} />}
               exact
             />
-            <Route path="/individual/:id" component={IndividualProfile} exact />
+            <ProtectedRoute
+              path="/individual/:id"
+              component={IndividualProfile}
+              exact
+              authorized={user}
+              redirect="/sign-up"
+            />
             <Route
               path="/organisation/:id"
               component={OrganisationProfile}
               exact
             />
 
-            <Route path="/forum" component={Forum} exact />
-            <Route path="/forum/newpost" component={CreatePost} exact />
-            <Route path="/forum/:id" component={SinglePost} exact />
+            <ProtectedRoute
+              path="/forum"
+              component={Forum}
+              exact
+              authorized={user}
+              redirect="/sign-up"
+            />
+            <ProtectedRoute
+              path="/forum/newpost"
+              component={CreatePost}
+              exact
+              authorized={user}
+              redirect="/sign-up"
+            />
+            <ProtectedRoute
+              path="/forum/:id"
+              component={SinglePost}
+              exact
+              authorized={user}
+              redirect="/sign-up"
+            />
           </Switch>
         </BrowserRouter>
       </HelmetProvider>
