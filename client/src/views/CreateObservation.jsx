@@ -48,7 +48,7 @@ class CreateObservation extends Component {
     body.append('APIid', data.APIid);
     body.append('lng', data.lng);
     body.append('lat', data.lat);
-    body.append('', data.description);
+    body.append('description', data.description);
     body.append('preferred_common_name', data.preferred_common_name);
 
     for (let picture of data.pictures) {
