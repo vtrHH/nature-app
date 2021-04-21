@@ -3,7 +3,6 @@ import { Component } from 'react';
 import { listOfObservations } from '../services/observation';
 
 import BirdList from '../components/BirdList';
-// import SearchBar from '../components/SearchBar';
 import Search from '../components/Search/Search';
 import HomeMapView from '../components/Map/HomeMapView';
 import CarouselObservations from '../components/Carousel/CarouselObservations';

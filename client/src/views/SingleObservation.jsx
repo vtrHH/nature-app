@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ObservationMapView from '../components/Map/ObservationMapView';
+import Slider from '../components/Slider/Slider'
+
 import { loadObservation } from '../services/observation';
 
 class SingleObservation extends Component {
@@ -15,51 +17,21 @@ class SingleObservation extends Component {
   async componentDidMount() {
     const observation = await loadObservation(this.props.match.params.id);
     this.setState({ observation: observation });
-
-    //  console.log('-------------componentDidMount()-------------------');
-    //  console.log(observation);
-    //  console.log(observation.location.coordinates[0]);
-  }
-
-  componentDidUpdate(previousProps, previousState) {
-    //  console.log('-------------componentDidUpdate-------------------');
-    //  console.log(previousProps, this.props);
-    //  console.log(previousState, this.state);
-  }
-
-  componentWillUnmount() {
-    //  console.log('---------------componentWillUnmount---------------');
   }
 
   render() {
-    //  console.log('-------------render-------------');
     const observation = this.state.observation;
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+    
     return (
       
       <div>
         {observation && (
-          <>
-
+          <>     
+            
             <h1>{observation.preferred_common_name}</h1>
-
-          <div>
-              {(observation.pictures && (
-                <img
-                  className="single-bird__img"
-                  src={observation.pictures[0]}
-                  alt={observation.preferred_common_name}
-                />
-              )) || <img src="" alt="" />}
-            </div>
-            <h1>Bird: {observation.bird}</h1>
-            <h1>Preferred_common_name: {observation.preferred_common_name}</h1>
-            <h1>APIid: {observation.APIid}</h1>
-
             <br></br>
-            {observation.pictures.map((picture) => (
-              <img className="single-bird__img" key = {picture} src={picture} alt=""/>
-            ))}
+            <Slider pictures={observation.pictures}/>
             <br></br>
             <span>Obervation date: { new Date(observation.date).toLocaleDateString('en-GB', options)}</span>
             <br></br>
