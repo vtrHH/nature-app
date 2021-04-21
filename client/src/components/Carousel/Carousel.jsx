@@ -1,7 +1,7 @@
  import React, { Component } from 'react'
- import {searchApi} from '../../services/i-nature-api'
+ //import {searchApi} from '../../services/i-nature-api'
  import {listOfObservations} from '../../services/observation'
- import {listOfPosts} from '../../services/forum'
+ //import {listOfPosts} from '../../services/forum'
  
  import './Carousel.scss'
 
@@ -23,7 +23,7 @@
       }
 
       getObservations = async () => {
-        const results = await listOfObservations();;
+        const results = await listOfObservations();
                 this.setState({
                   results: results
                 });
