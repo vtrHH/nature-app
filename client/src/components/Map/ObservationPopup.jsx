@@ -22,7 +22,7 @@ const ObservationPopup = (props) => {
           <b>Observed by:</b>
         </span>
         {'  '}
-        {observation.creator}
+        {observation.creator.username}
         <br />
         <a href={`/observation/${observation._id}`}>Get more details here...</a>
       </div>
