@@ -132,7 +132,7 @@ router.get('/user/:userId', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const observation = await Observation.findById(req.params.id);
+    const observation = await Observation.findById(req.params.id).populate('creator');
     res.json({ observation });
   } catch (error) {
     next(error);
