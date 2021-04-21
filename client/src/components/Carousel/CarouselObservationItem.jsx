@@ -18,26 +18,29 @@ const CarouselItemObservation = ({ result, show }) => {
         <div className="card__carousel-list">
           <div className="carousel-item__img">
             {/* {result.taxon.default_photo ? <img src={result.taxon.default_photo.square_url} alt={result.name}/> : <img src="https://polartowels.weebly.com/uploads/1/0/0/3/10036170/s233308597275768966_p5_i2_w632.jpeg" alt="" className="placeholder-img"/>}     */}
-            <img
+            {/* <img
               src="https://source.unsplash.com/1600x900/?bird"
               alt="nice bird"
-            />
+            /> */}
+            {!result.pictures[0] ? <img src="https://source.unsplash.com/1600x900/?post" alt={result.title} /> : <img src= {result.pictures[0]} alt={result.title} />}
           </div>
 
           <div className="carousel-item__details">
-            <h3>Name: {result.preferred_common_name}</h3>
-            <h3>APIid: {result.APIid}</h3>
-            <h3>Bird: {result.bird}</h3>
+            <h3>{result.preferred_common_name}</h3>
             {/* <h5>{result.taxon.name}</h5> */}
             <small>
-
-              Date: { new Date(result.addedDate).toLocaleDateString('en-GB')} <br />
+              { new Date(result.addedDate).toLocaleDateString('en-GB')} <br />
               {/* <span>Obervation date: { new Date(result.addedDate).toLocaleDateString('en-GB', options)}</span> */}
-              User: {result.creator.username} <br /> Location: <br /> Lat:
 
-              {result.location.coordinates[0]} <br /> Lng:
-              {result.location.coordinates[1]}
             </small>
+            <div className="carousel_item__user">
+            {result.creator.profilePicture ? <img src={result.creator.profilePicture} alt={result.creator.username}/> : <img src="https://source.unsplash.com/300x300/?smiling,woman" alt={result.creator.username}/>}
+             <strong>
+             {result.creator.username}
+
+             </strong> 
+
+            </div>
           </div>
         </div>
       </div>

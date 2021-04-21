@@ -101,11 +101,13 @@ class Home extends Component {
             clicking the button below
           </p>
           <HomeMapView observations={this.state.observations} />
+          <h2 style={{ fontSize: '2em', marginBottom: '0px' }}>Who´s that bird?</h2>
           <CarouselPosts
             show={2}
             content={'posts'}
             options={carouselPostsOptions}
           />
+          <h2 style={{ fontSize: '2em', marginBottom: '0px' }}>Latest Obsrvations</h2>
           <CarouselObservations
             show={2}
             content={'observations'}
