@@ -55,117 +55,121 @@ class App extends Component {
             <title>NatureApp</title>
           </Helmet>
           <Navbar user={user} onSignOut={this.handleSignOut} />
-          <Switch>
-            {user && user.role === 'individual' ? (
+          {this.state.loaded && (
+            <Switch>
+              {user && user.role === 'individual' ? (
+                <Route
+                  path="/"
+                  render={(props) => <Home {...props} user={user} />}
+                  exact
+                />
+              ) : user && user.role === 'organisation' ? (
+                <Route
+                  path="/"
+                  render={(props) => (
+                    <OrganisationHome {...props} user={user} />
+                  )}
+                  exact
+                />
+              ) : (
+                <Route path="/" component={LandingPage} exact />
+              )}
               <Route
                 path="/"
                 render={(props) => <Home {...props} user={user} />}
                 exact
               />
-            ) : user && user.role === 'organisation' ? (
-              <Route
-                path="/"
-                render={(props) => <OrganisationHome {...props} user={user} />}
+              <ProtectedRoute
+                path="/sign-in"
+                render={(props) => (
+                  <SignIn {...props} onUserChange={this.handleUserChange} />
+                )}
+                authorized={!user}
+                redirect="/"
                 exact
               />
-            ) : (
-              <Route path="/" component={LandingPage} exact />
-            )}
-            <Route
-              path="/"
-              render={(props) => <Home {...props} user={user} />}
-              exact
-            />
-            <ProtectedRoute
-              path="/sign-in"
-              render={(props) => (
-                <SignIn {...props} onUserChange={this.handleUserChange} />
-              )}
-              authorized={!user}
-              redirect="/"
-              exact
-            />
-            <ProtectedRoute
-              path="/sign-up"
-              render={(props) => (
-                <SignUp {...props} onUserChange={this.handleUserChange} />
-              )}
-              authorized={!user}
-              redirect="/"
-              exact
-            />
-            <ProtectedRoute
-              path="/observation/create"
-              component={CreateObservation}
-              authorized={user}
-              redirect="/sign-up"
-              exact
-            />
-            <ProtectedRoute
-              path="/observation/:id"
-              render={(props) => <SingleObservation {...props} user={user} />}
-              authorized={user}
-              redirect="/sign-up"
-              exact
-            />
-            <Route
-              path="/bird/:id"
-              render={(props) => <SingleBird {...props} user={user} />}
-              exact
-            />
-            <ProtectedRoute
-              path="/individual/:id"
-              component={IndividualProfile}
-              exact
-              authorized={user}
-              redirect="/sign-up"
-            />
+              <ProtectedRoute
+                path="/sign-up"
+                render={(props) => (
+                  <SignUp {...props} onUserChange={this.handleUserChange} />
+                )}
+                authorized={!user}
+                redirect="/"
+                exact
+              />
+              <ProtectedRoute
+                path="/observation/create"
+                component={CreateObservation}
+                authorized={user}
+                redirect="/sign-up"
+                exact
+              />
+              <ProtectedRoute
+                path="/observation/:id"
+                render={(props) => <SingleObservation {...props} user={user} />}
+                authorized={user}
+                redirect="/sign-up"
+                exact
+              />
+              <Route
+                path="/bird/:id"
+                render={(props) => <SingleBird {...props} user={user} />}
+                exact
+              />
+              <ProtectedRoute
+                path="/individual/:id"
+                component={IndividualProfile}
+                exact
+                authorized={user}
+                redirect="/sign-up"
+              />
 
-            <ProtectedRoute
-              path="/organisation"
-              component={OrganisationHome}
-              exact
-              authorized={user}
-              redirect="/sign-up"
-            />
-            <Route
-              path="/organisation/:id"
-              component={OrganisationProfile}
-              exact
-            />
+              <ProtectedRoute
+                path="/organisation"
+                component={OrganisationHome}
+                exact
+                authorized={user}
+                redirect="/sign-up"
+              />
+              <Route
+                path="/organisation/:id"
+                component={OrganisationProfile}
+                exact
+              />
 
-            <ProtectedRoute
-              path="/organisation/:id/edit"
-              render={(props) => (
-                <UpdateOrganisationProfile {...props} user={user} />
-              )}
-              authorized={user}
-              redirect="/sign-up"
-              exact
-            />
+              <ProtectedRoute
+                path="/organisation/:id/edit"
+                render={(props) => (
+                  <UpdateOrganisationProfile {...props} user={user} />
+                )}
+                authorized={user}
+                redirect="/sign-up"
+                exact
+              />
 
-            <ProtectedRoute
-              path="/forum"
-              component={Forum}
-              exact
-              authorized={user}
-              redirect="/sign-up"
-            />
-            <ProtectedRoute
-              path="/forum/newpost"
-              component={CreatePost}
-              exact
-              authorized={user}
-              redirect="/sign-up"
-            />
-            <ProtectedRoute
-              path="/forum/:id"
-              component={SinglePost}
-              exact
-              authorized={user}
-              redirect="/sign-up"
-            />
-          </Switch>
+              <ProtectedRoute
+                path="/forum"
+                component={Forum}
+                exact
+                authorized={user}
+                redirect="/sign-up"
+              />
+              <ProtectedRoute
+                path="/forum/newpost"
+                component={CreatePost}
+                exact
+                authorized={user}
+                redirect="/sign-up"
+              />
+              <ProtectedRoute
+                path="/forum/:id"
+                component={SinglePost}
+                exact
+                authorized={user}
+                redirect="/sign-up"
+              />
+            </Switch>
+          )}
         </BrowserRouter>
       </HelmetProvider>
     );
