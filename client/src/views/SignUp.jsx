@@ -3,28 +3,28 @@ import { signUp } from './../services/authentication';
 
 class SignUp extends Component {
   state = {
-    username: '',   
+    username: '',
     email: '',
     password: '',
     role: '',
-    profilePicture: '',
+    profilePicture: ''
   };
 
   handleFormSubmission = async (event) => {
     event.preventDefault();
     const { username, email, password, role, profilePicture } = this.state;
-    const body = new FormData()
+    const body = new FormData();
     body.append('username', username);
     body.append('email', email);
     body.append('password', password);
     body.append('role', role);
     body.append('profilePicture', profilePicture);
-    console.log(profilePicture)
+    console.log(profilePicture);
     const user = await signUp(body);
     this.props.onUserChange(user);
   };
 
-  handleFileInputChange = event => {
+  handleFileInputChange = (event) => {
     const { name, files } = event.target;
     const file = files[0];
     this.setState({
@@ -102,7 +102,7 @@ class SignUp extends Component {
               Individual or organisation?
             </option>
             <option value="individual">Individual</option>
-            <option value="shelter">Organisation</option>
+            <option value="organisation">Organisation</option>
           </select>
 
           <label htmlFor="password-input">Password</label>
@@ -123,7 +123,7 @@ class SignUp extends Component {
             name="profilePicture"
             onChange={this.handleFileInputChange}
           />
-          
+
           <button>Sign Up</button>
         </form>
       </main>

@@ -14,8 +14,8 @@ router.post(
   '/sign-up',
   fileUpload.single('profilePicture'),
   (req, res, next) => {
-    console.log(req.body)
-    
+    console.log(req.body);
+
     let profilePicture = req.file.path;
     const { username, email, password, role } = req.body;
     bcryptjs

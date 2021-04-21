@@ -90,28 +90,19 @@ class Home extends Component {
           {(user && <h2>Hello {user.username}</h2>) || <h2>Welcome!</h2>}
         </header>
         <div className="container--home">
-          <Search
-            content={'observations'}
-            onParent={(result) => this.handleResult(result)}
-          />
-          <Search
+                   <Search
             content={'taxa'}
             onParent={(result) => this.handleResult(result)}
           />
-          {/* <SearchBar
-            onSearchBar={this.updateSearch}
-            onButtonClicked={this.launchSearch}
-          /> */}
           <BirdList birds={birds} />
           <HomeMapView observations={this.state.observations} />
-          {/* <Carousel show={5} content= {"taxa"} options={carouselSpeciesOptions}/> */}
           <CarouselPosts
-            show={3}
+            show={2}
             content={'posts'}
             options={carouselPostsOptions}
           />
           <CarouselObservations
-            show={4}
+            show={2}
             content={'observations'}
             options={carouselObservationsOptions}
           />

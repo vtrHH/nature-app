@@ -18,6 +18,7 @@ router.get('/list', async (req, res, next) => {
     const observations = await Observation.find()
       .sort({ creationDate: -1 })
       .populate('creator');
+
     res.json({ observations });
   } catch (error) {
     next(error);

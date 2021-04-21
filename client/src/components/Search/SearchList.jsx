@@ -33,32 +33,45 @@ import SearchItemObservation from './SearchItemObservation';
     const content= this.props.content;
     console.log(content)
     const results = this.props.results;
+    console.log(results);
+    console.log(Array.isArray(results));
+    console.log(!!results);
+    if(results) {          
+      console.log(results.length);
+    }
     return (
-    <div className="search__list">
-      {results.map(result => (
-        <Link key={result.id} to={`/bird/${result.id}`}>
-          
-        {content === "taxa" && (
-          <>
-          <SearchItemTaxa content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
-          </>
-        )}
+    <>
+    { results && results.length === 0 ? (<div>Sorry, no bird found...</div>) : results ? (
+      
+      <div className="search__list">
+        
+        {results.map(result => (
+          <Link key={result.id} to={`/bird/${result.id}`}>
+            
+          {content === "taxa" && (
+            <>
+            <SearchItemTaxa content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
+            </>
+          )}
 
-        {content === "observations" && (
-          <>
-          <SearchItemObservation content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
-          </>
-        )}
+          {content === "observations" && (
+            <>
+            <SearchItemObservation content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
+            </>
+          )}
 
-        {content === "" && (
-          <>
-          <SearchItem content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
-          </>
-        )}
+          {content === "" && (
+            <>
+            <SearchItem content={this.props.content}result={result} selected={this.state.selected} onList={() => this.handleResult(result)}/>
+            </>
+          )}
 
-        </Link>
-      ))}
-    </div>
+          </Link>
+        ))}
+      </div>
+      ) : (<div></div>)
+    }
+    </>
   );
 };
   }
