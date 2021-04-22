@@ -8,7 +8,7 @@ const express = require('express');
 const Organisation = require('./../models/organisation');
 
 const routeGuard = require('./../middleware/route-guard');
-//const fileUpload = require('./../middleware/file-upload');
+const fileUpload = require('./../middleware/file-upload');
 //const sendEmail = require('./../utilities/send-email');
 
 const router = new express.Router();
@@ -31,34 +31,27 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.patch('/:id/edit', routeGuard, async (req, res, next) => {
-  const { organisationName, address, phoneNumber } = req.body;
+router.patch('/:id', routeGuard, async (req, res, next) => {
+  const {
+    organisationName,
+    phoneNumber,
+    street,
+    houseNumber,
+    city,
+    postcode,
+    birds
+  } = req.body;
   try {
-    //add picture
     const organisation = await Organisation.findByIdAndUpdate(
       req.params.id,
       {
         $set: {
           organisationName,
-          address,
-          phoneNumber
-        }
-      },
-      { new: true }
-    );
-    res.json({ organisation });
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.patch('/birds', routeGuard, async (req, res, next) => {
-  const { birds } = req.body;
-  try {
-    const organisation = await Organisation.findByIdAndUpdate(
-      req.user._id,
-      {
-        $set: {
+          phoneNumber,
+          street,
+          houseNumber,
+          city,
+          postcode,
           birds
         }
       },
@@ -69,5 +62,28 @@ router.patch('/birds', routeGuard, async (req, res, next) => {
     next(error);
   }
 });
+
+router.patch(
+  '/:id/pictures',
+  routeGuard,
+  fileUpload.array('pictures', 10),
+  async (req, res, next) => {
+    const pictures = req.files.map((file) => file.path);
+    try {
+      const organisation = await Organisation.findByIdAndUpdate(
+        req.user._id,
+        {
+          $set: {
+            pictures
+          }
+        },
+        { new: true }
+      );
+      res.json({ organisation });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 module.exports = router;
