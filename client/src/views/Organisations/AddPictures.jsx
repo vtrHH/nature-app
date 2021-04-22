@@ -11,6 +11,10 @@ class AddPictures extends Component {
     };
   }
 
+  componentDidMount() {
+    console.log(this.state.organisation.pictures);
+  }
+
   handleFormSubmission = async (event) => {
     event.preventDefault();
     const pictures = this.state.pictures;
@@ -18,14 +22,20 @@ class AddPictures extends Component {
     for (let picture of pictures) {
       body.append('pictures', picture);
     }
+    console.log(body);
+    console.log(pictures);
     await editPicturesInOrganisation(body, this.state.organisation._id);
     this.props.history.push(`/organisation/${this.state.organisation._id}`);
   };
 
   handleFileInputChange = (event) => {
     const { name, files } = event.target;
+    console.log(files);
     const arrayOfFiles = [];
-    for (const file of files) arrayOfFiles.push(file);
+    for (const file of files) {
+      console.log(file);
+      arrayOfFiles.push(file);
+    }
     this.setState({
       [name]: arrayOfFiles
     });
