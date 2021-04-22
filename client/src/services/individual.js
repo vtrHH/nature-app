@@ -9,7 +9,7 @@ export const loadIndividual = async(id) => {
 };
 
 //edit the information of an individual
-export const editIndividual = async(id, data) => {
+export const editIndividual = async(data, id) => {
     const response = await api.patch(`/individual/${id}/edit`, data);
     return response.data.individual;
 };
