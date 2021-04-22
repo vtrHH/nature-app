@@ -16,12 +16,6 @@ class UpdateIndividualProfile extends Component {
 
   handleFormSubmission = async (event) => {
     event.preventDefault();
-    const data = {
-      firstName: this.state.phoneNumber,
-      lastName: this.state.organisationName,
-      aboutMe: this.state.street,
-      profilePicture: this.state.profilePicture
-    };
     const { firstName, lastName, aboutMe, profilePicture } = this.state;
     const body = new FormData();
     body.append('firstName', firstName);
