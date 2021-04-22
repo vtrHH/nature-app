@@ -22,6 +22,7 @@ class CarouselList extends Component {
   render () {
     const show = this.props.show;
     const results = this.props.results;
+    const individual = this.props.individual;
     console.log(results)
     return (
 
@@ -37,7 +38,7 @@ class CarouselList extends Component {
                 <>
                 {results.map((result, index) => (
                     <Link key={result._id} to={`/forum/${result._id}`}>
-                    <CarouselPostItem key={result._id} result={result} show={show} />
+                    <CarouselPostItem key={result._id} result={result} show={show} user={result.creator}/>
                     </Link>
                 ))}                          
                 </>
@@ -46,12 +47,13 @@ class CarouselList extends Component {
                 <>
                 {results.map((result, index) => (
                     //<Link key={result.id} to={`/observations/${result._id}`}>
-                    <Link key={result._id} to={`/observation/${result._id}`}>
-                    <CarouselObservationItem key={result._id} result={result} show={show} />
-                    </Link>
+                    
+                    <CarouselObservationItem key={result._id} result={result} show={show} individual={individual} user={result.creator}/>
+                    
                 ))}                          
                 </>
               )}
+              
               </div>
             </div>
             <button className="right-arrow" onClick={() => this.navigate(1)}>

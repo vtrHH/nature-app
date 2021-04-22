@@ -5,21 +5,22 @@ import './Carousel.scss';
 
 import CarouselList from './CarouselList';
 
-class CarouselPosts extends Component {
+class Carousel extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       results: null,
-      selected: null
+      user: this.props.user,
+      content : this.props.content
     };
   }
 
   async componentDidMount() {
-    this.getPosts();
+    this.getPostsByUserId();
   }
 
-  getPosts = async () => {
+  getPostsByUserId = async () => {
     const results = await listOfPosts();
     console.log(results);
     this.setState({
@@ -30,13 +31,13 @@ class CarouselPosts extends Component {
   render() {
     const show = this.props.show;
     const content = this.props.content;
+    const user = this.props.user;
     const results = this.state.results;
     return (
       <>       
-
         {results && (
           <div className="carousel-container">
-            <CarouselList content={content} results={results} show={show} />
+            <CarouselList content={content} results={results} show={show} user={user}/>
           </div>
         )}
       </>
@@ -44,4 +45,4 @@ class CarouselPosts extends Component {
   }
 }
 
-export default CarouselPosts;
+export default Carousel;
