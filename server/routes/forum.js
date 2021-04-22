@@ -66,7 +66,7 @@ router.get('/user/:userId', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).populate('creator');
     res.json({ post });
   } catch (error) {
     next(error);
