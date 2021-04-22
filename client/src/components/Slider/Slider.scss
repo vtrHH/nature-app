@@ -6,10 +6,10 @@
     }
     
     .slider-pictures {
-        display: flex;
+        // display: flex;
         width: 100%;
         position: relative;
-        height: 25em;
+        height: 20em;
         width: 100%;
         & img {
             object-fit: cover;
@@ -22,19 +22,25 @@
     .right-arrow {
         position: absolute;
         z-index: 100;
-        top: 25em;
-        transform: translateY(-50%);
-        width: 48px;
-        height: 48px;
-        border-radius: 24px;
+        width: 3em;
+        height: 3em;
+        top: 45%;
+        // top: 50%;
+        // transform: translateY(-50%);
+        // width: 48px;
+        // height: 48px;
+        border-radius: 50%;
         background-color: white;
         border: 1px solid #ddd;
+        padding: 0px;
+        margin: 0px;
+        opacity: 0.5;
     }
     
     .left-arrow {
-        left: 24px;
+        left: 1em;
     }
     
     .right-arrow {
-        right: 24px;
+        right: 1em;
     }

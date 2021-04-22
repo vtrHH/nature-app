@@ -112,14 +112,14 @@ class Search extends Component {
           onSearch={(result) => this.handleResult(result)}
         /> */}
 
-        {this.state.searchQuery === '' ? (
-          <></>
-        ) : (
+        {this.state.searchQuery !== '' && !selected ? (
           <SearchList
             content={this.props.content}
             results={results}
             onSearch={(result) => this.handleResult(result)}
           />
+        ) : (
+          <></>
         )}
 
         {selected && (
