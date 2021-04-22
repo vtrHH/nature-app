@@ -57,31 +57,31 @@ class Home extends Component {
       photos: true
     }; */
 
-    const carouselObservationsOptions = {
-      route: 'observations',
-      q: null,
-      is_active: true,
-      taxon_id: 3,
-      rank: '',
-      // rank: 'species%2Csubspecies',
-      per_page: 20,
-      order: 'desc',
-      order_by: 'created_at',
-      photos: true
-    };
+    // const carouselObservationsOptions = {
+    //   route: 'observations',
+    //   q: null,
+    //   is_active: true,
+    //   taxon_id: 3,
+    //   rank: '',
+    //   // rank: 'species%2Csubspecies',
+    //   per_page: 20,
+    //   order: 'desc',
+    //   order_by: 'created_at',
+    //   photos: true
+    // };
 
-    const carouselPostsOptions = {
-      route: 'forum',
-      q: null,
-      is_active: true,
-      taxon_id: 3,
-      rank: '',
-      // rank: 'species%2Csubspecies',
-      per_page: 20,
-      order: 'desc',
-      order_by: 'created_at',
-      photos: true
-    };
+    // const carouselPostsOptions = {
+    //   route: 'forum',
+    //   q: null,
+    //   is_active: true,
+    //   taxon_id: 3,
+    //   rank: '',
+    //   // rank: 'species%2Csubspecies',
+    //   per_page: 20,
+    //   order: 'desc',
+    //   order_by: 'created_at',
+    //   photos: true
+    // };
 
     return (
       <main>
