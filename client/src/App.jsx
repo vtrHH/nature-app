@@ -5,7 +5,9 @@ import { signOut, verify } from './services/authentication';
 
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import ProtectedRoute from './components/ProtectedRoute';
-import Navbar from './components/Navbar';
+import Header from './components/Header';
+
+import {Container} from 'react-bootstrap'
 
 import Home from './views/Home';
 import LandingPage from './views/LandingPage';
@@ -50,12 +52,17 @@ class App extends Component {
   render() {
     const user = this.state.user;
     return (
+      
       <HelmetProvider>
         <BrowserRouter>
           <Helmet>
             <title>NatureApp</title>
           </Helmet>
-          <Navbar user={user} onSignOut={this.handleSignOut} />
+          <Container fluid>
+          <Header user={user} onSignOut={this.handleSignOut} />
+          </Container>
+          <Container>
+
           {this.state.loaded && (
             <Switch>
               {user && user.role === 'individual' ? (
@@ -171,6 +178,7 @@ class App extends Component {
               />
             </Switch>
           )}
+      </Container>
         </BrowserRouter>
       </HelmetProvider>
     );
