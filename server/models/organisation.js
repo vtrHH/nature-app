@@ -31,9 +31,14 @@ const organisationSchema = new mongoose.Schema({
   birds: {
     type: [String]
   },
+
   pictures: {
     type: [String]
-  }
+  }, 
+     
+  description: {
+    type: String
+  },
 });
 
 const Organisation = User.discriminator('organisation', organisationSchema);
