@@ -20,16 +20,18 @@ class Slider extends Component {
   render () {
     
     const { pictures } = this.props;
-    console.log(pictures)
+    console.log(pictures.length)
     console.log(this.state.index)
     return (
 
       <>
+              <div className={"slider-pictures"}>
+        {pictures.length > 1 && (
           <button className="left-arrow" onClick={() => this.navigate(-1)}>
               &lt;
           </button>
+        )}
 
-              <div className={"slider-pictures"}>
               
                 {pictures.map((url, index) => (
                    this.state.index === index && (<img key={url} src={url} alt={url}></img>) 
@@ -38,11 +40,14 @@ class Slider extends Component {
               {/* This option returns a console warning: Redundant alt attribute.  
               <img src={pictures[this.state.index]} alt={this.state.index}/> */}
             
-              </div>
 
+        {pictures.length > 1 && (
+          
           <button className="right-arrow" onClick={() => this.navigate(1)}>
             &gt;
           </button>
+        )}
+              </div>
         </>   
      
     );
