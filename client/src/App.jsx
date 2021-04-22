@@ -20,6 +20,8 @@ import OrganisationProfile from './views/Organisations/OrganisationProfile';
 import OrganisationHome from './views/Organisations/OrganisationHome';
 import UpdateOrganisationProfile from './views/Organisations/UpdateOrganisationProfile';
 import OrganisationOverview from './views/OrganisationOverview';
+import AddBirds from './views/Organisations/AddBirds';
+import AddPictures from './views/Organisations/AddPictures';
 
 import Forum from './views/Forum';
 import SinglePost from './views/SinglePost';
@@ -143,7 +145,23 @@ class App extends Component {
                 render={(props) => (
                   <UpdateOrganisationProfile {...props} user={user} />
                 )}
-                authorized={user}
+                authorized={user && user.role === 'organisation'}
+                redirect="/sign-up"
+                exact
+              />
+
+              <ProtectedRoute
+                path="/organisation/:id/add-birds"
+                render={(props) => <AddBirds {...props} user={user} />}
+                authorized={user && user.role === 'organisation'}
+                redirect="/sign-up"
+                exact
+              />
+
+              <ProtectedRoute
+                path="/organisation/:id/add-pictures"
+                render={(props) => <AddPictures {...props} user={user} />}
+                authorized={user && user.role === 'organisation'}
                 redirect="/sign-up"
                 exact
               />
