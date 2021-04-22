@@ -22,7 +22,7 @@ class Carousel extends Component {
 
   getPostsByUserId = async () => {
     const results = await listOfPosts();
-    console.log(results);
+    // console.log(results);
     this.setState({
       results: results
     });

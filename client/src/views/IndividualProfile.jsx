@@ -10,10 +10,10 @@ class IndividualProfile extends Component {
   };
 
   async componentDidMount() {
-    console.log(`Params ID is ${this.state.user}`)
+    // console.log(`Params ID is ${this.state.user}`)
     const individual = await loadIndividual(this.state.user);
     console.log(`Individual is ${individual}`)
-    this.setState({ individual });
+    // this.setState({ individual });
   }
 
   render() {

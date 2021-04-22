@@ -19,8 +19,7 @@ class Search extends Component {
     if (this.props.content === 'taxa') {
       this.searchApi = async () => {
         const query = this.state.searchQuery;
-        const results = await searchSpecie(query);
-        console.log(`searchApi on Parent search= ${query}`);
+        const results = await searchSpecie(query);        
         this.setState({
           results: results
         });
@@ -32,8 +31,7 @@ class Search extends Component {
       case 'taxa':
         this.searchApi = async () => {
           const query = this.state.searchQuery;
-          const results = await searchSpecie(query);
-          console.log(`searchApi on Parent search= ${query}`);
+          const results = await searchSpecie(query);          
           this.setState({
             results: results
           });
@@ -42,21 +40,16 @@ class Search extends Component {
       case 'observations':
         this.searchApi = async () => {
           const query = this.state.searchQuery;
-          const results = await searchObservations(query);
-          console.log(`searchApi on Parent search= ${query}`);
+          const results = await searchObservations(query);          
           this.setState({
             results: results
           });
         };
         break;
-      case 'user':
-        console.log('Search for users.');
-        break;
       default:
         this.searchApi = async () => {
           const query = this.state.searchQuery;
           const results = await searchSpecie(query);
-          console.log(`searchApi on Parent search= ${query}`);
           this.setState({
             results: results
           });
@@ -73,10 +66,6 @@ class Search extends Component {
     }
   }
 
-  componentWillUnmount() {
-    console.log('---------------componentWillUnmount---------------');
-  }
-
   handleQueryChange = (query) => {
     this.setState({
       searchQuery: query
@@ -84,7 +73,7 @@ class Search extends Component {
   };
 
   handleResult = (result) => {
-    console.log(`Search------------${result.id}`);
+    // console.log(`Search------------${result.id}`);
     this.setState({ selected: result });
     this.props.onParent(result);
   };
