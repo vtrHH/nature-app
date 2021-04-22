@@ -8,12 +8,26 @@ const organisationSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
-  address: {
+  street: {
+    type: String
+  },  
+  
+  houseNumber: {
     type: String
   },
+
+  city: {
+    type: String
+  },
+
+  postcode: {
+    type: String
+  },
+
   phoneNumber: {
     type: String
   },
+  
   birds: {
     type: [String]
   },

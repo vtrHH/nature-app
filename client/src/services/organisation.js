@@ -13,14 +13,13 @@ export const listOfOrganisation = async () => {
 };
 
 //edit the information of an organisation
-export const editOrganisation = async (id, data) => {
+export const editOrganisation = async (data, id) => {
   console.log(data);
   const response = await api.patch(`/organisation/${id}`, data);
-  return response.data;
+  return response.data.organisation;
 };
 
-//edit the birds of an organisation
-export const editBirdsInOrganisation = async (data) => {
-  const response = await api.patch(`/organisation/birds`, data);
+export const editPicturesInOrganisation = async (data, id) => {
+  const response = await api.patch(`/organisation/${id}/pictures`, data);
   return response.data.organisation;
 };
