@@ -9,7 +9,7 @@ const Individual = require('./../models/individual');
 const User = require('./../models/organisation');
 
 const routeGuard = require('./../middleware/route-guard');
-//const fileUpload = require('./../middleware/file-upload');
+const fileUpload = require('./../middleware/file-upload');
 //const sendEmail = require('./../utilities/send-email');
 
 const router = new express.Router();
@@ -32,25 +32,34 @@ router.get('/list', async (req, res, next) => {
   }
 });
 
-router.patch('/:id/edit', routeGuard, async (req, res, next) => {
-  const { firstName, lastName } = req.body;
-  try {
-    //add picture
-    const individual = await Individual.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: {
-          firstName,
-          lastName
-        }
-      },
-      { new: true }
-    );
-    res.json({ individual });
-  } catch (error) {
-    next(error);
+router.patch(
+  '/:id/edit',
+  routeGuard,
+  fileUpload.single('profilePicture'),
+  async (req, res, next) => {
+    const profilePicture = req.file.path;
+    const { firstName, lastName, aboutMe } = req.body;
+    console.log(profilePicture, req.body )
+    try {
+      //add picture
+      const individual = await Individual.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: {
+            firstName,
+            lastName,
+            aboutMe,
+            profilePicture
+          }
+        },
+        { new: true }
+      );
+      res.json({ individual });
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 router.patch('/preferences', routeGuard, async (req, res, next) => {
   const { preferences } = req.body;
