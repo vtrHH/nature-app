@@ -1,11 +1,11 @@
- import React, { Component } from 'react'
+import React, { Component } from 'react'
  import {listOfObservations} from '../../services/observation'
  
  import './Carousel.scss'
 
  import CarouselList from './CarouselList'
  
- class Carousel extends Component {
+ class CarouselObservations extends Component {
     constructor(props) {
         super(props);
     
@@ -27,8 +27,6 @@
                 });
       }
 
-
-
      render() {
          const show = this.props.show;
          const content = this.props.content;
@@ -45,5 +43,4 @@
      }
  }
  
- export default Carousel
- 
+ export default CarouselObservations

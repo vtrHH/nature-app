@@ -17,12 +17,6 @@ import SearchItemObservation from './SearchItemObservation';
       }
   }
 
-  componentDidUpdate(previousProps, previousState) {
-    console.log('-------------componentDidUpdate-------------------');
-    console.log(previousProps, this.props);
-    console.log(previousState, this.state);    
-  }
-
   handleResult = (result) => {
     console.log(`SearchList------------${result.id}`)  
     this.setState({selected:result});
@@ -31,11 +25,11 @@ import SearchItemObservation from './SearchItemObservation';
 
   render() {
     const content= this.props.content;
-    console.log(content)
+    // console.log(content)
     const results = this.props.results;
-    console.log(results);
-    console.log(Array.isArray(results));
-    console.log(!!results);
+    // console.log(results);
+    // console.log(Array.isArray(results));
+    // console.log(!!results);
     if(results) {          
       console.log(results.length);
     }

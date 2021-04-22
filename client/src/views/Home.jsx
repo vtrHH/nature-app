@@ -25,8 +25,9 @@ class Home extends Component {
   async componentDidMount() {
     const observations = await listOfObservations();
     this.setState({ observations });
+    };
     // console.log(this.state.observations);
-  }
+  
 
   updateSearch = (search) => {
     this.setState({
@@ -56,31 +57,31 @@ class Home extends Component {
       photos: true
     }; */
 
-    const carouselObservationsOptions = {
-      route: 'observations',
-      q: null,
-      is_active: true,
-      taxon_id: 3,
-      rank: '',
-      // rank: 'species%2Csubspecies',
-      per_page: 20,
-      order: 'desc',
-      order_by: 'created_at',
-      photos: true
-    };
+    // const carouselObservationsOptions = {
+    //   route: 'observations',
+    //   q: null,
+    //   is_active: true,
+    //   taxon_id: 3,
+    //   rank: '',
+    //   // rank: 'species%2Csubspecies',
+    //   per_page: 20,
+    //   order: 'desc',
+    //   order_by: 'created_at',
+    //   photos: true
+    // };
 
-    const carouselPostsOptions = {
-      route: 'forum',
-      q: null,
-      is_active: true,
-      taxon_id: 3,
-      rank: '',
-      // rank: 'species%2Csubspecies',
-      per_page: 20,
-      order: 'desc',
-      order_by: 'created_at',
-      photos: true
-    };
+    // const carouselPostsOptions = {
+    //   route: 'forum',
+    //   q: null,
+    //   is_active: true,
+    //   taxon_id: 3,
+    //   rank: '',
+    //   // rank: 'species%2Csubspecies',
+    //   per_page: 20,
+    //   order: 'desc',
+    //   order_by: 'created_at',
+    //   photos: true
+    // };
 
     return (
       <main>
@@ -104,18 +105,17 @@ class Home extends Component {
           <CarouselPosts
             show={2}
             content={'posts'}
-            options={carouselPostsOptions}
           />
-          <h2 style={{ fontSize: '2em', marginBottom: '0px' }}>Latest Obsrvations</h2>
+          <h2 style={{ fontSize: '2em', marginBottom: '0px' }}>Latest Observations</h2>
           <CarouselObservations
             show={2}
             content={'observations'}
-            options={carouselObservationsOptions}
           />
         </div>
       </main>
     );
   }
+
 }
 
 export default Home;

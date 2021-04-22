@@ -25,7 +25,7 @@ class Slider extends Component {
     return (
 
       <>
-              <div className={"slider-pictures"}>
+        <div className={"slider-pictures"}>
         {pictures.length > 1 && (
           <button className="left-arrow" onClick={() => this.navigate(-1)}>
               &lt;

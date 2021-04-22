@@ -37,3 +37,5 @@ export const loadObservationsByBirdId = async(api_id) => {
     const response = await api.get(`/observation/bird/${api_id}`);
     return response.data.observations;
 };
+
+//Missing list of observtaions by Bird Id
