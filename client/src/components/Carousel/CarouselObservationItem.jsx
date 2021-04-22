@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 //   ({ male: 'Male', female: 'Female' }[gender]);
 
 const CarouselItemObservation = ({ result, show, user, individual }) => {
-  console.log("CarouselItemObservation")
-  console.log(result)
-  console.log(user)
+  // console.log("CarouselItemObservation")
+  // console.log(result)
+  // console.log(user)
 
   // const show = this.props.show;
   // const result = this.props.results;
