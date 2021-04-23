@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { listOfPosts } from '../../services/forum';
+import { listOfPostsByUser } from '../../services/forum';
 
 import './Carousel.scss';
 
@@ -21,7 +21,7 @@ class Carousel extends Component {
   }
 
   getPostsByUserId = async () => {
-    const results = await listOfPosts();
+    const results = await listOfPostsByUser(this.props.user._id);
     // console.log(results);
     this.setState({
       results: results

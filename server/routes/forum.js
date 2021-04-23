@@ -73,6 +73,16 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+router.delete('/:id', routeGuard, async (req, res, next) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
+    res.json({});
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 router.post('/:id', routeGuard, async (req, res, next) => {
   try {
     const text = req.body.text;
@@ -90,6 +100,7 @@ router.post('/:id', routeGuard, async (req, res, next) => {
   }
 });
 
+
 router.get('/:id/comments', async (req, res, next) => {
   try {
     const comments = await Comment.find({ relatedpost: req.params.id })
@@ -101,4 +112,12 @@ router.get('/:id/comments', async (req, res, next) => {
   }
 });
 
+router.delete('/:id/comments', routeGuard, async (req, res, next) => {
+  try {
+    await Comment.deleteMany({ relatedpost: req.params.postid });
+    res.json({});
+  } catch (error) {
+    next(error);
+  }
+});
 module.exports = router;
