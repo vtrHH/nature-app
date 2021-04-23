@@ -1,13 +1,14 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
-import {Button, Navbar, Nav, Dropdown, DropdownButton } from 'react-bootstrap'
+import {Button, Navbar, Nav, Dropdown, DropdownButton, Col, Container } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Image from 'react-bootstrap/Image'
 
 const Header = ({ user, onSignOut }) => {
   return (
     
-    <Navbar className="pt-3 pb-3" navbar-expand-md bg="light" variant="light">
+    <Navbar collapseOnSelect expand="lg" className="pt-3 pb-3">
+    <Container>
     <Navbar.Brand href="/">
       <img
         alt=""
@@ -18,17 +19,25 @@ const Header = ({ user, onSignOut }) => {
       />{' '}
       Eye Bird
     </Navbar.Brand>
+    <Navbar.Toggle aria-controls='responsive-navbar-col'/>
+    <Navbar.Collapse id='responsive-navbar-nav'>
     <>
     {user && (
       <>
-    <Nav className="mx-auto order-0">
-      <a class="btn btn-primary" href="/observation/create" role="button">Create Observations</a>
-      {/* <Nav.Link href="/observation/create">Create Observations</Nav.Link> */}
-      <Nav.Link href="/forum">Whats that Bird?</Nav.Link>
-      <Nav.Link href="/organisations">Observatories</Nav.Link>
-        {/* <Image src={user.profilePicture} roundedCircle /> */}
-    </Nav>
-    <Nav className="mr-sm-2" >
+    <Nav fill  variant="pills" className="mt-3 mx-auto order-0">
+    <Nav.Item>
+      <a className="mb-2 btn btn-primary" href="/observation/create" role="button">Create Observations</a>
+      {/* <Nav.Link href="/observation/create">Create Observations</Nav.Link> */}      
+    </Nav.Item>
+    <Nav.Item>
+      <Nav.Link className="mb-2" href="/forum">Whats that Bird?</Nav.Link>
+    </Nav.Item>
+    <Nav.Item>
+      <Nav.Link className="mb-2"href="/organisations">Observatories</Nav.Link>      
+    </Nav.Item>
+    <Nav.Item>
+
+    <Nav fill  variant="pills" className="mt-3 mx-auto order-0">
     <Dropdown >
     <DropdownButton
       variant="secondary"
@@ -36,25 +45,32 @@ const Header = ({ user, onSignOut }) => {
       title={user.username}
       id="dropdown-menu-align-responsive-2"
     >
-        <Image src={user.profilePicture} roundedCircle style={{width:40}}/>
+        <Col><Image src={user.profilePicture} roundedCircle style={{width:40}}/></Col>
         <Dropdown.Item href={`/${user.role}/${user._id}`}>Your Profile</Dropdown.Item>
         <Dropdown.Item onClick={onSignOut}>Sign Out</Dropdown.Item>
         {/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item> */}
     </DropdownButton>
     </Dropdown>
-    </Nav>
+    </Nav>    
+    </Nav.Item>
+        </Nav>
       </>            
       ) || (
       <>
 
-      <Nav >
+      <Nav fill  variant="pills" className="mt-3 mx-auto order-0">
+    <Nav.Item>
       <Nav.Link href="/sign-in">Sign In</Nav.Link>
+    </Nav.Item>
+    <Nav.Item>
       <Nav.Link href="/sign-up">Sign Up</Nav.Link>
+    </Nav.Item>
       </Nav>
       </>
         )}
     </>
-        
+  </Navbar.Collapse>
+  </Container>      
   </Navbar>   
   );
 };
