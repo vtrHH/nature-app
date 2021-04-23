@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { signIn } from './../services/authentication';
+import {Form, Row, Button, Col, Container, Image} from 'react-bootstrap';
 
 class SignIn extends Component {
   state = {
@@ -24,54 +25,71 @@ class SignIn extends Component {
   render() {
     return (
       <main>
-        <header>
+        <>
+        <Container className="mt-3" >
+        <Row>
+            <Col md={{ span: 6, offset: 3 }}>
           <h1>Sign In</h1>
-        </header>
-        <div className="two-column-box">
-          <div className="log-in-box">
-            <form onSubmit={this.handleFormSubmission}>
-              <label htmlFor="email-input">Email</label>
-              <input
-                id="email-input"
-                type="email"
-                placeholder="james@example.com"
-                name="email"
-                value={this.state.email}
-                onChange={this.handleInputChange}
-              />
+            </Col>
+          </Row>  
+        </Container>
 
-              <label htmlFor="password-input">Password</label>
-              <input
-                id="password-input"
-                type="password"
-                placeholder="A secure password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChange}
-              />
+        <Form className="mt-3" 
+          onSubmit={this.handleFormSubmission}
+          >
+        <Container className="mt-3">
+          <Row>
+            <Col md={{ span: 6, offset: 3 }}>
+            <Form.Group className="mb-0">
+                <Form.Label htmlFor="email-input">Email address</Form.Label>
+                <Form.Control 
+                  id="email-input"
+                  type="email"
+                  placeholder="james@example.com"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleInputChange} />
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
+              </Form.Group>
+              
+            </Col>
+          </Row>  
+          <Row>  
+            <Col md={{ span: 6, offset: 3 }}>
+            <Form.Group className="mb-0">
+                <Form.Label htmlFor="password-input">Password</Form.Label>
+                <Form.Control 
+                  id="password-input"
+                  type="password"
+                  placeholder="A secure password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleInputChange}
+                />
+              </Form.Group>
 
-              <button>Sign In</button>
-            </form>
-            <div id="sign-up-box">
-              <p>
-                If you don't have an account, <br/>
-                <a href="/sign-up" className="form__a">
-                  SIGN UP HERE.
-                </a>
-              </p>
-            </div>
-          </div>
-          <div>
-            <img
-              src="https://images.unsplash.com/photo-1522926193341-e9ffd686c60f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-              alt=""
-              width="400"
-            />
-          </div>
-        </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={{ span: 6, offset: 3 }}>
+            {/* <button className="btn btn-primary">Sign In</button> */}
+          <Button type="submit" variant="primary" size="lg" block>
+            Sign In
+          </Button>
+              
+            </Col>
+          </Row>
+        </Container>
+        </Form>
+        <Image src="https://images.unsplash.com/photo-1522926193341-e9ffd686c60f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" fluid />
+        
+        </>
       </main>
     );
   }
-}
+}      
 
 export default SignIn;
+

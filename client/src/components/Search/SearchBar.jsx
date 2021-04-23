@@ -29,12 +29,13 @@ export class SearchBar extends Component {
    
     return (
       <>
-      <div className="searchbar">
+      {/* <div className="searchbar"> */}
        {/* {content !== "" ? (<label htmlFor="q">Search {content}</label>) : (<label htmlFor="q"></label>) } */}
       <Form>
-        <Form.Group>
+        <Form.Group >
           {/* <Form.Label>{`Search ${content}`}</Form.Label> */}
           <Form.Control
+          size="lg"
           name="q"
           value={this.state.searchTerm}
           placeholder={`Search ${content}`}
@@ -45,7 +46,7 @@ export class SearchBar extends Component {
           </Form.Text>
         </Form.Group>
       </Form>
-      </div>
+      {/* </div> */}
 
       {/* <div className="searchbar">
        {content !== "" ? (<label htmlFor="q">Search {content}</label>) : (<label htmlFor="q"></label>) }

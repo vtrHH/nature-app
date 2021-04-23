@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button, Row, Col} from 'react-bootstrap';
 
 class Geolocation extends Component {
   state = {
@@ -32,11 +33,18 @@ class Geolocation extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.handleCurrentLocationSearch}>Locate me</button>
-      </div>
+      
+      <Col md={{ span: 6, offset: 3 }}>
+          <Button onClick={this.handleCurrentLocationSearch} type="submit" variant="primary" size="lg" block>
+          Locate me
+          </Button>
+          </Col>
     );
   }
 }
 
 export default Geolocation;
+
+{/* <div>
+        <button onClick={this.handleCurrentLocationSearch}>Locate me</button>
+      </div> */}
