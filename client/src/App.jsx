@@ -175,7 +175,9 @@ class App extends Component {
               />
               <ProtectedRoute
                 path="/forum/:id"
-                component={SinglePost}
+                render={(props) => (
+                  <SinglePost {...props} user={user} />
+                )}
                 exact
                 authorized={user}
                 redirect="/sign-up"
