@@ -7,15 +7,15 @@
 
 .small-map {
     margin: 0 auto;
-    width: 60%;
+    width: 90%;
     height: 30em;
     margin-top: 2em;
 }
 
 .leaflet-popup-content-wrapper {
     text-align: center;
-    minwidth: 15em;
-    minheight: 7em;
+    min-width: 15em;
+    min-height: 7em;
 }
 
 .leaflet-popup-tip-container {
