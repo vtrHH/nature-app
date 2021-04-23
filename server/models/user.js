@@ -15,9 +15,6 @@ const userSchema = new mongoose.Schema(
       trim: true,
       required: true
     },
-    description: {
-      type: String
-    },
     passwordHashAndSalt: {
       type: String
     },

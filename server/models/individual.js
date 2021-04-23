@@ -13,8 +13,8 @@ const individualSchema = new mongoose.Schema({
     trim: true
   },
 
-  preferences: {
-    type: [String]
+  aboutMe: {
+    type: String
     // enum: ... ?
   }
 });

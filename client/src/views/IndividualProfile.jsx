@@ -1,7 +1,9 @@
 import { Component } from 'react';
-import CarouselObservationsByUser from '../components/Carousel/CarouselObservationsByUser'
-import CarouselPostsByUser from '../components/Carousel/CarouselPostsByUser'
+import CarouselObservationsByUser from '../components/Carousel/CarouselObservationsByUser';
+import CarouselPostsByUser from '../components/Carousel/CarouselPostsByUser';
 import { loadIndividual } from '../services/individual';
+import { Link } from 'react-router-dom';
+
 
 class IndividualProfile extends Component {
   state = {
@@ -12,8 +14,8 @@ class IndividualProfile extends Component {
   async componentDidMount() {
     // console.log(`Params ID is ${this.state.user}`)
     const individual = await loadIndividual(this.state.user);
-    console.log(`Individual is ${individual}`)
-    // this.setState({ individual });
+    console.log(`Individual is ${individual}`);
+    this.setState({ individual });
   }
 
   render() {
@@ -21,34 +23,39 @@ class IndividualProfile extends Component {
     return (
       <>
         {individual && (
-      <main>
-        
-        <h1>Hello {individual.username}!</h1>
-        <br/>
-        <img src={individual.profilePicture} alt={individual.username}/>
-        <br/>
-        <strong>Username: {individual.username}</strong>
-        <strong>Email: {individual.email}</strong>
-        <br/>
+          <main>
+            <h1>Hello {individual.username}!</h1>
+            <br />
+            <img src={individual.profilePicture} alt={individual.username} />
+            <br />
+            <strong>{individual.firstName}{individual.lastName}</strong>
+            <small>Username: {individual.username}</small>
+            <p> {individual.aboutMe}</p>
+            <br />
 
-        <button>Edit Profile</button>
+            <Link to={`/individual/${individual._id}/edit`}>
+              <button type="button">Edit your profile page</button>
+            </Link>
 
-             
-        <h2 style={{ fontSize: '2em', marginBottom: '0px' }}>Latest Observations</h2>
-          <CarouselObservationsByUser
-            show={2}
-            content={'observations'}
-            user={this.state.individual}
-          />
-        <h2 style={{ fontSize: '2em', marginBottom: '0px' }}>Latest Posts</h2>
-          <CarouselPostsByUser
-            show={2}
-            content={'posts'}
-            user={this.state.individual}
-          />
-      </main>
+            <h2 style={{ fontSize: '2em', marginBottom: '0px' }}>
+              Latest Observations
+            </h2>
+            <CarouselObservationsByUser
+              show={2}
+              content={'observations'}
+              user={this.state.individual}
+            />
+            <h2 style={{ fontSize: '2em', marginBottom: '0px' }}>
+              Latest Posts
+            </h2>
+            <CarouselPostsByUser
+              show={2}
+              content={'posts'}
+              user={this.state.individual}
+            />
+          </main>
         )}
-        </>
+      </>
     );
   }
 }
