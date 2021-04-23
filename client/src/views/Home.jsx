@@ -2,6 +2,8 @@ import { Component } from 'react';
 
 import { listOfObservations } from '../services/observation';
 
+import {Jumbotron, Button, Container} from 'react-bootstrap';
+
 import BirdList from '../components/BirdList';
 import Search from '../components/Search/Search';
 import HomeMapView from '../components/Map/HomeMapView';
@@ -44,50 +46,23 @@ class Home extends Component {
     let birds = this.state.birds;
     console.log(user);
 
-    /*  const carouselSpeciesOptions = {
-      route: 'taxa',
-      q: null,
-      is_active: true,
-      taxon_id: 3,
-      rank: '',
-      // rank: 'species%2Csubspecies',      
-      per_page: 20,
-      order: 'desc',
-      order_by: 'created_at',
-      photos: true
-    }; */
-
-    // const carouselObservationsOptions = {
-    //   route: 'observations',
-    //   q: null,
-    //   is_active: true,
-    //   taxon_id: 3,
-    //   rank: '',
-    //   // rank: 'species%2Csubspecies',
-    //   per_page: 20,
-    //   order: 'desc',
-    //   order_by: 'created_at',
-    //   photos: true
-    // };
-
-    // const carouselPostsOptions = {
-    //   route: 'forum',
-    //   q: null,
-    //   is_active: true,
-    //   taxon_id: 3,
-    //   rank: '',
-    //   // rank: 'species%2Csubspecies',
-    //   per_page: 20,
-    //   order: 'desc',
-    //   order_by: 'created_at',
-    //   photos: true
-    // };
-
     return (
       <main>
         <header>
-          <h1>Explore the latest birds</h1>
-          {(user && <h2>Hello {user.username}</h2>) || <h2>Welcome!</h2>}
+          <Jumbotron fluid className="jumbotron">
+          <Container>
+          {/* <div class="bg"></div> */}
+
+          {(user && <h4>Hello! {user.username}</h4>) || <h4>Welcome!</h4>}
+            <h1>Explore the latest birds</h1>
+            <p>
+            What bird is that? Consult our bird identification guide to ID mystery birds in the backyard and beyond. We have photos, song recordings, in-depth entries, and more to help bird watchers correctly identify the birds they spot.
+            </p>
+            <p>
+              <Button variant="primary">Learn more</Button>
+            </p>
+          </Container>
+          </Jumbotron>
         </header>
         <div className="container--home">
           <Search

@@ -64,7 +64,7 @@ class App extends Component {
           <Container fluid>
           <Header user={user} onSignOut={this.handleSignOut} />
           </Container>
-          <Container>
+          
 
           {this.state.loaded && (
             <Switch>
@@ -207,7 +207,7 @@ class App extends Component {
               />
             </Switch>
           )}
-      </Container>
+      
         </BrowserRouter>
       </HelmetProvider>
     );
