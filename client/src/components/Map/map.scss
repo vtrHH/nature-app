@@ -1,23 +1,29 @@
 .leaflet-container {
-  margin: 0 auto;
-  width: 80%;
-  height: 30em;
-  margin-top: 2em;
+    margin: 0 auto;
+    width: 80%;
+    height: 30em;
+    margin-top: 2em;
 }
 
 .small-map {
-  margin: 0 auto;
-  width: 60%;
-  height: 30em;
-  margin-top: 2em;
+    margin: 0 auto;
+    width: 60%;
+    height: 30em;
+    margin-top: 2em;
 }
 
 .leaflet-popup-content-wrapper {
-  text-align: center;
-  minwidth: 15em;
-  minheight: 7em;
+    text-align: center;
+    minwidth: 15em;
+    minheight: 7em;
 }
 
 .leaflet-popup-tip-container {
-  visibility: hidden;
+    visibility: hidden;
+}
+
+.mapContainer {
+    width: 100%;
+    border: solid 1px #c9c9c9;
+    border-radius: 1em;
 }
