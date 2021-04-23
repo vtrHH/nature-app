@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Row, Col} from 'react-bootstrap';
+import {Button, Col} from 'react-bootstrap';
 
 class Geolocation extends Component {
   state = {
@@ -44,7 +44,3 @@ class Geolocation extends Component {
 }
 
 export default Geolocation;
-
-{/* <div>
-        <button onClick={this.handleCurrentLocationSearch}>Locate me</button>
-      </div> */}

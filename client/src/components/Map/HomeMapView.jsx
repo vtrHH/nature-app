@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Row, Col} from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import ObservationMarkers from './ObservationMarkers';
 import Geolocation from './Geolocation';
