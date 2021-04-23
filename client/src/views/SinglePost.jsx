@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { loadPost, loadComments, createComment } from '../services/forum';
 import Slider from '../components/Slider/Slider';
+import { Link } from 'react-router-dom';
+
 
 class SinglePost extends Component {
   constructor(props) {
@@ -76,7 +78,7 @@ class SinglePost extends Component {
             </>
             {post.creator._id === this.state.user._id && (
               <>
-                <Link to={`/organisation/${organisation._id}/delete`}>
+                <Link to={`/forum/${post._id}/delete`}>
                   <button type="button">Delete this post</button>
                 </Link>
               </>
