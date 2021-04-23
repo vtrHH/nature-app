@@ -22,8 +22,12 @@ class AddPictures extends Component {
     for (let picture of pictures) {
       body.append('pictures', picture);
     }
-    console.log(body);
-    console.log(pictures);
+    // const oldPictures = this.state.organisation.pictures.spit(',');
+    //   const oldPictures = [];
+    // this.state.organisation.pictures.map((picture) => {
+    //     oldPictures.push(picture);
+    //   });
+    body.append('oldPictures', this.state.organisation.pictures);
     await editPicturesInOrganisation(body, this.state.organisation._id);
     this.props.history.push(`/organisation/${this.state.organisation._id}`);
   };
