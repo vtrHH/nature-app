@@ -49,8 +49,8 @@ class SearchItem extends Component {
     
         <div className="search-item__details">
           <div>
-          <h3>{result.preferred_common_name}</h3>
-          <h5>{result.name}</h5>
+          <h5>{result.preferred_common_name}</h5>
+          <span>{result.name}</span>
           </div>
           {/* <h5>{result.id}</h5> */}
           <button onClick={(e) => this.handleSelect(e, result.id)}>Select</button>     
