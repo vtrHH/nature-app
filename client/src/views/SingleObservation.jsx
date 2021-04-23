@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import ObservationMapView from '../components/Map/ObservationMapView';
-import Slider from '../components/Slider/Slider'
+import Slider from '../components/Slider/Slider';
+
+import { Link } from 'react-router-dom';
+
 
 import { loadObservation } from '../services/observation';
 
@@ -21,25 +24,39 @@ class SingleObservation extends Component {
 
   render() {
     const observation = this.state.observation;
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-    
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    };
+
     return (
       <div>
         {observation && (
-          <>     
-            
+          <>
             <h1>{observation.preferred_common_name}</h1>
             <br></br>
-            <Slider pictures={observation.pictures}/>
+            <Slider pictures={observation.pictures} />
             <br></br>
             <span>Observation creator: {observation.creator.username}</span>
             <br></br>
-            <span>Obervation date:{ new Date(observation.date).toLocaleDateString('en-GB', options)}</span>
+            <span>
+              Obervation date:
+              {new Date(observation.date).toLocaleDateString('en-GB', options)}
+            </span>
             <br></br>
             <span>{observation.description}</span>
             <ObservationMapView
               observationLocation={observation.location.coordinates}
             />
+            {observation.creator._id === this.state.user._id && (
+              <>
+                <Link to={`/observation/${observation._id}/delete`}>
+                  <button type="button">Delete this observation</button>
+                </Link>
+              </>
+            )}
           </>
         )}
       </div>
