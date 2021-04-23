@@ -114,7 +114,7 @@ router.get('/:id/comments', async (req, res, next) => {
 
 router.delete('/:id/comments', routeGuard, async (req, res, next) => {
   try {
-    await Comment.findByIdAndDelete(req.params.id);
+    await Comment.deleteMany({ relatedpost: req.params.postid });
     res.json({});
   } catch (error) {
     next(error);
