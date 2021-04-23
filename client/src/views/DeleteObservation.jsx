@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { loadPost, deletePost, deleteCommentsByPost  } from '../services/forum';
+import { loadObservation, deleteObservation} from '../services/observation';
 import { Link } from 'react-router-dom';
 
 class DeleteIndividualProfile extends Component {
@@ -7,49 +7,48 @@ class DeleteIndividualProfile extends Component {
     super(props);
     this.state = {
       user: this.props.user,
-      post: null,
+      observation: null,
       deleted: false
     };
   }
 
   async componentDidMount() {
-    const post = await loadPost(this.props.match.params.id);
+    const observation = await loadObservation(this.props.match.params.id);
     this.setState({
-      post,
+      observation,
     });
   }
 
-  deleteThisPost = async () => {
-    await deletePost(this.state.post._id);
-    await deleteCommentsByPost(this.state.post._id)
+  deleteThisObservation = async () => {
+    await deleteObservation(this.state.observation._id);
     this.setState({
       deleted: true
     });
   };
 
   render() {
-    const post = this.state.post;
+    const observation = this.state.observation;
     const deleted = this.state.deleted;
 
-    console.log(post);
+    console.log(observation);
     console.log(this.state.user);
     return (
       <main>
         {(deleted && (
           <>
-            <h1>Your post was Deleted</h1>
+            <h1>Your observation was Deleted</h1>
           </>
         )) || (
           <>
-            {post && (
+            {observation && (
               <>
-                {(post.creator._id === this.state.user._id && (
+                {(observation.creator._id === this.state.user._id && (
                   <>
-                    <h1>Are you sure you want to delete this post?</h1>
-                    <button type="button" onClick={this.deleteThisPost}>
+                    <h1>Are you sure you want to delete this observation?</h1>
+                    <button type="button" onClick={this.deleteThisObservation}>
                       Yes, please
                     </button>
-                    <Link to={`/forum/${post._id}`}>
+                    <Link to={`/observation/${observation._id}`}>
                       <button type="button">No, thanks</button>
                     </Link>
                   </>
