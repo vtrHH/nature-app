@@ -38,8 +38,7 @@ router.patch('/:id', routeGuard, async (req, res, next) => {
     street,
     houseNumber,
     city,
-    postcode,
-    birds
+    postcode
   } = req.body;
   try {
     const organisation = await Organisation.findByIdAndUpdate(
@@ -51,7 +50,24 @@ router.patch('/:id', routeGuard, async (req, res, next) => {
           street,
           houseNumber,
           city,
-          postcode,
+          postcode
+        }
+      },
+      { new: true }
+    );
+    res.json({ organisation });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.patch('/:id/birds', routeGuard, async (req, res, next) => {
+  const { birds } = req.body;
+  try {
+    const organisation = await Organisation.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
           birds
         }
       },
@@ -69,12 +85,19 @@ router.patch(
   fileUpload.array('pictures', 10),
   async (req, res, next) => {
     const pictures = req.files.map((file) => file.path);
+    const oldPictures = req.body.oldPictures.split(',');
+    const finalPictures = oldPictures;
+    pictures.map((picture) => {
+      if (!oldPictures.includes(picture)) {
+        finalPictures.unshift(picture);
+      }
+    });
     try {
       const organisation = await Organisation.findByIdAndUpdate(
         req.user._id,
         {
           $set: {
-            pictures
+            pictures: finalPictures
           }
         },
         { new: true }
