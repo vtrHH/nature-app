@@ -63,35 +63,11 @@ class App extends Component {
           </Helmet>
           <Container fluid>
             <Header user={user} onSignOut={this.handleSignOut} />
-          </Container>
-<<<<<<< HEAD
-          
+          </Container>          
 
           {this.state.loaded && (
             <Switch>
               {user && user.role === 'individual' ? (
-=======
-          <Container>
-            {this.state.loaded && (
-              <Switch>
-                {user && user.role === 'individual' ? (
-                  <Route
-                    path="/"
-                    render={(props) => <Home {...props} user={user} />}
-                    exact
-                  />
-                ) : user && user.role === 'organisation' ? (
-                  <Route
-                    path="/"
-                    render={(props) => (
-                      <OrganisationHome {...props} user={user} />
-                    )}
-                    exact
-                  />
-                ) : (
-                  <Route path="/" component={LandingPage} exact />
-                )}
->>>>>>> main
                 <Route
                   path="/"
                   render={(props) => <Home {...props} user={user} />}
@@ -153,7 +129,6 @@ class App extends Component {
                   authorized={user}
                   redirect="/sign-up"
                 />
-<<<<<<< HEAD
               ) : (
                 <Route path="/" component={LandingPage} exact />
               )}
@@ -280,82 +255,6 @@ class App extends Component {
             </Switch>
           )}
       
-=======
-
-                <ProtectedRoute
-                  path="/organisations"
-                  component={OrganisationOverview}
-                  exact
-                  authorized={user}
-                  redirect="/sign-up"
-                />
-                
-                <Route
-                  path="/organisation/:id"
-                  component={OrganisationProfile}
-                  exact
-                />
-
-                <ProtectedRoute
-                  path="/organisation/:id/edit"
-                  render={(props) => (
-                    <UpdateOrganisationProfile {...props} user={user} />
-                  )}
-                  authorized={user && user.role === 'organisation'}
-                  redirect="/sign-up"
-                  exact
-                />
-
-                <ProtectedRoute
-                  path="/organisation/:id/add-birds"
-                  render={(props) => <AddBirds {...props} user={user} />}
-                  authorized={user && user.role === 'organisation'}
-                  redirect="/sign-up"
-                  exact
-                />
-
-                <ProtectedRoute
-                  path="/organisation/:id/add-pictures"
-                  render={(props) => <AddPictures {...props} user={user} />}
-                  authorized={user && user.role === 'organisation'}
-                  redirect="/sign-up"
-                  exact
-                />
-
-                <ProtectedRoute
-                  path="/forum"
-                  component={Forum}
-                  exact
-                  authorized={user}
-                  redirect="/sign-up"
-                />
-
-                <ProtectedRoute
-                  path="/forum/:id/delete"
-                  render={(props) => <DeletePost {...props} user={user} />}
-                  exact
-                  authorized={user}
-                  redirect="/sign-up"
-                />
-
-                <ProtectedRoute
-                  path="/forum/newpost"
-                  component={CreatePost}
-                  exact
-                  authorized={user}
-                  redirect="/sign-up"
-                />
-                <ProtectedRoute
-                  path="/forum/:id"
-                  render={(props) => <SinglePost {...props} user={user} />}
-                  exact
-                  authorized={user}
-                  redirect="/sign-up"
-                />
-              </Switch>
-            )}
-          </Container>
->>>>>>> main
         </BrowserRouter>
       </HelmetProvider>
     );

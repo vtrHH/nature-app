@@ -25,6 +25,12 @@ export const loadPost = async (id) => {
   return response.data.post;
 };
 
+//deletes a post
+export const deletePost = async (id) => {
+  await api.delete(`/forum/${id}`);
+};
+
+
 
 
 //create a comment on a post
@@ -37,4 +43,9 @@ export const createComment = async (id, data) => {
 export const loadComments = async (id) => {
   const response = await api.get(`/forum/${id}/comments`);
   return response.data.comments;
+};
+
+//delete comments based on the related post Id
+export const deleteCommentsByPost = async (postId) => {
+  await api.delete(`/forum/${postId}/comments`);
 };
