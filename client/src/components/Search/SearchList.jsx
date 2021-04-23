@@ -31,7 +31,7 @@ import SearchItemObservation from './SearchItemObservation';
     // console.log(Array.isArray(results));
     // console.log(!!results);
     if(results) {          
-      console.log(results.length);
+      console.log(results);
     }
     return (
     <>

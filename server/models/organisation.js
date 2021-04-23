@@ -10,8 +10,8 @@ const organisationSchema = new mongoose.Schema({
   },
   street: {
     type: String
-  },  
-  
+  },
+
   houseNumber: {
     type: String
   },
@@ -27,7 +27,7 @@ const organisationSchema = new mongoose.Schema({
   phoneNumber: {
     type: String
   },
-  
+
   birds: {
     type: [String]
   },

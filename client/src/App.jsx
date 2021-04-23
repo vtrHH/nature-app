@@ -5,7 +5,9 @@ import { signOut, verify } from './services/authentication';
 
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import ProtectedRoute from './components/ProtectedRoute';
-import Navbar from './components/Navbar';
+import Header from './components/Header';
+
+import {Container} from 'react-bootstrap'
 
 import Home from './views/Home';
 import LandingPage from './views/LandingPage';
@@ -21,6 +23,8 @@ import OrganisationProfile from './views/Organisations/OrganisationProfile';
 import OrganisationHome from './views/Organisations/OrganisationHome';
 import UpdateOrganisationProfile from './views/Organisations/UpdateOrganisationProfile';
 import OrganisationOverview from './views/OrganisationOverview';
+import AddBirds from './views/Organisations/AddBirds';
+import AddPictures from './views/Organisations/AddPictures';
 
 import Forum from './views/Forum';
 import SinglePost from './views/SinglePost';
@@ -51,12 +55,17 @@ class App extends Component {
   render() {
     const user = this.state.user;
     return (
+      
       <HelmetProvider>
         <BrowserRouter>
           <Helmet>
             <title>NatureApp</title>
           </Helmet>
-          <Navbar user={user} onSignOut={this.handleSignOut} />
+          <Container fluid>
+          <Header user={user} onSignOut={this.handleSignOut} />
+          </Container>
+          <Container>
+
           {this.state.loaded && (
             <Switch>
               {user && user.role === 'individual' ? (
@@ -154,7 +163,23 @@ class App extends Component {
                 render={(props) => (
                   <UpdateOrganisationProfile {...props} user={user} />
                 )}
-                authorized={user}
+                authorized={user && user.role === 'organisation'}
+                redirect="/sign-up"
+                exact
+              />
+
+              <ProtectedRoute
+                path="/organisation/:id/add-birds"
+                render={(props) => <AddBirds {...props} user={user} />}
+                authorized={user && user.role === 'organisation'}
+                redirect="/sign-up"
+                exact
+              />
+
+              <ProtectedRoute
+                path="/organisation/:id/add-pictures"
+                render={(props) => <AddPictures {...props} user={user} />}
+                authorized={user && user.role === 'organisation'}
                 redirect="/sign-up"
                 exact
               />
@@ -182,6 +207,7 @@ class App extends Component {
               />
             </Switch>
           )}
+      </Container>
         </BrowserRouter>
       </HelmetProvider>
     );
