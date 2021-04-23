@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Row } from 'react-bootstrap';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import ObservationMarkers from './ObservationMarkers';
 import Geolocation from './Geolocation';
@@ -25,9 +26,12 @@ class MapView extends Component {
   render() {
     const { currentLocation, zoom } = this.state;
     return (
-      <>
+      
+      <Row>
+        
         <Geolocation whenLocationSearchtriggered={this.updateLocationOfState} />
         <MapContainer
+          className="mapContainer"
           center={currentLocation}
           zoom={zoom}
           whenCreated={(map) => this.setState({ map })}
@@ -38,7 +42,9 @@ class MapView extends Component {
           />
           <ObservationMarkers observations={this.props.observations} />
         </MapContainer>
-      </>
+      
+      </Row>
+      
     );
   }
 }
