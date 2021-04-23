@@ -1,4 +1,7 @@
 import { Component } from 'react';
+import './IndividualProfile.scss'
+import {Container, Row, Col, Image, Button} from 'react-bootstrap';
+
 import CarouselObservationsByUser from '../components/Carousel/CarouselObservationsByUser';
 import CarouselPostsByUser from '../components/Carousel/CarouselPostsByUser';
 import { loadIndividual } from '../services/individual';
@@ -24,18 +27,29 @@ class IndividualProfile extends Component {
       <>
         {individual && (
           <main>
-            <h1>Hello {individual.username}!</h1>
-            <br />
-            <img src={individual.profilePicture} alt={individual.username} />
-            <br />
+          <Container className="mt-3" >
+          
+          <Row>           
+            <Col md={{ span: 6, offset: 3 }} className="text-center" >
+            <div class="profile">
+            <Image className="thumbnail" src={individual.profilePicture} alt={individual.username}  />
+         
+            <h3>{individual.username}</h3>       
+		
             <strong>{individual.firstName}{individual.lastName}</strong>
-            <small>Username: {individual.username}</small>
+            <small>Username: <strong>{individual.username}</strong></small>
             <p> {individual.aboutMe}</p>
+              
+            <Link to={`/individual/${individual._id}/edit`}>
+              <Button size="sm" type="button">Edit profile</Button>
+            </Link>
+            </div>
+           </Col>           
+          </Row>  
+          </Container>
+
             <br />
 
-            <Link to={`/individual/${individual._id}/edit`}>
-              <button type="button">Edit your profile page</button>
-            </Link>
 
             <h2 style={{ fontSize: '2em', marginBottom: '0px' }}>
               Latest Observations
