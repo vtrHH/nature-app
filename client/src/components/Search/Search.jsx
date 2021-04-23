@@ -73,33 +73,25 @@ class Search extends Component {
   };
 
   handleResult = (result) => {
-    // console.log(`Search------------${result.id}`);
     this.setState({ selected: result });
     this.props.onParent(result);
   };
 
   handleClear = () => {
     this.setState({ selected: null });
-    // this.props.onParent(result)
   };
 
   render() {
     let results = this.state.results;
     let selected = this.state.selected;
-    // console.log("-------user---------");
-    // console.log(user);
+    
     return (
       <div className="container--search">
         <SearchBar
           content={this.props.content}
+          text={this.props.text}
           onSearchBar={this.handleQueryChange}
         />
-
-        {/* <SearchList
-          content={this.props.content}
-          results={results}
-          onSearch={(result) => this.handleResult(result)}
-        /> */}
 
         {this.state.searchQuery !== '' && !selected ? (
           <SearchList

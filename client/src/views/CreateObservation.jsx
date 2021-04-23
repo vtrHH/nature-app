@@ -9,7 +9,7 @@ import Geolocation from './../components/Map/Geolocation';
 
 class CreateObservation extends Component {
   state = {
-    APIid: '',
+    APIid: [],
     preferred_common_name: '',
     date: '',
     lat: 0,
