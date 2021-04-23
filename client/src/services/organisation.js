@@ -23,3 +23,8 @@ export const editPicturesInOrganisation = async (data, id) => {
   const response = await api.patch(`/organisation/${id}/pictures`, data);
   return response.data.organisation;
 };
+
+export const addBirdsInOrganisation = async (data, id) => {
+  const response = await api.patch(`/organisation/${id}/birds`, data);
+  return response.data.organisation;
+};

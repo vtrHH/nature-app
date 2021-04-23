@@ -10,7 +10,6 @@ class ObservationMapView extends Component {
       currentLocation: props.observationLocation,
       zoom: 12
     };
-    console.log(props.observationLocation);
   }
 
   render() {

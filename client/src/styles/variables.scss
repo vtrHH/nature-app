@@ -1,14 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Muli');
 * {
-  &,
-  &:before,
-  &:after {
-    box-sizing: border-box;
-  }
+    &,
+    &:before,
+    &:after {
+        box-sizing: border-box;
+    }
 }
 
-$font-body: -apple-system, BlinkMacSystemFont,'Muli', Helvetica, Arial, sans-serif;
-$font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$grey: hsl(0, 0, 90%);
-$green: rgb(89, 228, 112);
-
+$font-body: -apple-system,
+BlinkMacSystemFont,
+'Muli',
+Helvetica,
+Arial,
+sans-serif;
+$font-sans: 'Helvetica Neue',
+Helvetica,
+Arial,
+sans-serif;
+$grey: hsl(0,
+0,
+90%);
+$green: rgb(89,
+228,
+112);
