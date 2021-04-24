@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ObservationMapView from "../components/Map/ObservationMapView";
 import Slider from "../components/Slider/Slider";
 import {Link} from 'react-dom'
+import { loadObservation } from "../services/observation";
 
 import {
   Container,
@@ -12,7 +13,6 @@ import {
 
 import './SingleObservation.scss'
 
-import { loadObservation } from "../services/observation";
 
 class SingleObservation extends Component {
   constructor(props) {

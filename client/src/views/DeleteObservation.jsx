@@ -1,14 +1,16 @@
-import { Component } from 'react';
-import { loadObservation, deleteObservation} from '../services/observation';
-import { Link } from 'react-router-dom';
+import { Component } from "react";
+import { loadObservation, deleteObservation } from "../services/observation";
+import { Link } from "react-router-dom";
 
-class DeleteIndividualProfile extends Component {
+import { Row, Button, Col, Container } from "react-bootstrap";
+
+class DeleteObservation extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: this.props.user,
       observation: null,
-      deleted: false
+      deleted: false,
     };
   }
 
@@ -22,7 +24,7 @@ class DeleteIndividualProfile extends Component {
   deleteThisObservation = async () => {
     await deleteObservation(this.state.observation._id);
     this.setState({
-      deleted: true
+      deleted: true,
     });
   };
 
@@ -36,7 +38,13 @@ class DeleteIndividualProfile extends Component {
       <main>
         {(deleted && (
           <>
-            <h1>Your observation was Deleted</h1>
+            <Container className="mt-3">
+              <Row>
+                <Col className="text-center" md={{ span: 6, offset: 3 }}>
+                  <h1>Your observation was Deleted</h1>
+                </Col>
+              </Row>
+            </Container>
           </>
         )) || (
           <>
@@ -44,13 +52,36 @@ class DeleteIndividualProfile extends Component {
               <>
                 {(observation.creator._id === this.state.user._id && (
                   <>
-                    <h1>Are you sure you want to delete this observation?</h1>
-                    <button type="button" onClick={this.deleteThisObservation}>
-                      Yes, please
-                    </button>
-                    <Link to={`/observation/${observation._id}`}>
-                      <button type="button">No, thanks</button>
-                    </Link>
+                    <Container className="mt-3">
+                      <Row>
+                        <Col
+                          className="text-center"
+                          md={{ span: 6, offset: 3 }}
+                        >
+                          <h3>
+                            Are you sure you want to delete this observation?
+                          </h3>
+                        </Col>
+                      </Row>
+                    </Container>
+                    <Container className="mt-3">
+                      <Row>
+                        <Col className="text-center">
+                          <Button
+                            variant="danger"
+                            type="button"
+                            onClick={this.deleteThisObservation}
+                          >
+                            Yes, please
+                          </Button>
+                        </Col>
+                        <Col className="text-center">
+                          <Link to={`/observation/${observation._id}`}>
+                            <Button variant="dark" type="button">No, thanks</Button>
+                          </Link>
+                        </Col>
+                      </Row>
+                    </Container>
                   </>
                 )) || (
                   <h1>
@@ -66,4 +97,4 @@ class DeleteIndividualProfile extends Component {
     );
   }
 }
-export default DeleteIndividualProfile;
+export default DeleteObservation;

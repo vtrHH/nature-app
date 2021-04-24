@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { Row, Button, Col, Container } from "react-bootstrap";
 
-class DeleteIndividualProfile extends Component {
+class DeletePost extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,13 +66,13 @@ class DeleteIndividualProfile extends Component {
                     <Container className="mt-3">
                       <Row>
                         <Col className="text-center">
-                          <Button type="button" onClick={this.deleteThisPost}>
+                          <Button variant="danger" type="button" onClick={this.deleteThisPost}>
                             Yes, please
                           </Button>
                           </Col>
                           <Col className="text-center">
                           <Link to={`/forum/${post._id}`}>
-                            <Button variant="danger" type="button">No, thanks</Button>
+                            <Button variant="dark" type="button">No, thanks</Button>
                           </Link>
                         </Col>
                       </Row>
@@ -98,4 +98,4 @@ class DeleteIndividualProfile extends Component {
     );
   }
 }
-export default DeleteIndividualProfile;
+export default DeletePost;
