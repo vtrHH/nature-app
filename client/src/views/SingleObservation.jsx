@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import ObservationMapView from "../components/Map/ObservationMapView";
 import Slider from "../components/Slider/Slider";
+import {Link} from 'react-dom'
 
 import {
   Container,
   Row,
   Col,
-  Button,
-  Image,
-  Form,
-  InputGroup,
-  FormControl,
+  Image
 } from "react-bootstrap";
 
 import './SingleObservation.scss'
@@ -92,6 +89,13 @@ class SingleObservation extends Component {
             <ObservationMapView className="width100"
               observationLocation={observation.location.coordinates}
             />
+            {observation.creator._id === this.state.user._id && (
+              <>
+                <Link to={`/observation/${observation._id}/delete`}>
+                  <button type="button">Delete this observation</button>
+                </Link>
+              </>
+            )}
           </>
         )}
       </div>
@@ -100,36 +104,3 @@ class SingleObservation extends Component {
 }
 
 export default SingleObservation;
-
-// <Row>
-// <Col className="postItem mb-0" md={12}>
-//   <div>
-//     <div className="post_item__user">
-//       {observation.creator.profilePicture ? (
-//         <Image
-//           roundedCircle
-//           src={observation.creator.profilePicture}
-//           alt={observation.creator.username}
-//         />
-//       ) : (
-//         <Image
-//           roundedCircle
-//           src="https://source.unsplash.com/300x300/?smiling,woman"
-//           alt={observation.creator.username}
-//         />
-//       )}
-//       <strong>{observation.creator.username}</strong>
-//     </div>
-//     <div>
-//       <small>
-//         {" "}
-//         {new Date(observation.addedDate).toLocaleDateString(
-//           "en-GB",
-//           options
-//         )}
-//       </small>
-//       <p>{observation.description}</p>
-//     </div>
-//   </div>
-// </Col>
-// </Row>

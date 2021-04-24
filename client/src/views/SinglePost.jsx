@@ -13,7 +13,6 @@ import {
 } from "react-bootstrap";
 
 import Slider from "../components/Slider/Slider";
-import { Link } from "react-router-dom";
 
 class SinglePost extends Component {
   constructor(props) {
@@ -218,16 +217,3 @@ class SinglePost extends Component {
 }
 
 export default SinglePost;
-
-{
-  /* <small>{comment.creator.username}</small>
-                    <small>
-                      {" "}
-                      {new Date(comment.addedDate).toLocaleDateString(
-                        "en-GB",
-                        options
-                      )}
-                    </small>
-                    <p key={comment._id}>{comment.text}</p>
-                     */
-}

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { createPost } from "../services/forum";
 import { Form, Row, Button, Col, Container } from "react-bootstrap";
-import Search from "../components/Search/Search";
 
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";

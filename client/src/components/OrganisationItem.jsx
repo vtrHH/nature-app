@@ -1,4 +1,4 @@
-import { Row, Col, Image, Button } from "react-bootstrap";
+import { Row, Col, Image } from "react-bootstrap";
 import "./OrganisationItem.scss";
 
 const OrganisationItem = ({ organisation }) => {

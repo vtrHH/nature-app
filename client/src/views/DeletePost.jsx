@@ -2,7 +2,7 @@ import { Component } from "react";
 import { loadPost, deletePost, deleteCommentsByPost } from "../services/forum";
 import { Link } from "react-router-dom";
 
-import { Form, Row, Button, Col, Container } from "react-bootstrap";
+import { Row, Button, Col, Container } from "react-bootstrap";
 
 class DeleteIndividualProfile extends Component {
   constructor(props) {
@@ -10,14 +10,14 @@ class DeleteIndividualProfile extends Component {
     this.state = {
       user: this.props.user,
       post: null,
+      deleted: false
     };
   }
 
   async componentDidMount() {
     const post = await loadPost(this.props.match.params.id);
     this.setState({
-      post: post,
-      deleted: false,
+      post,
     });
   }
 
