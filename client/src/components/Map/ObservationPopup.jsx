@@ -10,6 +10,14 @@ const ObservationPopup = (props) => {
       <div>
         {observation.preferred_common_name && (
           <>
+            {observation.pictures && (
+              <img
+                height="100em"
+                src={observation.pictures[0]}
+                alt={observation.preferred_common_name}
+              />
+            )}
+            <br />
             <span>
               <b>Common name:</b>
             </span>
