@@ -1,9 +1,17 @@
 import { Component } from "react";
 import { loadPost, loadComments, createComment } from "../services/forum";
-import Slider from "../components/Slider/Slider";
 import { Link } from "react-router-dom";
 
-import { Container, Row, Col, Button, Image, Form } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Image,
+  Form
+} from "react-bootstrap";
+
+import Slider from "../components/Slider/Slider";
 
 class SinglePost extends Component {
   constructor(props) {
@@ -53,6 +61,7 @@ class SinglePost extends Component {
   render() {
     const post = this.state.post;
     const comments = this.state.comments;
+
     console.log(post);
     console.log(comments);
     const options = {
@@ -66,7 +75,6 @@ class SinglePost extends Component {
       <main>
         {post && (
           <>
-            {console.log(post.creator._id, this.state.user._id)}
             <>
               <Container className="mt-3">
                 <Row>
@@ -113,6 +121,13 @@ class SinglePost extends Component {
                 <Container className="mt-3">
                   <Row>
                     <Col md={{ span: 6, offset: 3 }} className="text-center">
+                      <Button
+                        href={`/forum/${post._id}/delete`}
+                        className="btn btn-danger btn-sm"
+                        type="button"
+                      >
+                        Delete this post
+                      </Button>
                       <Link
                         to={{
                           pathname: `/forum/${post._id}/convert`,
@@ -128,23 +143,12 @@ class SinglePost extends Component {
                       </Link>
                     </Col>
                   </Row>
-                  <Row>
-                    <Col md={{ span: 6, offset: 3 }} className="text-center">
-                      <Button
-                        href={`/forum/${post._id}/delete`}
-                        className="btn btn-danger btn-sm"
-                        type="button"
-                      >
-                        Delete this post
-                      </Button>
-                    </Col>
-                  </Row>
                 </Container>
               </>
             )}
             {comments && (
               <>
-              <Container className="mt-3">
+                <Container className="mt-3">
                   {comments.map((comment) => (
                     <>
                       <Row key={comment._id}>
@@ -184,32 +188,30 @@ class SinglePost extends Component {
                 </Container>
               </>
             )}
-
+            <br />
             <Container className="mt-3">
               <Row>
                 <Col md={{ span: 6, offset: 3 }} className="text-center">
-                  <Form onSubmit={this.handleFormSubmission}>
-                    <Form.Group className="mb-0">
-                      <Form.Label htmlFor="input-text">
-                        Can you help {post.creator.username}?{" "}
-                      </Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        rows={3}
-                        type="text"
-                        id="input-text"
-                        name="text"
-                        placeholder="Type your idea"
-                        value={this.state.text}
-                        onChange={this.handleInputChange}
-                        required
-                      />
-                      <br />
-                      <Button type="submit" variant="primary" size="lg" block>
-                        Send
-                      </Button>
-                    </Form.Group>
-                  </Form>
+                  <Form.Group className="mb-0">
+                    <Form.Label htmlFor="input-text">
+                      Can you help {post.creator.username}?{" "}
+                    </Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      type="text"
+                      id="input-text"
+                      name="text"
+                      placeholder="Type your idea"
+                      value={this.state.text}
+                      onChange={this.handleInputChange}
+                      required
+                    />
+                    <br />
+                    <Button type="submit" variant="primary" size="lg" block>
+                      Send
+                    </Button>
+                  </Form.Group>
                 </Col>
               </Row>
             </Container>
