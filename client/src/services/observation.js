@@ -12,6 +12,12 @@ export const createObservation = async (data) => {
   return response.data.observation;
 };
 
+//create observation from post
+export const createObservationFromPost = async (data) => {
+  const response = await api.post('/observation/convert', data);
+  return response.data.observation;
+};
+
 //edits an observation
 export const editObservation = async (id) => {
   const response = await api.patch(`/observation/${id}/edit`);

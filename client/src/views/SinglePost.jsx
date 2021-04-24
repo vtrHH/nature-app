@@ -3,7 +3,6 @@ import { loadPost, loadComments, createComment } from '../services/forum';
 import Slider from '../components/Slider/Slider';
 import { Link } from 'react-router-dom';
 
-
 class SinglePost extends Component {
   constructor(props) {
     super(props);
@@ -80,6 +79,19 @@ class SinglePost extends Component {
               <>
                 <Link to={`/forum/${post._id}/delete`}>
                   <button type="button">Delete this post</button>
+                </Link>
+                <Link
+                  to={{
+                    pathname: `/forum/${post._id}/convert`,
+                    state: {
+                      post: post,
+                      user: this.state.user
+                    }
+                  }}
+                >
+                  <button type="button">
+                    Convert this post in observation
+                  </button>
                 </Link>
               </>
             )}

@@ -62,6 +62,41 @@ router.post(
   }
 );
 
+router.post(
+  '/convert',
+  routeGuard,
+  async (req, res, next) => {
+    const {
+      lat,
+      lng,
+      date,
+      APIid,
+      preferred_common_name,
+      pictures,
+      description,
+    } = req.body;
+    const location = {
+      coordinates: [lat, lng]
+    };
+    const creator = req.user._id;
+    //add picture
+    try {
+      const observation = await Observation.create({
+        location,
+        APIid,
+        preferred_common_name,
+        date,
+        creator,
+        description,
+        pictures
+      });
+      res.json({ observation });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 // router.post('/', routeGuard, async(req, res, next) => {
 //     try {
 //         //fileUpload.single('picture'),

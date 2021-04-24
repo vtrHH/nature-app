@@ -20,6 +20,7 @@ import IndividualProfile from './views/IndividualProfile';
 import UpdateIndividualProfile from './views/UpdateIndividualProfile';
 import DeletePost from './views/DeletePost';
 import DeleteObservation from './views/DeleteObservation';
+import ConvertPost from './views/ConvertPost';
 
 import OrganisationProfile from './views/Organisations/OrganisationProfile';
 import OrganisationHome from './views/Organisations/OrganisationHome';
@@ -139,7 +140,7 @@ class App extends Component {
 
               <ProtectedRoute
                 path="/individual/:id"
-                component={IndividualProfile}
+                render={(props) => <IndividualProfile {...props} user={user} />}
                 exact
                 authorized={user}
                 redirect="/sign-up"
@@ -206,6 +207,14 @@ class App extends Component {
               <ProtectedRoute
                 path="/forum/:id/delete"
                 render={(props) => <DeletePost {...props} user={user} />}
+                exact
+                authorized={user}
+                redirect="/sign-up"
+              />
+
+              <ProtectedRoute
+                path="/forum/:id/convert"
+                render={(props) => <ConvertPost {...props} user={user} />}
                 exact
                 authorized={user}
                 redirect="/sign-up"
