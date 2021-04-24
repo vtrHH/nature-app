@@ -1,13 +1,13 @@
-import { Component } from "react";
-import { Link } from "react-router-dom";
+import { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-import { Container, Row, Col, Image, Button } from "react-bootstrap";
+import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 
 class OrganisationHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      organisation: this.props.user,
+      organisation: this.props.user
     };
   }
 
@@ -27,7 +27,7 @@ class OrganisationHome extends Component {
               </Container>
               <Container fluid style={{ padding: 0 }}>
                 <Image
-                  style={{ width: "100%" }}
+                  style={{ width: '100%' }}
                   src={organisation.profilePicture}
                   alt={organisation.name}
                 />
@@ -44,9 +44,9 @@ class OrganisationHome extends Component {
                   </p>
                   <p>Email: {organisation.email}</p>
                   <p>
-                    Adress: {organisation.street}{" "}
-                    {organisation.houseNumber + ","} {organisation.postcode}{" "}
-                    {organisation.city}{" "}
+                    Adress: {organisation.street}{' '}
+                    {organisation.houseNumber + ','} {organisation.postcode}{' '}
+                    {organisation.city}{' '}
                   </p>
                   <p>Phone Number: {organisation.phoneNumber}</p>
                   <Link to={`/organisation/${organisation._id}`}>
@@ -62,7 +62,7 @@ class OrganisationHome extends Component {
                   <br />
                   <Link to={`/organisation/${organisation._id}/edit`}>
                     <Button size="sm" variant="outline-secondary" type="button">
-                      Edit your contact details
+                      Edit your profile details
                     </Button>
                   </Link>
                   <br />
@@ -76,7 +76,7 @@ class OrganisationHome extends Component {
                   <br />
                   <Link to={`/organisation/${organisation._id}/add-pictures`}>
                     <Button size="sm" variant="outline-secondary" type="button">
-                      Change your pictures
+                      Add pictures
                     </Button>
                   </Link>
                 </Col>

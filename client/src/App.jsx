@@ -63,7 +63,7 @@ class App extends Component {
       <HelmetProvider>
         <BrowserRouter>
           <Helmet>
-            <title>NatureApp</title>
+            <title>EyeBird</title>
           </Helmet>
           <Container fluid>
             <Header user={user} onSignOut={this.handleSignOut} />

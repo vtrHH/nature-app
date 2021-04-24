@@ -10,8 +10,8 @@ class MapView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentLocation: [52.52437, 13.41053],
-      zoom: 12,
+      currentLocation: [0, 0],
+      zoom: 1.5,
       map: null
     };
   }
@@ -26,9 +26,7 @@ class MapView extends Component {
   render() {
     const { currentLocation, zoom } = this.state;
     return (
-      
       <Row>
-        
         <Geolocation whenLocationSearchtriggered={this.updateLocationOfState} />
         <MapContainer
           className="mapContainer"
@@ -42,9 +40,7 @@ class MapView extends Component {
           />
           <ObservationMarkers observations={this.props.observations} />
         </MapContainer>
-      
       </Row>
-      
     );
   }
 }
