@@ -11,7 +11,7 @@ const Header = ({ user, onSignOut }) => {
     <Navbar.Brand href="/">
       <img
         alt=""
-        src="/logo.jpg"
+        src="../bird-icon.png"
         width="30"
         height="30"
         className="d-inline-block align-top"
@@ -44,7 +44,7 @@ const Header = ({ user, onSignOut }) => {
       title={user.username}
       id="dropdown-menu-align-responsive-2"
     >
-        <Col><Image src={user.profilePicture} roundedCircle style={{width:40}}/></Col>
+        <Col><Image src={user.profilePicture} roundedCircle style={{width:40, height:40, objectFit:"cover"}}/></Col>
         <Dropdown.Item href={`/${user.role}/${user._id}`}>Your Profile</Dropdown.Item>
         <Dropdown.Item onClick={onSignOut}>Sign Out</Dropdown.Item>
     </DropdownButton>
