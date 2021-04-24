@@ -39,7 +39,7 @@ const Header = ({ user, onSignOut }) => {
     <Nav fill  variant="pills" className=" mx-auto order-0">
     <Dropdown >
     <DropdownButton
-      variant="secondary"
+      variant="outline-secondary"
       menuAlign={{ lg: 'right' }}
       title={user.username}
       id="dropdown-menu-align-responsive-2"

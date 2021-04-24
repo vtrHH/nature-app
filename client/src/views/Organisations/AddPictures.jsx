@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-
-import { editPicturesInOrganisation } from './../../services/organisation';
+import React, { Component } from "react";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { editPicturesInOrganisation } from "./../../services/organisation";
 
 class AddPictures extends Component {
   constructor(props) {
     super(props);
     this.state = {
       organisation: this.props.user,
-      pictures: ''
+      pictures: "",
     };
   }
 
@@ -20,14 +20,14 @@ class AddPictures extends Component {
     const pictures = this.state.pictures;
     const body = new FormData();
     for (let picture of pictures) {
-      body.append('pictures', picture);
+      body.append("pictures", picture);
     }
     // const oldPictures = this.state.organisation.pictures.spit(',');
     //   const oldPictures = [];
     // this.state.organisation.pictures.map((picture) => {
     //     oldPictures.push(picture);
     //   });
-    body.append('oldPictures', this.state.organisation.pictures);
+    body.append("oldPictures", this.state.organisation.pictures);
     await editPicturesInOrganisation(body, this.state.organisation._id);
     this.props.history.push(`/organisation/${this.state.organisation._id}`);
   };
@@ -41,27 +41,42 @@ class AddPictures extends Component {
       arrayOfFiles.push(file);
     }
     this.setState({
-      [name]: arrayOfFiles
+      [name]: arrayOfFiles,
     });
   };
   render() {
     return (
       <main>
         <header>
-          <h2>Add Pictures</h2>
+          <Container className="mt-3">
+            <Row>
+              <Col md={{ span: 6, offset: 3 }} className="text-center">
+                <h2>Add Pictures</h2>
+              </Col>
+            </Row>
+          </Container>
         </header>
-        <form onSubmit={this.handleFormSubmission}>
-          <label htmlFor="input-pictures">Pictures</label>
-          <input
-            id="input-pictures"
-            type="file"
-            name="pictures"
-            multiple
-            onChange={this.handleFileInputChange}
-          />
 
-          <button>Add pictures</button>
-        </form>
+        <Container className="mt-3" className="text-center">
+          <Row>
+            <Col md={{ span: 6, offset: 3 }}>
+              <Form onSubmit={this.handleFormSubmission}>
+                <Form.Group>
+                  <Form.Label htmlFor="input-pictures"></Form.Label>
+                  <Form.Control style={{margin:'0 4em 2em'}}
+                    id="input-pictures"
+                    type="file"
+                    name="pictures"
+                    multiple
+                    onChange={this.handleFileInputChange}
+                  />
+                </Form.Group>
+                <Button>Add pictures</Button>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+       
       </main>
     );
   }

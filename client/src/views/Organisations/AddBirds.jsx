@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-
-import Search from '../../components/Search/Search';
-import { addBirdsInOrganisation } from './../../services/organisation';
+import React, { Component } from "react";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import Search from "../../components/Search/Search";
+import { addBirdsInOrganisation } from "./../../services/organisation";
 
 class AddBirds extends Component {
   constructor(props) {
     super(props);
     this.state = {
       organisation: this.props.user,
-      birds: this.props.user.birds
+      birds: this.props.user.birds,
     };
   }
 
@@ -27,12 +27,12 @@ class AddBirds extends Component {
     if (this.state.birds === null) {
       birdsClone = [result.id];
       this.setState({
-        birds: birdsClone
+        birds: birdsClone,
       });
     } else if (birdsClone.includes(result.id) === false) {
       birdsClone.push(result.id);
       this.setState({
-        birds: birdsClone
+        birds: birdsClone,
       });
     }
   };
@@ -41,14 +41,29 @@ class AddBirds extends Component {
     return (
       <main>
         <header>
-          <h2>Add Birds</h2>
+          <Container className="mt-3">
+            <Row>
+              <Col md={{ span: 6, offset: 3 }} className="text-center">
+                <h2>Add Birds</h2>
+              </Col>
+            </Row>
+          </Container>
+
           <Search
-            content={'taxa'}
+            content={"taxa"}
             onParent={(result) => this.handleResult(result)}
           />
-          <form onSubmit={this.handleFormSubmission}>
-            <button>Add bird to you observatory list</button>
-          </form>
+          <br/>
+          <br/>
+          <Container className="mt-3" className="text-center">
+            <Row>
+              <Col md={{ span: 6, offset: 3 }}>
+                <Form onSubmit={this.handleFormSubmission}>
+                  <Button>Add bird to you observatory list</Button>
+                </Form>
+              </Col>
+            </Row>
+          </Container>
         </header>
       </main>
     );

@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import { Container, Row, Col, CardDeck } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 import './OrganisationProfile.scss';
 
