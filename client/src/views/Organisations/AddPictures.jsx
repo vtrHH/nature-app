@@ -71,7 +71,7 @@ class AddPictures extends Component {
                     onChange={this.handleFileInputChange}
                   />
                 </Form.Group>
-                <Button>Add pictures</Button>
+                <Button type="submit">Add pictures</Button>
               </Form>
             </Col>
           </Row>

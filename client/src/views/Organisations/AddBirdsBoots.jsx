@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import Search from "../../components/Search/Search";
 import { addBirdsInOrganisation } from "./../../services/organisation";
@@ -54,14 +53,14 @@ class AddBirds extends Component {
             content={"taxa"}
             onParent={(result) => this.handleResult(result)}
           />
-          <br />
-          <br />
+          <br/>
+          <br/>
           <Container className="mt-3" className="text-center">
             <Row>
               <Col md={{ span: 6, offset: 3 }}>
-                <form onSubmit={this.handleFormSubmission}>
-                  <Button type="submit">Add bird to you observatory list</Button>
-                </form>
+                <Form onSubmit={this.handleFormSubmission}>
+                  <Button>Add bird to you observatory list</Button>
+                </Form>
               </Col>
             </Row>
           </Container>

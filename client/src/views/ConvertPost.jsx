@@ -5,6 +5,7 @@ import Search from '../components/Search/Search';
 import Slider from '../components/Slider/Slider';
 import ObservationMapView from '../components/Map/ObservationMapView';
 
+import "./SingleObservation.scss";
 
 class ConvertPost extends Component {
   constructor(props) {
@@ -95,14 +96,23 @@ class ConvertPost extends Component {
     return (
       <main>
         <header>
+        <Container className="mt-3">
+              <Row>
+                <Col md={{ span: 6, offset: 3 }} className="text-center">
+                  
           <h2>New observation</h2>
-          <h3>out of your question "{post.title}"</h3>
+          <hr></hr>
+          <h5>Out of your question "{post.title}"</h5>
+                </Col>
+              </Row>
+            </Container>
         </header>
         {post && (
           <>
             <br></br>
             <Slider pictures={post.pictures} />
             <br></br>
+            
             <span>Obervation creator: {post.creator.username}</span>
             <br></br>
             <span>
@@ -118,7 +128,7 @@ class ConvertPost extends Component {
         )}
         <h4>Add the bird and a description for this observation</h4>
         
-        <Container className="mt-3">
+        <Container className="mt-5">
           <Row>
             <Col className="text-center" md={{ span: 6, offset: 3 }}>
               <Search

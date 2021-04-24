@@ -78,7 +78,7 @@ class UpdateOrganisationProfile extends Component {
                         type="text"
                         id="input-street"
                         name="street"
-                        value={this.state.street}
+                        value={this.props.user.street}
                         placeholder="please add your street"
                         onChange={this.handleInputChange}
                       />
@@ -150,7 +150,7 @@ class UpdateOrganisationProfile extends Component {
                     type="text"
                         id="input-description"
                         name="description"
-                        value={this.state.organisation.description}
+                        value={this.props.user.organisation}
                         placeholder="Please give us some information about your observatory "
                         onChange={this.handleInputChange}
                         cols="30"
@@ -159,7 +159,7 @@ class UpdateOrganisationProfile extends Component {
                     </Form.Group>
                     <br/>
 
-                    <Button type="submit">Update your contact details</Button>
+                    <Button>Update your contact details</Button>
                   </Form>
                 </Col>
               </Row>
