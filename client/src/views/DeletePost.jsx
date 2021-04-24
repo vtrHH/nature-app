@@ -1,6 +1,8 @@
-import { Component } from 'react';
-import { loadPost, deletePost, deleteCommentsByPost  } from '../services/forum';
-import { Link } from 'react-router-dom';
+import { Component } from "react";
+import { loadPost, deletePost, deleteCommentsByPost } from "../services/forum";
+import { Link } from "react-router-dom";
+
+import { Row, Button, Col, Container } from "react-bootstrap";
 
 class DeleteIndividualProfile extends Component {
   constructor(props) {
@@ -21,9 +23,9 @@ class DeleteIndividualProfile extends Component {
 
   deleteThisPost = async () => {
     await deletePost(this.state.post._id);
-    await deleteCommentsByPost(this.state.post._id)
+    await deleteCommentsByPost(this.state.post._id);
     this.setState({
-      deleted: true
+      deleted: true,
     });
   };
 
@@ -37,7 +39,13 @@ class DeleteIndividualProfile extends Component {
       <main>
         {(deleted && (
           <>
-            <h1>Your post was Deleted</h1>
+            <Container className="mt-3">
+              <Row>
+                <Col className="text-center" md={{ span: 6, offset: 3 }}>
+                  <h1>Your post was Deleted</h1>
+                </Col>
+              </Row>
+            </Container>
           </>
         )) || (
           <>
@@ -45,19 +53,42 @@ class DeleteIndividualProfile extends Component {
               <>
                 {(post.creator._id === this.state.user._id && (
                   <>
-                    <h1>Are you sure you want to delete this post?</h1>
-                    <button type="button" onClick={this.deleteThisPost}>
-                      Yes, please
-                    </button>
-                    <Link to={`/forum/${post._id}`}>
-                      <button type="button">No, thanks</button>
-                    </Link>
+                    <Container className="mt-3">
+                      <Row>
+                        <Col
+                          className="text-center"
+                          md={{ span: 6, offset: 3 }}
+                        >
+                          <h3>Are you sure you want to delete this post?</h3>
+                        </Col>
+                      </Row>
+                    </Container>
+                    <Container className="mt-3">
+                      <Row>
+                        <Col className="text-center">
+                          <Button type="button" onClick={this.deleteThisPost}>
+                            Yes, please
+                          </Button>
+                          </Col>
+                          <Col className="text-center">
+                          <Link to={`/forum/${post._id}`}>
+                            <Button variant="danger" type="button">No, thanks</Button>
+                          </Link>
+                        </Col>
+                      </Row>
+                    </Container>
                   </>
                 )) || (
-                  <h1>
-                    Since you are not the creator of this post, you´re not
-                    allowed to delete it.
-                  </h1>
+                  <Container className="mt-3">
+                    <Row>
+                      <Col className="text-center" md={{ span: 6, offset: 3 }}>
+                        <h1>
+                          Since you are not the creator of this post, you´re not
+                          allowed to delete it.
+                        </h1>
+                      </Col>
+                    </Row>
+                  </Container>
                 )}
               </>
             )}
