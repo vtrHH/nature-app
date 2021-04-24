@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { signOut, verify } from './services/authentication';
 
@@ -11,6 +11,7 @@ import { Container } from 'react-bootstrap';
 
 import Home from './views/Home';
 import LandingPage from './views/LandingPage';
+import ErrorView from './views/ErrorView';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
 import CreateObservation from './views/CreateObservation';
@@ -28,6 +29,7 @@ import UpdateOrganisationProfile from './views/Organisations/UpdateOrganisationP
 import OrganisationOverview from './views/OrganisationOverview';
 import AddBirds from './views/Organisations/AddBirds';
 import AddPictures from './views/Organisations/AddPictures';
+import GetInspired from './views/GetInspired';
 
 import Forum from './views/Forum';
 import SinglePost from './views/SinglePost';
@@ -170,6 +172,8 @@ class App extends Component {
                 exact
               />
 
+              <Route path="/get-inspired" component={GetInspired} exact />
+
               <ProtectedRoute
                 path="/organisation/:id/edit"
                 render={(props) => (
@@ -234,6 +238,8 @@ class App extends Component {
                 authorized={user}
                 redirect="/sign-up"
               />
+              <Route path="/error" component={ErrorView} />
+              <Redirect to="/error" />
             </Switch>
           )}
         </BrowserRouter>

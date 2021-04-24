@@ -22,6 +22,17 @@ router.get('/list', async (req, res, next) => {
   }
 });
 
+router.get('/random', async (req, res, next) => {
+  try {
+    const totalOrganisations = await Organisation.count();
+    const randomIndex = Math.floor(Math.random() * totalOrganisations);
+    const organisations = await Organisation.find().limit(2).skip(randomIndex);
+    res.json({ organisations });
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/:id', async (req, res, next) => {
   try {
     const organisation = await Organisation.findById(req.params.id);

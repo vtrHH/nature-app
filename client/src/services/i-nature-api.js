@@ -35,6 +35,10 @@ export const searchApi = async(query, options) => {
     return response.data.results;
 };
 
+
+
+// https://api.inaturalist.org/v1/taxa/?taxon_id=3
+
 // https: //api.inaturalist.org/v1/taxa?q=kiwi&is_active=true&taxon_id=3&rank=species%2Csubspecies
 
 //     taxa ? q = kiwi &

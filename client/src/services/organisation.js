@@ -12,6 +12,12 @@ export const listOfOrganisation = async () => {
   return response.data.organisations;
 };
 
+//returns random organisation
+export const randomOrganisations = async () => {
+  const response = await api.get(`/organisation/random`);
+  return response.data.organisations;
+};
+
 //edit the information of an organisation
 export const editOrganisation = async (data, id) => {
   console.log(data);

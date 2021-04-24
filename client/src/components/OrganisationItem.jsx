@@ -1,10 +1,10 @@
-import defaultImage from './assets/organisation-default-picture.png';
+// import defaultImage from './assets/organisation-default-picture.png';
 import { Row, Col, Image } from 'react-bootstrap';
 import './OrganisationItem.scss';
 
 const OrganisationItem = ({ organisation }) => {
   console.log(organisation);
-  const itemPicture = organisation.pictures[0];
+  // const itemPicture = organisation.pictures[0];
   return (
     <>
       <Row>
