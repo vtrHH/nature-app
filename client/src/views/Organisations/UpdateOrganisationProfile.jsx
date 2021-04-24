@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
-import { editOrganisation } from "./../../services/organisation";
+import React, { Component } from 'react';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import { editOrganisation } from './../../services/organisation';
 
 class UpdateOrganisationProfile extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class UpdateOrganisationProfile extends Component {
       houseNumber: this.props.user.houseNumber,
       city: this.props.user.city,
       postcode: this.props.user.postcode,
-      description: this.props.user.description,
+      description: this.props.user.description
     };
   }
 
@@ -26,7 +26,7 @@ class UpdateOrganisationProfile extends Component {
       houseNumber: this.state.houseNumber,
       city: this.state.city,
       postcode: this.state.postcode,
-      description: this.state.description,
+      description: this.state.description
     };
     await editOrganisation(data, this.state.organisation._id);
     this.props.history.push(`/organisation/${this.state.organisation._id}`);
@@ -55,7 +55,7 @@ class UpdateOrganisationProfile extends Component {
 
             <Container className="mt-3">
               <Row>
-                <Col md={{ span: 6, offset: 3 }} >
+                <Col md={{ span: 6, offset: 3 }}>
                   <Form className="mt-3" onSubmit={this.handleFormSubmission}>
                     <Form.Group className="mb-0">
                       <Form.Label htmlFor="input-organisationName">
@@ -70,7 +70,7 @@ class UpdateOrganisationProfile extends Component {
                         onChange={this.handleInputChange}
                       />
                     </Form.Group>
-                    <br/>
+                    <br />
 
                     <Form.Group className="mb-0">
                       <Form.Label htmlFor="input-street">Street</Form.Label>
@@ -83,7 +83,7 @@ class UpdateOrganisationProfile extends Component {
                         onChange={this.handleInputChange}
                       />
                     </Form.Group>
-                    <br/>
+                    <br />
 
                     <Form.Group className="mb-0">
                       <Form.Label htmlFor="input-houseNumber">
@@ -98,7 +98,7 @@ class UpdateOrganisationProfile extends Component {
                         onChange={this.handleInputChange}
                       />
                     </Form.Group>
-                    <br/>
+                    <br />
                     <Form.Group className="mb-0">
                       <Form.Label htmlFor="input-city">City</Form.Label>
                       <Form.Control
@@ -110,7 +110,7 @@ class UpdateOrganisationProfile extends Component {
                         onChange={this.handleInputChange}
                       />
                     </Form.Group>
-                    <br/>
+                    <br />
 
                     <Form.Group className="mb-0">
                       <Form.Label htmlFor="input-postcode">Postcode</Form.Label>
@@ -123,7 +123,7 @@ class UpdateOrganisationProfile extends Component {
                         onChange={this.handleInputChange}
                       />
                     </Form.Group>
-                    <br/>
+                    <br />
 
                     <Form.Group className="mb-0">
                       <Form.Label htmlFor="input-phoneNumer">
@@ -138,7 +138,7 @@ class UpdateOrganisationProfile extends Component {
                         onChange={this.handleInputChange}
                       />
                     </Form.Group>
-                    <br/>
+                    <br />
 
                     <Form.Group className="mb-0">
                       <Form.Label htmlFor="input-description">
@@ -146,18 +146,18 @@ class UpdateOrganisationProfile extends Component {
                       </Form.Label>
                       <Form.Control
                         as="textarea"
-                    rows={3}
-                    type="text"
+                        rows={3}
+                        type="text"
                         id="input-description"
                         name="description"
-                        value={this.state.organisation.description}
+                        value={this.state.description}
                         placeholder="Please give us some information about your observatory "
                         onChange={this.handleInputChange}
                         cols="30"
                         rows="5"
                       />
                     </Form.Group>
-                    <br/>
+                    <br />
 
                     <Button type="submit">Update your contact details</Button>
                   </Form>
