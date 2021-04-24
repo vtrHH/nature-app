@@ -1,6 +1,5 @@
 // import './BirdItem.scss';
 import { Link } from 'react-router-dom';
-import {Image} from 'react-bootstrap'
 
 // import { getHumanReadableGender } from './../common';
 

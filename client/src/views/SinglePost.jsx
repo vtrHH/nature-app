@@ -8,9 +8,7 @@ import {
   Col,
   Button,
   Image,
-  Form,
-  InputGroup,
-  FormControl,
+  Form
 } from "react-bootstrap";
 
 import Slider from "../components/Slider/Slider";
