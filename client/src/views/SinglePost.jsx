@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { loadPost, loadComments, createComment } from "../services/forum";
+import { Link } from "react-router-dom";
 
 import {
   Container,
@@ -129,6 +130,19 @@ class SinglePost extends Component {
                       >
                         Delete this post
                       </Button>
+                      <Link
+                        to={{
+                          pathname: `/forum/${post._id}/convert`,
+                          state: {
+                            post: post,
+                            user: this.state.user,
+                          },
+                        }}
+                      >
+                        <Button type="button">
+                          Convert this post in observation
+                        </Button>
+                      </Link>
                     </Col>
                   </Row>
                 </Container>
@@ -139,9 +153,9 @@ class SinglePost extends Component {
                 <Container className="mt-3">
                   {comments.map((comment) => (
                     <>
-                      <Row>
+                      <Row key={comment._id}>
                         <Col className="postItem mb-0" md={12}>
-                          <div>
+                          <div key={comment._id}>
                             <div className="post_item__user">
                               {comment.creator.profilePicture ? (
                                 <Image
@@ -171,44 +185,38 @@ class SinglePost extends Component {
                           </div>
                         </Col>
                       </Row>
-                      {/* <small>{comment.creator.username}</small>
-                    <small>
-                      {" "}
-                      {new Date(comment.addedDate).toLocaleDateString(
-                        "en-GB",
-                        options
-                      )}
-                    </small>
-                    <p key={comment._id}>{comment.text}</p> */}
                     </>
                   ))}
                 </Container>
               </>
             )}
+            <br />
             <Container className="mt-3">
               <Row>
                 <Col md={{ span: 6, offset: 3 }} className="text-center">
-                  <Form className="mt-3" onSubmit={this.handleFormSubmission}>
-                      <h5>Can you help {post.creator.username}?{" "}</h5>
-                    <InputGroup className="mb-3">
-                      <FormControl
-                        type="text"
-                        id="input-text"
-                        name="text"
-                        placeholder="Type your idea"
-                        value={this.state.text}
-                        onChange={this.handleInputChange}
-                        required
-                      />
-                      <InputGroup.Append>
-                        <Button variant="outline-secondary">Send</Button>
-                      </InputGroup.Append>
-                    </InputGroup>
-                  </Form>
+                  <Form.Group className="mb-0">
+                    <Form.Label htmlFor="input-text">
+                      Can you help {post.creator.username}?{" "}
+                    </Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      type="text"
+                      id="input-text"
+                      name="text"
+                      placeholder="Type your idea"
+                      value={this.state.text}
+                      onChange={this.handleInputChange}
+                      required
+                    />
+                    <br />
+                    <Button type="submit" variant="primary" size="lg" block>
+                      Send
+                    </Button>
+                  </Form.Group>
                 </Col>
               </Row>
             </Container>
-            
           </>
         )}
       </main>

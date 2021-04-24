@@ -25,7 +25,7 @@ class SingleBird extends Component {
     console.log(bird);
 
     return (
-      <div class="single-bird">
+      <div className="single-bird">
         {bird && (
           <>
             {/* <h1>SingleBird</h1> */}

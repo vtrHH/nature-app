@@ -1,11 +1,11 @@
-import { Component } from 'react';
-import './IndividualProfile.scss';
-import { Container, Row, Col, Image, Button } from 'react-bootstrap';
+import { Component } from "react";
+import "./IndividualProfile.scss";
+import { Container, Row, Col, Image, Button } from "react-bootstrap";
 
-import CarouselObservationsByUser from '../components/Carousel/CarouselObservationsByUser';
-import CarouselPostsByUser from '../components/Carousel/CarouselPostsByUser';
-import { loadIndividual } from '../services/individual';
-import { Link } from 'react-router-dom';
+import CarouselObservationsByUser from "../components/Carousel/CarouselObservationsByUser";
+import CarouselPostsByUser from "../components/Carousel/CarouselPostsByUser";
+import { loadIndividual } from "../services/individual";
+import { Link } from "react-router-dom";
 
 class IndividualProfile extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class IndividualProfile extends Component {
     this.state = {
       individual: null,
       user: this.props.match.params.id,
-      loggedUser: this.props.user
+      loggedUser: this.props.user,
     };
   }
 
@@ -33,7 +33,7 @@ class IndividualProfile extends Component {
             <Container className="mt-3">
               <Row>
                 <Col md={{ span: 6, offset: 3 }} className="text-center">
-                  <div class="profile">
+                  <div className="profile">
                     <Image
                       className="thumbnail"
                       src={individual.profilePicture}
@@ -53,12 +53,12 @@ class IndividualProfile extends Component {
 
                     {individual._id === this.state.loggedUser._id && (
                       <>
-                      <Link to={`/individual/${individual._id}/edit`}>
-                        <Button size="sm" type="button">
-                          Edit profile
-                        </Button>
-                      </Link>
-                      {/*<br/>
+                        <Link to={`/individual/${individual._id}/edit`}>
+                          <Button size="sm" type="button">
+                            Edit profile
+                          </Button>
+                        </Link>
+                        {/*<br/>
                       <br/>
                       <Link to={`/individual/${individual._id}/delete`}>
                         <Button size="sm" type="button">
@@ -73,21 +73,32 @@ class IndividualProfile extends Component {
             </Container>
 
             <br />
-
-            <h2 style={{ fontSize: '2em', marginBottom: '0px' }}>
-              Latest Observations
-            </h2>
+            <Container className="mt-3">
+              <Row>
+                <Col md={{ span: 6, offset: 3 }} className="text-center">
+                  <h2 style={{ fontSize: "2em", marginBottom: "0px" }}>
+                    Latest Observations
+                  </h2>
+                </Col>
+              </Row>
+            </Container>
             <CarouselObservationsByUser
               show={2}
-              content={'observations'}
+              content={"observations"}
               user={this.state.individual}
             />
-            <h2 style={{ fontSize: '2em', marginBottom: '0px' }}>
-              Latest Posts
-            </h2>
+            <Container className="mt-3">
+              <Row>
+                <Col md={{ span: 6, offset: 3 }} className="text-center">
+                  <h2 style={{ fontSize: "2em", marginBottom: "0px" }}>
+                    Latest Posts
+                  </h2>
+                </Col>
+              </Row>
+            </Container>
             <CarouselPostsByUser
               show={2}
-              content={'posts'}
+              content={"posts"}
               user={this.state.individual}
             />
           </main>
