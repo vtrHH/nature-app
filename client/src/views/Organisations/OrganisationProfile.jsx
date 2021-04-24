@@ -54,6 +54,8 @@ class OrganisationProfile extends Component {
             {organisation.pictures && (
               <Slider pictures={organisation.pictures} />
             )}
+            <h2>About {organisation.organisationName}</h2>
+            <p>{organisation.description}</p>
             <h3>Contact details</h3>
             <p>{organisation.email}</p>
             <p>{organisation.phoneNumber}</p>

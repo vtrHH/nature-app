@@ -12,7 +12,8 @@ class UpdateOrganisationProfile extends Component {
       street: this.props.user.street,
       houseNumber: this.props.user.houseNumber,
       city: this.props.user.city,
-      postcode: this.props.user.postcode
+      postcode: this.props.user.postcode,
+      description: this.props.user.description
     };
   }
 
@@ -24,7 +25,8 @@ class UpdateOrganisationProfile extends Component {
       street: this.state.street,
       houseNumber: this.state.houseNumber,
       city: this.state.city,
-      postcode: this.state.postcode
+      postcode: this.state.postcode,
+      description: this.state.description
     };
     await editOrganisation(data, this.state.organisation._id);
     this.props.history.push(`/organisation/${this.state.organisation._id}`);
@@ -102,6 +104,21 @@ class UpdateOrganisationProfile extends Component {
                 placeholder="please add your phone number"
                 onChange={this.handleInputChange}
               />
+
+              <label htmlFor="input-description">
+                Description of your observatory
+              </label>
+              <input
+                type="textarea"
+                id="input-description"
+                name="description"
+                value={this.props.user.organisation}
+                placeholder="please give us some information about your observatory "
+                onChange={this.handleInputChange}
+                cols="30"
+                rows="5"
+              />
+
               <button>Update your contact details</button>
             </form>
           </>

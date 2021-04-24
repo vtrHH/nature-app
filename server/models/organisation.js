@@ -34,11 +34,11 @@ const organisationSchema = new mongoose.Schema({
 
   pictures: {
     type: [String]
-  }, 
-     
+  },
+
   description: {
     type: String
-  },
+  }
 });
 
 const Organisation = User.discriminator('organisation', organisationSchema);

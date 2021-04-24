@@ -38,7 +38,8 @@ router.patch('/:id', routeGuard, async (req, res, next) => {
     street,
     houseNumber,
     city,
-    postcode
+    postcode,
+    description
   } = req.body;
   try {
     const organisation = await Organisation.findByIdAndUpdate(
@@ -50,7 +51,8 @@ router.patch('/:id', routeGuard, async (req, res, next) => {
           street,
           houseNumber,
           city,
-          postcode
+          postcode,
+          description
         }
       },
       { new: true }
