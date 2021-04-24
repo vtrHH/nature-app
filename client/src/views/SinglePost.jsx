@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { loadPost, loadComments, createComment } from "../services/forum";
+import {Link} from 'react-router-dom'
 
 import {
   Container,
@@ -129,6 +130,19 @@ class SinglePost extends Component {
                       >
                         Delete this post
                       </Button>
+                      <Link
+                        to={{
+                          pathname: `/forum/${post._id}/convert`,
+                          state: {
+                            post: post,
+                            user: this.state.user,
+                          },
+                        }}
+                      >
+                        <Button type="button">
+                          Convert this post in observation
+                        </Button>
+                      </Link>
                     </Col>
                   </Row>
                 </Container>
@@ -189,7 +203,7 @@ class SinglePost extends Component {
               <Row>
                 <Col md={{ span: 6, offset: 3 }} className="text-center">
                   <Form className="mt-3" onSubmit={this.handleFormSubmission}>
-                      <h5>Can you help {post.creator.username}?{" "}</h5>
+                    <h5>Can you help {post.creator.username}? </h5>
                     <InputGroup className="mb-3">
                       <FormControl
                         type="text"
@@ -208,7 +222,6 @@ class SinglePost extends Component {
                 </Col>
               </Row>
             </Container>
-            
           </>
         )}
       </main>

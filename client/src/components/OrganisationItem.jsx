@@ -8,7 +8,7 @@ const OrganisationItem = ({ organisation }) => {
         <Col className="organisationItem" md={12}>
         {/* <Row>           
             <Col md={{ span: 6, offset: 3 }} className="text-center" > */}
-            <div class="organisationProfile">
+            <div className="organisationProfile">
             <Image className="thumbnail" src={organisation.profilePicture} alt={organisation.username}  />
             </div>
       

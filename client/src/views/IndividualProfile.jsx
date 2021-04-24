@@ -33,7 +33,7 @@ class IndividualProfile extends Component {
             <Container className="mt-3">
               <Row>
                 <Col md={{ span: 6, offset: 3 }} className="text-center">
-                  <div class="profile">
+                  <div className="profile">
                     <Image
                       className="thumbnail"
                       src={individual.profilePicture}
