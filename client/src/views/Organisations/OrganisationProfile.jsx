@@ -3,14 +3,18 @@ import { Component } from 'react';
 import { loadOrganisation } from '../../services/organisation';
 import Slider from '../../components/Slider/Slider';
 import BirdItem from '../../components/BirdItem';
+
 import { searchSpecieById } from '../../services/i-nature-api';
 
 import OrganisationMapView from '../../components/Map/OrganisationMapView';
+import GetGeoDataOfObservatory from '../../components/Map/GetGeoDataOfObservatory';
 
 class OrganisationProfile extends Component {
   state = {
     organisation: null,
-    birds: []
+    currentLocation: [0, 0],
+    birds: [],
+    locationLoaded: false
   };
 
   async componentDidMount() {
@@ -29,6 +33,12 @@ class OrganisationProfile extends Component {
   findBirdDetails = async (bird) => {
     const birdDetail = await searchSpecieById(bird);
     return birdDetail[0];
+  };
+
+  updateLocationOfState = (location) => {
+    if (this.state.birds) {
+      this.setState({ currentLocation: location, locationLoaded: true });
+    }
   };
 
   render() {
@@ -52,7 +62,16 @@ class OrganisationProfile extends Component {
               {organisation.street} {organisation.houseNumber + ','}{' '}
               {organisation.postcode} {organisation.city}{' '}
             </p>
-            <OrganisationMapView organisation={organisation} />
+            <GetGeoDataOfObservatory
+              organisation={organisation}
+              whenLocationSearchtriggered={this.updateLocationOfState}
+            />
+            {this.state.locationLoaded === true && (
+              <OrganisationMapView
+                organisation={organisation}
+                currentLocation={this.state.currentLocation}
+              />
+            )}
             {birds && (
               <>
                 <h3>Birds you can watch here</h3>
