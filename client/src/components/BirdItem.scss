@@ -1,0 +1,22 @@
+.card__bird-item {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 2px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border: 1px solid grey;
+    justify-content: center;
+    img {
+        width: 125px;
+    }
+}
+
+.bird-item__details {
+    font-size: 0.8em;
+}

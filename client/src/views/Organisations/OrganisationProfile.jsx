@@ -1,20 +1,24 @@
-import { Component } from 'react';
+import { Component } from "react";
 
-import { loadOrganisation } from '../../services/organisation';
-import Slider from '../../components/Slider/Slider';
-import BirdItem from '../../components/BirdItem';
+import { Container, Row, Col, CardDeck } from "react-bootstrap";
 
-import { searchSpecieById } from '../../services/i-nature-api';
+import './OrganisationProfile.scss';
 
-import OrganisationMapView from '../../components/Map/OrganisationMapView';
-import GetGeoDataOfObservatory from '../../components/Map/GetGeoDataOfObservatory';
+import { loadOrganisation } from "../../services/organisation";
+import Slider from "../../components/Slider/Slider";
+import BirdItem from "../../components/BirdItem";
+
+import { searchSpecieById } from "../../services/i-nature-api";
+
+import OrganisationMapView from "../../components/Map/OrganisationMapView";
+import GetGeoDataOfObservatory from "../../components/Map/GetGeoDataOfObservatory";
 
 class OrganisationProfile extends Component {
   state = {
     organisation: null,
     currentLocation: [0, 0],
     birds: [],
-    locationLoaded: false
+    locationLoaded: false,
   };
 
   async componentDidMount() {
@@ -49,21 +53,36 @@ class OrganisationProfile extends Component {
         {organisation && (
           <main>
             <header>
-              <h2>{organisation.organisationName}</h2>
+              <Container className="mt-3">
+                <Row>
+                  <Col md={{ span: 6, offset: 3 }} className="text-center">
+                    <h2>{organisation.organisationName}</h2>
+                  </Col>
+                </Row>
+              </Container>
             </header>
+
             {organisation.pictures && (
               <Slider pictures={organisation.pictures} />
             )}
-            <h2>About {organisation.organisationName}</h2>
-            <p>{organisation.description}</p>
-            <h3>Contact details</h3>
-            <p>{organisation.email}</p>
-            <p>{organisation.phoneNumber}</p>
-            <h3>Address</h3>
-            <p>
-              {organisation.street} {organisation.houseNumber + ','}{' '}
-              {organisation.postcode} {organisation.city}{' '}
-            </p>
+            <br />
+
+            <Container className="mt-3">
+              <Row>
+                <Col md={{ span: 6, offset: 3 }} className="text-center">
+                  <h3>About <br/> <strong>{organisation.organisationName}</strong></h3>
+                  <p>{organisation.description}</p>
+                  <h5>Contact details</h5>
+                  <p>{organisation.email}</p>
+                  <p>{organisation.phoneNumber}</p>
+                  <h5>Address</h5>
+                  <p>
+                    {organisation.street} {organisation.houseNumber + ","}{" "}
+                    {organisation.postcode} {organisation.city}{" "}
+                  </p>
+                </Col>
+              </Row>
+            </Container>
             <GetGeoDataOfObservatory
               organisation={organisation}
               whenLocationSearchtriggered={this.updateLocationOfState}
@@ -76,10 +95,22 @@ class OrganisationProfile extends Component {
             )}
             {birds && (
               <>
-                <h3>Birds you can watch here</h3>
-                {birds.map((bird) => (
-                  <BirdItem bird={bird} />
-                ))}
+                <Container className="mt-3">
+                  <Row>
+                    <Col md={12} className="text-center">
+                        <h5>
+                          Birds you can watch in <br/>{organisation.organisationName}
+                        </h5>
+                    {/* <CardDeck> */}
+                      <div className="birdlist">
+                        {birds.map((bird) => (
+                          <BirdItem bird={bird} />
+                        ))}
+                      </div>
+                    {/* </CardDeck> */}
+                    </Col>
+                  </Row>
+                </Container>
               </>
             )}
           </main>
